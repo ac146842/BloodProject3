@@ -17,6 +17,7 @@ namespace BloodProject3.Models
         public int BloodTypeID { get; set; }
 
         [DataType(DataType.Date)]
+        //add validation to make sure donationdate isnt in future
         public DateTime? LastDonationDate { get; set; }
     }
 }

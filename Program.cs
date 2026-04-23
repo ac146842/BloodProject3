@@ -8,6 +8,8 @@ builder.Services.AddDbContext<BloodProject3DbContext>(options => options.UseSqlS
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BloodProject3DbContext>();
 
+//call adddata method to seed the database with initial data
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
