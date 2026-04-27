@@ -26,6 +26,7 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "License Number is required.")]
         [StringLength(50)] //max string length of 50 characters
         [Display(Name = "License Number")]
+        [RegularExpression(@"^[A-Z]{2}\d{6}$", ErrorMessage = "License must be 2 uppercase letters followed by 6 digits.")]
         public string LicenseNumber { get; set; }
     }
 }

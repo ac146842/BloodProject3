@@ -22,9 +22,10 @@ namespace BloodProject3.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Phone number is required.")]
+        [Required]
         [StringLength(15)] //max 15
         [Phone] //ensures input is a valid phone number format
+        [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Phone must be in the format 000-000-0000")]
         public string Phone { get; set; }
 
         [Required]
