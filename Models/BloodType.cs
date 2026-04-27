@@ -4,11 +4,22 @@ namespace BloodProject3.Models
 {
     public class BloodType
     {
-        [Key]
+        public enum BloodGroup //display name is whats display to the user on the web page
+        {
+            [Display(Name = "A+")] APositive,
+            [Display(Name = "A-")] ANegative,
+            [Display(Name = "B+")] BPositive,
+            [Display(Name = "B-")] BNegative,
+            [Display(Name = "O+")] OPositive,
+            [Display(Name = "O-")] ONegative,
+            [Display(Name = "AB+")] ABPositive,
+            [Display(Name = "AB-")] ABNegative
+        }
+
+        [Key] //primary key 
         public int BloodTypeID { get; set; }
 
-        [Required]
-        [StringLength(3)]
-        public string BloodTypeName { get; set; }
+        [Required] //required field
+        public BloodGroup SelectedBloodType { get; set; }
     }
 }
