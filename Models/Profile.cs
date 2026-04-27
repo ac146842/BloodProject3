@@ -8,28 +8,28 @@ namespace BloodProject3.Models
         [Key]
         public int ProfileID { get; set; }
 
-        [ForeignKey("UserID")]
         [Required]
+        [ForeignKey("UserID")]
         public int UserID { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "First name is required.")]
+        [StringLength(50)] //max 50 characters
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Last name is required.")]
+        [StringLength(50)] //max 50 characters 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
-        [StringLength(15)]
-        [Phone]
+        [Required(ErrorMessage = "Phone number is required.")]
+        [StringLength(15)] //max 15
+        [Phone] //ensures input is a valid phone number format
         public string Phone { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        //add validation to ensure date of birth is not in the future
+        //add validation
         public DateTime DateOfBirth { get; set; }
     }
 }
