@@ -5,20 +5,20 @@ namespace BloodProject3.Models
 {
     public class MedicalForm
     {
-        [Key]
+        [Key] //pk
         public int FormID { get; set; }
 
-        [Required]
-        [ForeignKey("NurseID")]
+        [Required] //required 
+        [ForeignKey("NurseID")] //fk
         public int NurseID { get; set; }
 
-        [Required]
-        [ForeignKey("AppointmentID")]
+        [Required] //required
+        [ForeignKey("AppointmentID")] //fk
         public int AppointmentID { get; set; }
 
-        [Required]
-        [DataType(DataType.DateTime)]
-        //add validation to ensure form date is not in the future
+        [Required] 
+        [DataType(DataType.DateTime)] //makes a date time picker in the form
+        //add validation in controller
         public DateTime FormDate { get; set; }
     }
 }

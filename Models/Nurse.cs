@@ -5,23 +5,27 @@ namespace BloodProject3.Models
 {
     public class Nurse
     {
-        [Key]
+        [Key] 
         public int NurseID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Nurse must be linked to a User account.")]
         [ForeignKey("UserID")]
         public int UserID { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Please specify the nurse's job role.")]
+        [StringLength(50)] //max string length of 50 characters
+        [Display(Name = "Job Role")]
         public string JobRole { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Start date is required.")]
         [DataType(DataType.Date)]
+        [Display(Name = "Employment Start Date")]
+        //add validation in controller
         public DateTime EmployedStartDate { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "License Number is required.")]
+        [StringLength(50)] //max string length of 50 characters
+        [Display(Name = "License Number")]
         public string LicenseNumber { get; set; }
     }
 }
