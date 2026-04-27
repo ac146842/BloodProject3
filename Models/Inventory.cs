@@ -14,21 +14,33 @@ namespace BloodProject3.Models
             Reserved = 5
         }
 
-        [Key]
+        [Key] //primary key
         public int BloodBankID { get; set; }
 
+        //fk and required field
+        [Required]
         [ForeignKey("DonationID")]
         public int DonationID { get; set; }
 
+        //fk and required field
+        [Required]
         [ForeignKey("BloodTypeID")]
         public int BloodTypeID { get; set; }
 
-        //make decmial annotation
+        [Required(ErrorMessage = "Volume is required")] //required field with error message
+        [Display(Name = "Current Volume (ML)")] //displays on web page as current volume
+        //3 total digits, 2 after decimal
+        [Column(TypeName = "decimal(3, 2)")]
         public decimal CurrentVolumeML { get; set; }
 
-        [StringLength(15)]
+        [Required] //required
+        [StringLength(15, ErrorMessage = "Location code cannot exceed 15 characters")] //max string length can be 15 with error message
+        [Display(Name = "Storage Location")] //displays on web page as storage location
+        //'Fridge-A1', 'Shelf-04'
         public string StorageLocation { get; set; }
 
+        [Required] //required
+        [Display(Name = "Inventory Status")] //displays as inventory status
         public Status BloodStatus { get; set; }
     }
 }
