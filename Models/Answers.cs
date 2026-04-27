@@ -5,21 +5,24 @@ namespace BloodProject2.Models
 {
     public class Answers
     {
-        [Key]
+        [Key] //primary key
         public int AnswersID { get; set; }
 
-        [ForeignKey("HealthQID")]
+        [ForeignKey("HealthQID")]  //foreign key to HealthQuestions
         public int HealthQID { get; set; }
 
-        [ForeignKey("AppointmentID")]
+        [ForeignKey("AppointmentID")] //foreign key to Appointments
         public int AppointmentID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Answer is required")] //makes sure an answer is provided and gives error message if no answer is given
         public string QuestionAnswers { get; set; }
 
-        [Required]
-        //just the date
-        //add validation to ensure answer date is not in the future
+        public Answers() 
+        { 
+            AnswerDate = DateTime.Now; //defaults to current date and time, records time and date answers were written
+        }
+
+        [Required] //makes sure an answer is provided      
         public DateTime AnswerDate { get; set; }
     }
 }
