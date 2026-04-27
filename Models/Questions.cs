@@ -7,7 +7,9 @@ namespace BloodProject3.Models
         [Key]
         public int HealthQID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Question text cannot be empty.")]
+        [StringLength(500)]
+        [Display(Name = "Question Text")]
         public string FormQuestions { get; set; }
     }
 }
