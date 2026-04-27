@@ -5,14 +5,14 @@ namespace BloodProject3.Models
 {
     public class Donor
     {
-        [Key]
+        [Key] //primary key
         public int DonorID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "User link is required.")] //links donor back to a specific account
         [ForeignKey("UserID")]
         public int UserID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Blood type is required.")] //fk to the bloodtype table and error message is given
         [ForeignKey("BloodTypeID")]
         public int BloodTypeID { get; set; }
 

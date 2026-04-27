@@ -14,32 +14,38 @@ namespace BloodProject3.Models
             Sent = 5
         }
 
-        [Key]
+        [Key] //primary key
         public int DonationID { get; set; }
 
+        [Required] //required appointment id and fk
         [ForeignKey("AppointmentID")]
         public int AppointmentID { get; set; }
 
-        [ForeignKey("BloodTypeID")]
+        [Required]
+        [ForeignKey("BloodTypeID")] //required bloodtype id and fk
         public int BloodTypeID { get; set; }
 
-        [ForeignKey("DonorID")]
+        [Required]
+        [ForeignKey("DonorID")] //required donor id and fk
         public int DonorID { get; set; }
 
-        [Required]
-        //just the date
-        //add validation to ensure collection date is not in the future
+        [Required(ErrorMessage = "Collection date is required")] //required collectiondate
+        [DataType(DataType.Date)] //ensures ui shows a date pickter
+        [Display(Name = "Date Collected")] //displays name on webpage as date collected
         public DateTime CollectionDate { get; set; }
 
-        [Required]
-        //make decimal annotation
+        [Required(ErrorMessage = "Please enter the volume")] //required volume amount
+        [Column(TypeName = "decimal(6, 2)")] // Formats the decimal for the Database with max number length being 6
+        [Range(0.01, 500.00, ErrorMessage = "Volume must be between 0.01 and 500 ML")] //ensures volume is between 0.01 and 500
+        [Display(Name = "Volume (ML)")] //displays name as Volume ML
         public decimal VolumeML { get; set; }
 
-        [Required]
-        //just the date
-        //add validation to ensure expiry date is after collection date
+        [DataType(DataType.Date)] 
+        [Display(Name = "Expiry Date")] //displays as Expiry date on web page
+        // Collectiondate + 42 days
         public DateTime ExpiryDate { get; set; }
 
+        [Required] //required field
         public Status BloodStatus { get; set; }
     }
 }
