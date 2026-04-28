@@ -20,6 +20,7 @@ namespace BloodProject3.Models
         public int BloodTypeID { get; set; }
 
         [Required] //required field
+        //invalid selected column name selectedbloodtype
         public BloodGroup SelectedBloodType { get; set; }
     }
 }

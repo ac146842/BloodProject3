@@ -6,7 +6,7 @@ namespace BloodProject3.Areas.Identity.Data
 {
     public class DbInitialiser
     {
-        public static void AddData(IApplicationBuilder applicationBuilder)
+        public static void AddData(IApplicationBuilder applicationBuilder, Answers[] answers)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
@@ -83,6 +83,55 @@ namespace BloodProject3.Areas.Identity.Data
                     context.SaveChanges();
                 }
 
+                //Nurse
+                if (!context.Nurse.Any())
+                {
+                    var Nurses = new Nurse[]
+                    {
+
+                    };
+
+                    context.Nurse.AddRange(Nurses);
+                    context.SaveChanges();
+                }
+
+                //Questions
+                if (!context.Questions.Any())
+                {
+                    var Questions = new Questions[]
+                    {
+
+                    };
+
+                    context.Questions.AddRange(Questions);
+                    context.SaveChanges();
+                }
+
+                //MedicalForm
+                if (!context.MedicalForm.Any())
+                {
+                    var MedicalForms = new MedicalForm[]
+                    {
+
+                    };
+
+                    context.MedicalForm.AddRange(MedicalForms);
+                    context.SaveChanges();
+                }
+
+                //Answers
+                if (!context.Answers.Any())
+                {
+                    var Answers = new Answers[]
+                    {
+
+                    };
+
+                   // context.Answers.AddRange(Answers);
+                    context.SaveChanges();
+                }
+
+                
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BloodProject2.Models
+namespace BloodProject3.Models
 {
     public class Answers
     {
