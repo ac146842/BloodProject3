@@ -8,6 +8,10 @@ namespace BloodProject3.Models
         [Key] //primary key
         public int AnswersID { get; set; }
 
+        [Required]
+        [ForeignKey("FormID")]
+        public int FormID { get; set; }
+
         [ForeignKey("HealthQID")]  //foreign key to HealthQuestions
         public int HealthQID { get; set; }
 

@@ -25,7 +25,7 @@ namespace BloodProject3.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BloodProject2.Models.Answers", b =>
+            modelBuilder.Entity("BloodProject3.Models.Answers", b =>
                 {
                     b.Property<int>("AnswersID")
                         .ValueGeneratedOnAdd()

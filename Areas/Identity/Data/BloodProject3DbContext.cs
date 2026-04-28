@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using BloodProject2.Models;
+using BloodProject3.Models;
 using BloodProject3.Models;
 
 namespace BloodProject3.Areas.Identity.Data;
@@ -21,7 +21,7 @@ public class BloodProject3DbContext : IdentityDbContext<IdentityUser>
         // Add your customizations after calling base.OnModelCreating(builder);
     }
 
-public DbSet<BloodProject2.Models.Answers> Answers { get; set; } = default!;
+public DbSet<BloodProject3.Models.Answers> Answers { get; set; } = default!;
 
 public DbSet<BloodProject3.Models.Appointment> Appointment { get; set; } = default!;
 

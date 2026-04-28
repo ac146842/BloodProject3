@@ -1,4 +1,4 @@
-﻿@model BloodProject2.Models.Answers
+﻿@model BloodProject3.Models.Answers
 
 @{
     ViewData["Title"] = "Edit";
@@ -13,6 +13,11 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AnswersID" />
+            <div class="form-group">
+                <label asp-for="FormID" class="control-label"></label>
+                <input asp-for="FormID" class="form-control" />
+                <span asp-validation-for="FormID" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="HealthQID" class="control-label"></label>
                 <input asp-for="HealthQID" class="form-control" />

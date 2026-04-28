@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BloodProject2.Models.Answers>
+﻿@model IEnumerable<BloodProject3.Models.Answers>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,6 +12,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FormID)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.HealthQID)
             </th>
@@ -30,6 +33,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormID)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HealthQID)
             </td>

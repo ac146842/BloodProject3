@@ -35,7 +35,7 @@ namespace BloodProject3.Models
         public DateTime CollectionDate { get; set; }
 
         [Required(ErrorMessage = "Please enter the volume")] //required volume amount
-        [Column(TypeName = "decimal(3, 2)")] // Formats the decimal for the Database with max number length being 3
+        [Column(TypeName = "decimal(6, 2)")] // Formats the decimal for the Database with max number length being 5
         [Range(0.01, 500.00, ErrorMessage = "Volume must be between 0.01 and 500 ML")] //ensures volume is between 0.01 and 500
         [Display(Name = "Volume (ML)")] //displays name as Volume ML
         public decimal VolumeML { get; set; }

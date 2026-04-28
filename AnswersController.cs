@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BloodProject2.Models;
 using BloodProject3.Areas.Identity.Data;
+using BloodProject3.Models;
 
-namespace BloodProject3.Controllers
+namespace BloodProject3
 {
     public class AnswersController : Controller
     {
@@ -54,7 +54,7 @@ namespace BloodProject3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AnswersID,HealthQID,AppointmentID,QuestionAnswers,AnswerDate")] Answers answers)
+        public async Task<IActionResult> Create([Bind("AnswersID,FormID,HealthQID,AppointmentID,QuestionAnswers,AnswerDate")] Answers answers)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace BloodProject3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AnswersID,HealthQID,AppointmentID,QuestionAnswers,AnswerDate")] Answers answers)
+        public async Task<IActionResult> Edit(int id, [Bind("AnswersID,FormID,HealthQID,AppointmentID,QuestionAnswers,AnswerDate")] Answers answers)
         {
             if (id != answers.AnswersID)
             {
