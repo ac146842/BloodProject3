@@ -6,7 +6,7 @@ namespace BloodProject3.Areas.Identity.Data
 {
     public class DbInitialiser
     {
-        public static void AddData(IApplicationBuilder applicationBuilder, Answers[] answers)
+        public static void AddData(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
