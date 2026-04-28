@@ -19,14 +19,14 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var bloodTypes = new BloodType[]
                     {
-                        new BloodType{BloodTypeID=1, SelectedBloodType = BloodType.BloodGroup.APositive},
-                        new BloodType{BloodTypeID=2, SelectedBloodType = BloodType.BloodGroup.OPositive},
-                        new BloodType{BloodTypeID=3, SelectedBloodType = BloodType.BloodGroup.BPositive},
-                        new BloodType{BloodTypeID=4, SelectedBloodType = BloodType.BloodGroup.ABPositive},
-                        new BloodType{BloodTypeID=5, SelectedBloodType = BloodType.BloodGroup.ANegative},
-                        new BloodType{BloodTypeID=6, SelectedBloodType = BloodType.BloodGroup.ONegative},
-                        new BloodType{BloodTypeID=7, SelectedBloodType = BloodType.BloodGroup.BNegative},
-                        new BloodType{BloodTypeID=8, SelectedBloodType = BloodType.BloodGroup.ABNegative}
+                        new BloodType{SelectedBloodType = BloodType.BloodGroup.APositive},
+                        new BloodType{SelectedBloodType = BloodType.BloodGroup.OPositive},
+                        new BloodType{SelectedBloodType = BloodType.BloodGroup.BPositive},
+                        new BloodType{SelectedBloodType = BloodType.BloodGroup.ABPositive},
+                        new BloodType{SelectedBloodType = BloodType.BloodGroup.ANegative},
+                        new BloodType{SelectedBloodType = BloodType.BloodGroup.ONegative},
+                        new BloodType{SelectedBloodType = BloodType.BloodGroup.BNegative},
+                        new BloodType{SelectedBloodType = BloodType.BloodGroup.ABNegative}
                     };
                     context.BloodType.AddRange(bloodTypes);
                     context.SaveChanges();
@@ -73,9 +73,9 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var donors = new Donor[]
                     {
-                        new Donor{DonorID=1, UserID=1, BloodTypeID=1},
-                        new Donor{DonorID=2, UserID=2, BloodTypeID=2},
-                        new Donor{DonorID=3, UserID=3, BloodTypeID=3}
+                        new Donor{UserID=1, BloodTypeID=1},
+                        new Donor{UserID=2, BloodTypeID=2},
+                        new Donor{UserID=3, BloodTypeID=3}
                     };
                     context.Donor.AddRange(donors);
                     context.SaveChanges();
@@ -86,8 +86,8 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var nurses = new Nurse[]
                     {
-                        new Nurse{NurseID=1, UserID=11, JobRole="Senior Nurse", EmployedStartDate=DateTime.Parse("2020-01-10"), LicenseNumber="RN12345"},
-                        new Nurse{NurseID=2, UserID=12, JobRole="Clinic Lead", EmployedStartDate=DateTime.Parse("2021-05-15"), LicenseNumber="RN67890"}
+                        new Nurse{UserID=11, JobRole="Senior Nurse", EmployedStartDate=DateTime.Parse("2020-01-10"), LicenseNumber="RN12345"},
+                        new Nurse{UserID=12, JobRole="Clinic Lead", EmployedStartDate=DateTime.Parse("2021-05-15"), LicenseNumber="RN67890"}
                     };
                     context.Nurse.AddRange(nurses);
                     context.SaveChanges();
@@ -98,19 +98,19 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var questions = new Questions[]
                     {
-                        new Questions{HealthQID=1, FormQuestions="How old are you?"},
-                        new Questions{HealthQID=2, FormQuestions="To donate plasma you must weigh 50 kg or more and be 150 cm or taller. To donate blood you must weigh 50kg or more. Do you match these requirements?"},
-                        new Questions{HealthQID=3, FormQuestions="Have you ever received a blood transfusion in the UK, Republic of Ireland or France after 1st January 1980?"},
-                        new Questions{HealthQID=4, FormQuestions="Have you ever had a stroke, heart attack, or cardiac stent?"},
-                        new Questions{HealthQID=5, FormQuestions="Are you under any health investigations and/or awaiting surgery?"},
-                        new Questions{HealthQID=6, FormQuestions="Do you have cough or cold symptoms?"},
-                        new Questions{HealthQID=7, FormQuestions="Have you had COVID in the last 7 days?"},
-                        new Questions{HealthQID=8, FormQuestions="Have you had the Flu in the last 4 weeks?"},
-                        new Questions{HealthQID=9, FormQuestions="Have you or anyone in your household had diarrhoea and/or vomiting in the last 12 weeks?"},
-                        new Questions{HealthQID=10, FormQuestions="Have you had a tattoo or piercing in the last 3 months?"},
-                        new Questions{HealthQID=11, FormQuestions="Are you currently pregnant or have you given birth recently?"},
-                        new Questions{HealthQID=12, FormQuestions="Are you taking any prescription medications including iron?"},
-                        new Questions{HealthQID=13, FormQuestions="Have you travelled outside of New Zealand in the last 12 months?"}
+                        new Questions{FormQuestions="How old are you?"},
+                        new Questions{FormQuestions="To donate plasma you must weigh 50 kg or more and be 150 cm or taller. To donate blood you must weigh 50kg or more. Do you match these requirements?"},
+                        new Questions{FormQuestions="Have you ever received a blood transfusion in the UK, Republic of Ireland or France after 1st January 1980?"},
+                        new Questions{FormQuestions="Have you ever had a stroke, heart attack, or cardiac stent?"},
+                        new Questions{FormQuestions="Are you under any health investigations and/or awaiting surgery?"},
+                        new Questions{FormQuestions="Do you have cough or cold symptoms?"},
+                        new Questions{FormQuestions="Have you had COVID in the last 7 days?"},
+                        new Questions{FormQuestions="Have you had the Flu in the last 4 weeks?"},
+                        new Questions{FormQuestions="Have you or anyone in your household had diarrhoea and/or vomiting in the last 12 weeks?"},
+                        new Questions{FormQuestions="Have you had a tattoo or piercing in the last 3 months?"},
+                        new Questions{FormQuestions="Are you currently pregnant or have you given birth recently?"},
+                        new Questions{FormQuestions="Are you taking any prescription medications including iron?"},
+                        new Questions{FormQuestions="Have you travelled outside of New Zealand in the last 12 months?"}
                     };
                     context.Questions.AddRange(questions);
                     context.SaveChanges();
@@ -121,7 +121,7 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var medicalForms = new MedicalForm[]
                     {
-                        new MedicalForm{FormID=1, NurseID=1, AppointmentID=101, FormDate=DateTime.Now}
+                        new MedicalForm{NurseID=1, AppointmentID=101, FormDate=DateTime.Now}
                     };
                     context.MedicalForm.AddRange(medicalForms);
                     context.SaveChanges();
@@ -132,9 +132,9 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var Answers = new Answers[]
                     {
-                        new Answers{AnswersID=1, FormID=1, HealthQID=1, AppointmentID=1, QuestionAnswers="25", AnswerDate=DateTime.Now},
-                        new Answers{AnswersID=2, FormID=1, HealthQID=2, AppointmentID=1, QuestionAnswers="Yes", AnswerDate=DateTime.Now},
-                        new Answers{AnswersID=3, FormID=1, HealthQID=13, AppointmentID=1, QuestionAnswers="No", AnswerDate=DateTime.Now}
+                        new Answers{HealthQID=1, AppointmentID=1, QuestionAnswers="25", AnswerDate=DateTime.Now},
+                        new Answers{HealthQID=2, AppointmentID=1, QuestionAnswers="Yes", AnswerDate=DateTime.Now},
+                        new Answers{HealthQID=13, AppointmentID=1, QuestionAnswers="No", AnswerDate=DateTime.Now}
                     };
 
                     context.Answers.AddRange(Answers);
@@ -146,8 +146,8 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var donations = new DonatedBlood[]
                     {
-                       new DonatedBlood{DonationID=1, AppointmentID=1, DonorID=1, BloodTypeID=1, CollectionDate=DateTime.Now.AddDays(-1), ExpiryDate=DateTime.Now.AddDays(41), VolumeML=450.00m, BloodStatus=DonatedBlood.Status.Approved},
-                       new DonatedBlood{DonationID=2, AppointmentID=2, DonorID=2, BloodTypeID=2, CollectionDate=DateTime.Now.AddDays(-2), ExpiryDate=DateTime.Now.AddDays(40), VolumeML=500.00m, BloodStatus=DonatedBlood.Status.Approved}
+                       new DonatedBlood{AppointmentID=1, DonorID=1, BloodTypeID=1, CollectionDate=DateTime.Now.AddDays(-1), ExpiryDate=DateTime.Now.AddDays(41), VolumeML=450.00m, BloodStatus=DonatedBlood.Status.Approved},
+                       new DonatedBlood{AppointmentID=2, DonorID=2, BloodTypeID=2, CollectionDate=DateTime.Now.AddDays(-2), ExpiryDate=DateTime.Now.AddDays(40), VolumeML=500.00m, BloodStatus=DonatedBlood.Status.Approved}
                     };
                     context.DonatedBlood.AddRange(donations);
                     context.SaveChanges();
@@ -158,8 +158,8 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var inventoryItems = new Inventory[]
                     {
-                        new Inventory{BloodBankID=1, DonationID=1, BloodTypeID=1, CurrentVolumeML=4.50m, StorageLocation="Fridge-A1", BloodStatus=Inventory.Status.Available},
-                        new Inventory{BloodBankID=2, DonationID=2, BloodTypeID=2, CurrentVolumeML=5.00m, StorageLocation="Shelf-04", BloodStatus=Inventory.Status.Available}
+                        new Inventory{DonationID=1, BloodTypeID=1, CurrentVolumeML=4.50m, StorageLocation="Fridge-A1", BloodStatus=Inventory.Status.Available},
+                        new Inventory{DonationID=2, BloodTypeID=2, CurrentVolumeML=5.00m, StorageLocation="Shelf-04", BloodStatus=Inventory.Status.Available}
                     };
 
                     context.Inventory.AddRange(inventoryItems);
