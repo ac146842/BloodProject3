@@ -54,7 +54,7 @@ namespace BloodProject3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DonorID,UserID,BloodTypeID,LastDonationDate")] Donor donor)
+        public async Task<IActionResult> Create([Bind("DonorID,UserID,BloodTypeID")] Donor donor)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace BloodProject3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DonorID,UserID,BloodTypeID,LastDonationDate")] Donor donor)
+        public async Task<IActionResult> Edit(int id, [Bind("DonorID,UserID,BloodTypeID")] Donor donor)
         {
             if (id != donor.DonorID)
             {

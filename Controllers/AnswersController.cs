@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BloodProject3.Areas.Identity.Data;
 using BloodProject3.Models;
 
-namespace BloodProject3
+namespace BloodProject3.Controllers
 {
     public class AnswersController : Controller
     {

@@ -18,9 +18,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.BloodTypeID)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastDonationDate)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -32,9 +29,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BloodTypeID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastDonationDate)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DonorID">Edit</a> |
