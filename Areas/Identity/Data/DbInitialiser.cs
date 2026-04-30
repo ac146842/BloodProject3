@@ -14,27 +14,8 @@ namespace BloodProject3.Areas.Identity.Data
 
                 context.Database.Migrate();
 
-                //Roles
-                {
-                    var roles = new IdentityRole[]
-                    {
-                        new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
-                    };
-                    context.Roles.AddRange(roles);
-                    context.SaveChanges();
-                }
+                
 
-                // 4. Link the user (this must stay INSIDE these braces)
-                var adminMapping = new IdentityUserRole<string>
-                {
-                    UserId = "7f9b50ae-6022-4896-bfee-b5b346f9bbf2",
-                    RoleId = roles[0].Id // roles[0] is "Admin"
-                };
-
-                context.UserRoles.Add(adminMapping);
-                context.SaveChanges();
-
- 
 
                 //BloodType
                 if (!context.BloodType.Any())
