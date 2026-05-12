@@ -6,9 +6,9 @@ var connectionString = builder.Configuration.GetConnectionString("BloodProject3D
 
 builder.Services.AddDbContext<BloodProject3DbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BloodProject3DbContext>();
-
-
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<BloodProject3DbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -27,10 +27,10 @@ using (var scope = app.Services.CreateScope()) //creates admin role if it doesn'
 
 using (var scope = app.Services.CreateScope())
 {
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
     string adminID = "00000000000";
-    string AdminPassword = "Admin123";
+    string AdminPassword = "BloodDonation@123";
 
     if (await userManager.FindByEmailAsync("BDstaff@org.nz") == null)
     {
