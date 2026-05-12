@@ -8,14 +8,42 @@ builder.Services.AddDbContext<BloodProject3DbContext>(options => options.UseSqlS
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BloodProject3DbContext>();
 
-//call adddata method to seed the database with initial data
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-DbInitialiser.AddData(app);
+DbInitialiser.AddData(app); //calls adddata method to seed the database
+
+using (var scope = app.Services.CreateScope()) //creates admin role if it doesn't exist
+{
+       var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+       if (!await roleManager.RoleExistsAsync("Admin"))
+           await roleManager.CreateAsync(new IdentityRole("Admin"));
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+
+    string adminID = "00000000000";
+    string AdminPassword = "Admin123";
+
+    if (await userManager.FindByEmailAsync("BDstaff@org.nz") == null)
+    {
+        var adminUser = new User
+        {
+            Id = adminID,
+            UserName = "BDstaff@org.nz",
+            Email = "BDstaff@org.nz"
+        };
+        await userManager.CreateAsync(adminUser, AdminPassword);
+        await userManager.AddToRoleAsync(adminUser, "Admin");
+    }
+}
 
 
 // Configure the HTTP request pipeline.
