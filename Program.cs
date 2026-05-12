@@ -13,6 +13,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+
 var app = builder.Build();
 
 DbInitialiser.AddData(app); //calls adddata method to seed the database
@@ -32,16 +34,32 @@ using (var scope = app.Services.CreateScope())
     string adminID = "00000000000";
     string AdminPassword = "BloodDonation@123";
 
+    /*
     if (await userManager.FindByEmailAsync("BDstaff@org.nz") == null)
     {
         var adminUser = new User
         {
             Id = adminID,
             UserName = "BDstaff@org.nz",
-            Email = "BDstaff@org.nz"
+            Email = "BDstaff@org.nz";
+
+            await userManager.CreateAsync(adminUser, AdminPassword);
+            await userManager.AddToRoleAsync(adminUser, "Admin");
         };
-        await userManager.CreateAsync(adminUser, AdminPassword);
-        await userManager.AddToRoleAsync(adminUser, "Admin");
+    }
+    */
+
+    if (await userManager.FindByEmailAsync("BDstaff@org.nz") == null)
+    {
+        var user = new IdentityUser();
+        user.Id = adminID;
+        user.UserName = "BDstaff@org.nz";
+        user.Email = "BDstaff@org.nz";
+
+
+        await userManager.CreateAsync(user, AdminPassword);
+        await userManager.AddToRoleAsync(user, "Admin");
+
     }
 }
 
@@ -53,6 +71,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 app.UseRouting();
@@ -67,6 +86,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();
