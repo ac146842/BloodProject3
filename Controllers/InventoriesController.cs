@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BloodProject3.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class InventoriesController : Controller
     {
         private readonly BloodProject3DbContext _context;
