@@ -27,45 +27,9 @@ using (var scope = app.Services.CreateScope()) //creates admin role if it doesn'
         await roleManager.CreateAsync(new IdentityRole("Admin"));
 }
 
-/*
-using (var scope = app.Services.CreateScope())
-{
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-
-    string adminID = "00000000000";
-    string AdminPassword = "BloodDonation@123";
-
-
-
-    /*
-    if (await userManager.FindByEmailAsync("BDstaff@org.nz") == null)
-    {
-        var adminUser = new User
-        {
-            Id = adminID,
-            UserName = "BDstaff@org.nz",
-            Email = "BDstaff@org.nz";
-
-            await userManager.CreateAsync(adminUser, AdminPassword);
-            await userManager.AddToRoleAsync(adminUser, "Admin");
-        };
-    }
-    
-
-    if (await userManager.FindByEmailAsync("BDstaff@org.nz") == null)
-    {
-        var user = new IdentityUser();
-        user.Id = adminID;
-        user.UserName = "BDstaff@org.nz";
-        user.Email = "BDstaff@org.nz";
-
-
-        await userManager.CreateAsync(user, AdminPassword);
-        await userManager.AddToRoleAsync(user, "Admin");
-
-    }
-}
- */
+//user account
+//email "ac146842@avcol.school.nz"
+//password "Password123."
 
 using (var scope = app.Services.CreateScope())
 {

@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
+<head >
+    @await RenderSectionAsync("Styles", required: false)
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BloodProject3</title>
@@ -50,8 +51,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="DonatedBloods" asp-action="Index">Donated Bloods</a>
                                 </li>
                             }
-
-                        <partial name="_LoginPartial" />
+                            <partial name="_LoginPartial" />
 
                     </ul>
                 </div>
@@ -59,7 +59,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main"">
             @RenderBody()
         </main>
     </div>
