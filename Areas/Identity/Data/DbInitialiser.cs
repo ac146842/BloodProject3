@@ -1,5 +1,7 @@
 ﻿using BloodProject3.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Build.Framework;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 
 namespace BloodProject3.Areas.Identity.Data
