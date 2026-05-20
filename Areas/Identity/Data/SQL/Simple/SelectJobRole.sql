@@ -1,0 +1,2 @@
+SELECT DISTINCT JobRole 
+FROM Nurse;
