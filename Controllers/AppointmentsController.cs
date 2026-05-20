@@ -50,12 +50,16 @@ namespace BloodProject3.Controllers
         }
 
         // POST: Appointments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AppointmentID,DonorID,NurseID,AppointmentDateTime,Location,TypeOfAppointment,AppointmentStatus")] Appointment appointment)
         {
+            // ---- PAST DATE VALIDATION ADDED HERE ----
+            if (appointment.AppointmentDateTime < DateTime.Now)
+            {
+                ModelState.AddModelError("AppointmentDateTime", "The appointment date and time cannot be in the past.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(appointment);
@@ -82,8 +86,6 @@ namespace BloodProject3.Controllers
         }
 
         // POST: Appointments/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AppointmentID,DonorID,NurseID,AppointmentDateTime,Location,TypeOfAppointment,AppointmentStatus")] Appointment appointment)
@@ -91,6 +93,12 @@ namespace BloodProject3.Controllers
             if (id != appointment.AppointmentID)
             {
                 return NotFound();
+            }
+
+            // past date validation
+            if (appointment.AppointmentDateTime < DateTime.Now)
+            {
+                ModelState.AddModelError("AppointmentDateTime", "The appointment date and time cannot be in the past.");
             }
 
             if (ModelState.IsValid)

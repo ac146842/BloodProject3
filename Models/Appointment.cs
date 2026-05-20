@@ -35,7 +35,6 @@ namespace BloodProject3.Models
 
         [Required(ErrorMessage = "Please select a date and time.")] //requires a date and time to be chosen and ensures date cannot be in the past with an error message
         [DataType(DataType.DateTime)]
-        
         public DateTime AppointmentDateTime { get; set; }
 
         [Required]
