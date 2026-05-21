@@ -20,13 +20,37 @@
         line-height: 1.6;
         max-width: 65ch;
     }   
+
+    .Carouselcontainer {
+        margin-top: 20rem;
+        margin-bottom: 2rem;
+        max-height: 200px;
+        max-width: 200px;
+    }
+
+    .PHE {
+        display: flex;
+        justify-content: space-around;
+        background-color: darkgray;
+        margin-top: 20rem;
+
+    }
+
+    .PHE div {
+            background-color: #f1f1f1;
+            margin: 10px;
+            padding: 20px;
+            font-size: 1rem;
+            max-width: 65ch;
+            
+        }
 </style>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 <body>
-<!--
+
 <div class="header-container">
     <div>
         <h1 class="Header1">Welcome to the Blood Donation App!</h1>
@@ -44,22 +68,22 @@
         </p>
     </div>
 </div>
--->
 
-   <div class="container">
+
+   <div class="Carouselcontainer">
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">
-                    <img src="https://i.pinimg.com/originals/5d/e9/c9/5de9c9d977fc980d9c248222f9c5fede.png" class="d-block w-100" alt="...">
+                    <img src="https://i.pinimg.com/originals/5d/e9/c9/5de9c9d977fc980d9c248222f9c5fede.png" class="d-block w-100" alt="N1">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://thf.bing.com/th/id/OIP.zo4GATtI3AVNI9vREuP3KwAAAA?o=7&cb=thfc1falconrm=3&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="...">
+                    <img src="https://thf.bing.com/th/id/OIP.zo4GATtI3AVNI9vREuP3KwAAAA?o=7&cb=thfc1falconrm=3&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="N2">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://tse3.mm.bing.net/th/id/OIP.4JXwBEwIEeMEVNjh6gTDnQHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="...">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.4JXwBEwIEeMEVNjh6gTDnQHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="N3">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://tse1.mm.bing.net/th/id/OIP.ZFeXpolVf-wNwiUH6iRIPQHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="...">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.ZFeXpolVf-wNwiUH6iRIPQHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="N4">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -72,6 +96,60 @@
             </button>
         </div>
     </div>
+
+    <!--
+    <div class="PHE">
+        
+        <p class="Prep">
+            Please bring a valid form of ID and fill out a Donor details form. 
+            Completing the form ensures your health information is complete and 
+            you consent to testing.
+        </p> 
+        <p class="Health">
+            After you've completed the form, a finger prick test will be needed in 
+            order to check your haemoglobin level. This is a confidential process 
+            and no one may  accompany you except children under the age of 5. This 
+            is to ensure the interview will be done in a consistent manner and free 
+            from any external influence.
+        </p>
+        <p class="Eligibility">
+            New donors can donate blood between the ages 16 and 71
+            Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer
+            You must weigh 50 kg or more and be atleast 150 cm tall
+            You must be in good health at the time you donate
+            You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)
+        </p>
+    </div>
+
+    <div>abcd</div>
+    -->
+
+    <div class="PHE">
+        
+        <div>
+            Please bring a valid form of ID and fill out a Donor details form.
+            Completing the form ensures your health information is complete and
+            you consent to testing.
+        </div>
+
+        <div>
+            After you've completed the form, a finger prick test will be needed in
+            order to check your haemoglobin level. This is a confidential process
+            and no one may  accompany you except children under the age of 5. This
+            is to ensure the interview will be done in a consistent manner and free
+            from any external influence.
+        </div>
+
+        <div>
+            New donors can donate blood between the ages 16 and 71
+            Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer
+            You must weigh 50 kg or more and be atleast 150 cm tall
+            You must be in good health at the time you donate
+            You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)
+        </div>
+
+    </div>
+
 </body>
 
 
