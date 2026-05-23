@@ -22,7 +22,13 @@ namespace BloodProject3.Controllers
         // GET: MedicalForms
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MedicalForm.ToListAsync());
+            // Included Appointment and Donor so the Index view can display friendly info
+            var medicalForms = _context.MedicalForm
+                .Include(m => m.Nurse)
+                .Include(m => m.Appointment)
+                    .ThenInclude(a => a.Donor);
+
+            return View(await medicalForms.ToListAsync());
         }
 
         // GET: MedicalForms/Details/5
@@ -34,7 +40,11 @@ namespace BloodProject3.Controllers
             }
 
             var medicalForm = await _context.MedicalForm
+                .Include(m => m.Nurse)
+                .Include(m => m.Appointment)
+                    .ThenInclude(a => a.Donor)
                 .FirstOrDefaultAsync(m => m.FormID == id);
+
             if (medicalForm == null)
             {
                 return NotFound();
@@ -46,12 +56,17 @@ namespace BloodProject3.Controllers
         // GET: MedicalForms/Create
         public IActionResult Create()
         {
+            var nurseList = _context.Nurse.ToList().Select(n => new SelectListItem
+            {
+                Value = n.NurseID.ToString(),
+                Text = $"{n.FirstName} {n.LastName}"
+            }).ToList();
+            ViewBag.NurseList = new SelectList(nurseList, "Value", "Text");
+
             return View();
         }
 
         // POST: MedicalForms/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FormID,NurseID,AppointmentID,FormDate")] MedicalForm medicalForm)
@@ -62,36 +77,45 @@ namespace BloodProject3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            var nurseList = _context.Nurse.ToList().Select(n => new SelectListItem
+            {
+                Value = n.NurseID.ToString(),
+                Text = $"{n.FirstName} {n.LastName}"
+            }).ToList();
+            ViewBag.NurseList = new SelectList(nurseList, "Value", "Text");
+
             return View(medicalForm);
         }
 
         // GET: MedicalForms/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var medicalForm = await _context.MedicalForm.FindAsync(id);
-            if (medicalForm == null)
-            {
-                return NotFound();
-            }
+            if (medicalForm == null) return NotFound();
+
+            // Populate dropdowns
+            ViewBag.NurseList = new SelectList(_context.Nurse.Select(n => new {
+                Id = n.NurseID,
+                Name = $"{n.FirstName} {n.LastName}"
+            }), "Id", "Name", medicalForm.NurseID);
+
+            ViewBag.AppointmentList = new SelectList(_context.Appointment.Include(a => a.Donor).Select(a => new {
+                Id = a.AppointmentID,
+                Name = $"{a.Donor.FirstName} {a.Donor.LastName} ({a.AppointmentDateTime.ToString("dd/MM/yyyy")})"
+            }), "Id", "Name", medicalForm.AppointmentID);
+
             return View(medicalForm);
         }
 
         // POST: MedicalForms/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("FormID,NurseID,AppointmentID,FormDate")] MedicalForm medicalForm)
         {
-            if (id != medicalForm.FormID)
-            {
-                return NotFound();
-            }
+            if (id != medicalForm.FormID) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -102,17 +126,15 @@ namespace BloodProject3.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MedicalFormExists(medicalForm.FormID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!MedicalFormExists(medicalForm.FormID)) return NotFound();
+                    else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.NurseList = new SelectList(_context.Nurse.Select(n => new { Id = n.NurseID, Name = $"{n.FirstName} {n.LastName}" }), "Id", "Name", medicalForm.NurseID);
+            ViewBag.AppointmentList = new SelectList(_context.Appointment.Include(a => a.Donor).Select(a => new { Id = a.AppointmentID, Name = $"{a.Donor.FirstName} {a.Donor.LastName} ({a.AppointmentDateTime.ToString("dd/MM/yyyy")})" }), "Id", "Name", medicalForm.AppointmentID);
+
             return View(medicalForm);
         }
 
@@ -125,6 +147,8 @@ namespace BloodProject3.Controllers
             }
 
             var medicalForm = await _context.MedicalForm
+                .Include(m => m.Nurse)
+                .Include(m => m.Appointment)
                 .FirstOrDefaultAsync(m => m.FormID == id);
             if (medicalForm == null)
             {

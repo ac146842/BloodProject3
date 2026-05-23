@@ -1,24 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BloodProject3.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BloodProject3.Models
 {
+    // C#
     public class MedicalForm
     {
-        [Key] //pk
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FormID { get; set; }
 
-        [Required] //required 
-        [ForeignKey("NurseID")] //fk
+        [Required]
+        [ForeignKey("NurseID")]
         public int NurseID { get; set; }
+        public virtual Nurse Nurse { get; set; }
 
-        [Required] //required
-        [ForeignKey("AppointmentID")] //fk
+        [Required]
+        [ForeignKey("AppointmentID")]
         public int AppointmentID { get; set; }
+        public Appointment Appointment { get; set; } = new Appointment();
 
-        [Required] 
-        [DataType(DataType.DateTime)] //makes a date time picker in the form
-        //add validation in controller
+        [Required]
+        [DataType(DataType.DateTime)]
+        [NoFutureDateAttribute(ErrorMessage = "Form date cannot be set in the future.")]
         public DateTime FormDate { get; set; }
     }
 }

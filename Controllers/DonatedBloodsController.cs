@@ -54,10 +54,18 @@ namespace BloodProject3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DonationID,AppointmentID,BloodTypeID,DonorID,CollectionDate,VolumeML,ExpiryDate,BloodStatus")] DonatedBlood donatedBlood)
+        public async Task<IActionResult> Create([Bind("DonationID,AppointmentID,BloodTypeID,DonorID,VolumeML,BloodStatus")] DonatedBlood donatedBlood)
         {
+            // 1. Remove date properties from validation checking since the user isn't inputting them
+            ModelState.Remove("CollectionDate");
+            ModelState.Remove("ExpiryDate");
+
             if (ModelState.IsValid)
             {
+                // 2. Automatically applies date calculations 
+                donatedBlood.CollectionDate = DateTime.Now;
+                donatedBlood.ExpiryDate = DateTime.Now.AddDays(42);
+
                 _context.Add(donatedBlood);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

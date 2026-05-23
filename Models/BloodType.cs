@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BloodProject3.Models
 {
@@ -17,6 +18,7 @@ namespace BloodProject3.Models
         }
 
         [Key] //primary key 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BloodTypeID { get; set; }
 
         [Required] //required field

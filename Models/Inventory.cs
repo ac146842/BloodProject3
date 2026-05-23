@@ -15,6 +15,7 @@ namespace BloodProject3.Models
         }
 
         [Key] //primary key
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BloodBankID { get; set; }
 
         //fk and required field
@@ -29,8 +30,8 @@ namespace BloodProject3.Models
 
         [Required(ErrorMessage = "Volume is required")] //required field with error message
         [Display(Name = "Current Volume (ML)")] //displays on web page as current volume
-        //3 total digits, 2 after decimal
-        [Column(TypeName = "decimal(3, 2)")]
+        //6 total digits, 2 after decimal (FIXED: changed from 3 to 6 to prevent SQL overflow errors)
+        [Column(TypeName = "decimal(6, 2)")]
         public decimal CurrentVolumeML { get; set; }
 
         [Required] //required

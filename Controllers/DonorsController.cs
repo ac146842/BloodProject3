@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BloodProject3.Areas.Identity.Data;
 using BloodProject3.Models;
-
 namespace BloodProject3.Controllers
 {
     public class DonorsController : Controller
@@ -22,7 +21,7 @@ namespace BloodProject3.Controllers
         // GET: Donors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Donor.ToListAsync());
+            return View(await _context.Donor.Include(d => d.BloodType).ToListAsync());
         }
 
         // GET: Donors/Details/5
@@ -34,6 +33,7 @@ namespace BloodProject3.Controllers
             }
 
             var donor = await _context.Donor
+                .Include(d => d.BloodType)
                 .FirstOrDefaultAsync(m => m.DonorID == id);
             if (donor == null)
             {
@@ -46,6 +46,13 @@ namespace BloodProject3.Controllers
         // GET: Donors/Create
         public IActionResult Create()
         {
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypes = new SelectList(bloodTypeList, "Value", "Text");
+
             return View();
         }
 
@@ -54,7 +61,7 @@ namespace BloodProject3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DonorID,UserID,BloodTypeID")] Donor donor)
+        public async Task<IActionResult> Create([Bind("DonorID,FirstName,LastName,Phone,DateOfBirth,BloodTypeID")] Donor donor)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +69,14 @@ namespace BloodProject3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypes = new SelectList(bloodTypeList, "Value", "Text");
+
             return View(donor);
         }
 
@@ -86,7 +101,7 @@ namespace BloodProject3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DonorID,UserID,BloodTypeID")] Donor donor)
+        public async Task<IActionResult> Edit(int id, [Bind("DonorID,FirstName,LastName,Phone,DateOfBirth,BloodTypeID")] Donor donor)
         {
             if (id != donor.DonorID)
             {
@@ -125,6 +140,7 @@ namespace BloodProject3.Controllers
             }
 
             var donor = await _context.Donor
+                .Include(d => d.BloodType)
                 .FirstOrDefaultAsync(m => m.DonorID == id);
             if (donor == null)
             {

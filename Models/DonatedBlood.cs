@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BloodProject3.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BloodProject3.Models
@@ -15,6 +16,7 @@ namespace BloodProject3.Models
         }
 
         [Key] //primary key
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonationID { get; set; }
 
         [Required] //required appointment id and fk
@@ -32,6 +34,7 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "Collection date is required")] //required collectiondate
         [DataType(DataType.Date)] //ensures ui shows a date pickter
         [Display(Name = "Date Collected")] //displays name on webpage as date collected
+        [NoFutureDateAttribute(ErrorMessage = "Collection Date cannot be in the future.")]
         public DateTime CollectionDate { get; set; }
 
         [Required(ErrorMessage = "Please enter the volume")] //required volume amount
@@ -40,9 +43,8 @@ namespace BloodProject3.Models
         [Display(Name = "Volume (ML)")] //displays name as Volume ML
         public decimal VolumeML { get; set; }
 
-        [DataType(DataType.Date)] 
-        [Display(Name = "Expiry Date")] //displays as Expiry date on web page
-        // Collectiondate + 42 days
+        [DataType(DataType.Date)]
+        [Display(Name = "Expiry Date")]
         public DateTime ExpiryDate { get; set; }
 
         [Required] //required field

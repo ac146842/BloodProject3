@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BloodProject3.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BloodProject3.Models
@@ -22,19 +23,23 @@ namespace BloodProject3.Models
         }
 
         [Key] //primary key
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AppointmentID { get; set; }
 
         // DonorID is required, as every appointment must be associated with a donor
         [ForeignKey("DonorID")]
         public int DonorID { get; set; }
+        public virtual Donor Donor { get; set; }
 
         // NurseID is required, as every appointment must be associated with a nurse and done in person
-        [Required(ErrorMessage = "A nurse must be assigned.")] 
+        [Required(ErrorMessage = "A nurse must be assigned.")]
         [ForeignKey("NurseID")]
         public int NurseID { get; set; }
+        public virtual Nurse Nurse { get; set; } // Required for .Include(a => a.Nurse)
 
         [Required(ErrorMessage = "Please select a date and time.")] //requires a date and time to be chosen and ensures date cannot be in the past with an error message
         [DataType(DataType.DateTime)]
+        [NoPastDate(ErrorMessage = "The appointment date and time cannot be in the past.")] //custom validation attribute to check for past dates
         public DateTime AppointmentDateTime { get; set; }
 
         [Required]
@@ -49,5 +54,10 @@ namespace BloodProject3.Models
         // Status is required, as every appointment must have a status with an error message if not chosen
         [Required(ErrorMessage = "Please select a status for the appointment.")]
         public Status AppointmentStatus { get; set; }
+
+        [Required(ErrorMessage = "Appointment duration is required.")]
+        [Range(1, 60, ErrorMessage = "Appointment duration must be between 1 and 60 minutes.")]
+        [Display(Name = "Duration (Minutes)")]
+        public int DurationEndTime { get; set; }
     }
 }

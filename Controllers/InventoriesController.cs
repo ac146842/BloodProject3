@@ -7,11 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BloodProject3.Areas.Identity.Data;
 using BloodProject3.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace BloodProject3.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class InventoriesController : Controller
     {
         private readonly BloodProject3DbContext _context;

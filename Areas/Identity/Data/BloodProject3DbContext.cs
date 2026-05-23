@@ -37,7 +37,5 @@ public DbSet<BloodProject3.Models.MedicalForm> MedicalForm { get; set; } = defau
 
 public DbSet<BloodProject3.Models.Nurse> Nurse { get; set; } = default!;
 
-public DbSet<BloodProject3.Models.Profile> Profile { get; set; } = default!;
-
 public DbSet<BloodProject3.Models.Questions> Questions { get; set; } = default!;
 }

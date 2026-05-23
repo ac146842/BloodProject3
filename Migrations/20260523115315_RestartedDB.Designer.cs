@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodProject3.Migrations
 {
     [DbContext(typeof(BloodProject3DbContext))]
-    [Migration("20260430213341_Register")]
-    partial class Register
+    [Migration("20260523115315_RestartedDB")]
+    partial class RestartedDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("ProductVersion", "10.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -36,7 +36,11 @@ namespace BloodProject3.Migrations
                     b.Property<DateTime>("AnswerDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("AppointmentID")
+                    b.Property<string>("AnswersText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DonorID")
                         .HasColumnType("int");
 
                     b.Property<int>("FormID")
@@ -44,10 +48,6 @@ namespace BloodProject3.Migrations
 
                     b.Property<int>("HealthQID")
                         .HasColumnType("int");
-
-                    b.Property<string>("QuestionAnswers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AnswersID");
 
@@ -71,6 +71,9 @@ namespace BloodProject3.Migrations
                     b.Property<int>("DonorID")
                         .HasColumnType("int");
 
+                    b.Property<int>("DurationEndTime")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -83,6 +86,10 @@ namespace BloodProject3.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("AppointmentID");
+
+                    b.HasIndex("DonorID");
+
+                    b.HasIndex("NurseID");
 
                     b.ToTable("Appointment");
                 });
@@ -148,10 +155,30 @@ namespace BloodProject3.Migrations
                     b.Property<int>("BloodTypeID")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("LastDonationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("DonorID");
+
+                    b.HasIndex("BloodTypeID");
 
                     b.ToTable("Donor");
                 });
@@ -171,7 +198,7 @@ namespace BloodProject3.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("CurrentVolumeML")
-                        .HasColumnType("decimal(3, 2)");
+                        .HasColumnType("decimal(6, 2)");
 
                     b.Property<int>("DonationID")
                         .HasColumnType("int");
@@ -205,6 +232,8 @@ namespace BloodProject3.Migrations
 
                     b.HasKey("FormID");
 
+                    b.HasIndex("NurseID");
+
                     b.ToTable("MedicalForm");
                 });
 
@@ -219,36 +248,12 @@ namespace BloodProject3.Migrations
                     b.Property<DateTime>("EmployedStartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("JobRole")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("LicenseNumber")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("NurseID");
-
-                    b.ToTable("Nurse");
-                });
-
-            modelBuilder.Entity("BloodProject3.Models.Profile", b =>
-                {
-                    b.Property<int>("ProfileID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProfileID"));
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("JobRole")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -258,17 +263,19 @@ namespace BloodProject3.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
+                    b.HasKey("NurseID");
 
-                    b.HasKey("ProfileID");
-
-                    b.ToTable("Profile");
+                    b.ToTable("Nurse");
                 });
 
             modelBuilder.Entity("BloodProject3.Models.Questions", b =>
@@ -489,6 +496,47 @@ namespace BloodProject3.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("BloodProject3.Models.Appointment", b =>
+                {
+                    b.HasOne("BloodProject3.Models.Donor", "Donor")
+                        .WithMany()
+                        .HasForeignKey("DonorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BloodProject3.Models.Nurse", "Nurse")
+                        .WithMany()
+                        .HasForeignKey("NurseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Donor");
+
+                    b.Navigation("Nurse");
+                });
+
+            modelBuilder.Entity("BloodProject3.Models.Donor", b =>
+                {
+                    b.HasOne("BloodProject3.Models.BloodType", "BloodType")
+                        .WithMany()
+                        .HasForeignKey("BloodTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BloodType");
+                });
+
+            modelBuilder.Entity("BloodProject3.Models.MedicalForm", b =>
+                {
+                    b.HasOne("BloodProject3.Models.Nurse", "Nurse")
+                        .WithMany()
+                        .HasForeignKey("NurseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Nurse");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

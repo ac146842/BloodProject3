@@ -1,8 +1,7 @@
 ﻿using BloodProject3.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Build.Framework;
-using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BloodProject3.Areas.Identity.Data
 {
@@ -15,9 +14,6 @@ namespace BloodProject3.Areas.Identity.Data
                 var context = serviceScope.ServiceProvider.GetService<BloodProject3DbContext>();
 
                 context.Database.Migrate();
-
-                
-
 
                 //BloodType
                 if (!context.BloodType.Any())
@@ -37,64 +33,86 @@ namespace BloodProject3.Areas.Identity.Data
                     context.SaveChanges();
                 }
 
-                //Profile
-                if (!context.Profile.Any())
-                {
-                    var profiles = new Profile[]
-                    {
-                        new Profile{UserID=1, FirstName="John", LastName="Doe", Phone="1234567890", DateOfBirth=DateTime.Parse("1990-01-01")},
-                        new Profile{UserID=2, FirstName="Jane", LastName="Smith", Phone="0987654321", DateOfBirth=DateTime.Parse("1992-02-02")},
-                        new Profile{UserID=3, FirstName="Michael", LastName="Johnson", Phone="5551234567", DateOfBirth=DateTime.Parse("1988-03-15")},
-                        new Profile{UserID=4, FirstName="Emily", LastName="Williams", Phone="5559876543", DateOfBirth=DateTime.Parse("1995-04-22")},
-                        new Profile{UserID=5, FirstName="David", LastName="Brown", Phone="5552468135", DateOfBirth=DateTime.Parse("1987-05-10")},
-                        new Profile{UserID=6, FirstName="Sarah", LastName="Davis", Phone="5553691357", DateOfBirth=DateTime.Parse("1993-06-18")},
-                        new Profile{UserID=7, FirstName="James", LastName="Miller", Phone="5554827160", DateOfBirth=DateTime.Parse("1991-07-25")},
-                        new Profile{UserID=8, FirstName="Jessica", LastName="Wilson", Phone="5555739284", DateOfBirth=DateTime.Parse("1994-08-12")},
-                        new Profile{UserID=9, FirstName="Robert", LastName="Moore", Phone="5556850391", DateOfBirth=DateTime.Parse("1989-09-30")},
-                        new Profile{UserID=10, FirstName="Amanda", LastName="Taylor", Phone="5557961402", DateOfBirth=DateTime.Parse("1996-10-14")},
-                        new Profile{UserID=11, FirstName="William", LastName="Anderson", Phone="5558072513", DateOfBirth=DateTime.Parse("1986-11-07")},
-                        new Profile{UserID=12, FirstName="Lauren", LastName="Thomas", Phone="5559183624", DateOfBirth=DateTime.Parse("1997-12-20")},
-                        new Profile{UserID=13, FirstName="Christopher", LastName="Jackson", Phone="5550294735", DateOfBirth=DateTime.Parse("1990-01-28")},
-                        new Profile{UserID=14, FirstName="Megan", LastName="White", Phone="5551405846", DateOfBirth=DateTime.Parse("1998-02-11")},
-                        new Profile{UserID=15, FirstName="Daniel", LastName="Harris", Phone="5552516957", DateOfBirth=DateTime.Parse("1985-03-19")},
-                        new Profile{UserID=16, FirstName="Ashley", LastName="Martin", Phone="5553627068", DateOfBirth=DateTime.Parse("1999-04-05")},
-                        new Profile{UserID=17, FirstName="Matthew", LastName="Thompson", Phone="5554738179", DateOfBirth=DateTime.Parse("1992-05-22")},
-                        new Profile{UserID=18, FirstName="Natalie", LastName="Garcia", Phone="5555849280", DateOfBirth=DateTime.Parse("2000-06-09")},
-                        new Profile{UserID=19, FirstName="Anthony", LastName="Martinez", Phone="5556950391", DateOfBirth=DateTime.Parse("1988-07-16")},
-                        new Profile{UserID=20, FirstName="Olivia", LastName="Robinson", Phone="5557061402", DateOfBirth=DateTime.Parse("1994-08-03")},
-                        new Profile{UserID=21, FirstName="Mark", LastName="Clark", Phone="5558172513", DateOfBirth=DateTime.Parse("1991-09-27")},
-                        new Profile{UserID=22, FirstName="Sophia", LastName="Rodriguez", Phone="5559283624", DateOfBirth=DateTime.Parse("1997-10-14")},
-                        new Profile{UserID=23, FirstName="Steven", LastName="Lewis", Phone="5550394735", DateOfBirth=DateTime.Parse("1989-11-21")},
-                        new Profile{UserID=24, FirstName="Emma", LastName="Lee", Phone="5551405846", DateOfBirth=DateTime.Parse("1996-12-08")},
-                        new Profile{UserID=25, FirstName="Paul", LastName="Walker", Phone="5552516957", DateOfBirth=DateTime.Parse("1987-01-30")}
-                    }; 
-
-                    context.Profile.AddRange(profiles);
-                    context.SaveChanges();
-                }
-
-                //Donor
-                if (!context.Donor.Any())
-                {
-                    var donors = new Donor[]
-                    {
-                        new Donor{UserID=1, BloodTypeID=1},
-                        new Donor{UserID=2, BloodTypeID=2},
-                        new Donor{UserID=3, BloodTypeID=3}
-                    };
-                    context.Donor.AddRange(donors);
-                    context.SaveChanges();
-                }
-
-                //Nurse
+                //Nurses
                 if (!context.Nurse.Any())
                 {
                     var nurses = new Nurse[]
                     {
-                        new Nurse{UserID=11, JobRole="Senior Nurse", EmployedStartDate=DateTime.Parse("2020-01-10"), LicenseNumber="RN12345"},
-                        new Nurse{UserID=12, JobRole="Clinic Lead", EmployedStartDate=DateTime.Parse("2021-05-15"), LicenseNumber="RN67890"}
+                        new Nurse{FirstName="William", LastName="Anderson", Phone = "555-807-2513", JobRole = "Senior Nurse", EmployedStartDate = DateTime.Parse("2020-01-10"), LicenseNumber = "RN123456"},
+                        new Nurse{FirstName="Lauren", LastName="Thomas", Phone = "555-918-3624", JobRole="Clinic Lead", EmployedStartDate=DateTime.Parse("2021-05-15"), LicenseNumber="RN678901"},
+                        new Nurse{FirstName="Robert", LastName="Moore", Phone = "555-685-0391", JobRole = "Staff Nurse", EmployedStartDate = DateTime.Parse("2023-08-24"), LicenseNumber = "RN456123"},
+                        new Nurse{FirstName="Amanda", LastName="Taylor", Phone = "555-796-1402", JobRole = "Phlebotomist", EmployedStartDate = DateTime.Parse("2024-11-02"), LicenseNumber = "RN789321"}
                     };
                     context.Nurse.AddRange(nurses);
+                    context.SaveChanges();
+                }
+
+                //Donors
+                if (!context.Donor.Any())
+                {
+                    var donors = new Donor[]
+                    {
+                        new Donor{FirstName="John", LastName="Doe", Phone="123-456-7890", DateOfBirth=DateTime.Parse("1990-01-01"), BloodTypeID=1},
+                        new Donor{FirstName="Jane", LastName="Smith", Phone="098-765-4321", DateOfBirth=DateTime.Parse("1992-02-02"), BloodTypeID=2},
+                        new Donor{FirstName="Michael", LastName="Johnson", Phone="555-123-4567", DateOfBirth=DateTime.Parse("1988-03-15"), BloodTypeID=3},
+                        new Donor{FirstName="Emily", LastName="Williams", Phone="555-987-6543", DateOfBirth=DateTime.Parse("1995-04-22"), BloodTypeID=4},
+                        new Donor{FirstName="David", LastName="Brown", Phone="555-246-8135", DateOfBirth=DateTime.Parse("1987-05-10"), BloodTypeID=1},
+                        new Donor{FirstName="Sarah", LastName="Davis", Phone="555-369-1357", DateOfBirth=DateTime.Parse("1993-06-18"), BloodTypeID=2},
+                        new Donor{FirstName="James", LastName="Miller", Phone="555-482-7160", DateOfBirth=DateTime.Parse("1991-07-25"), BloodTypeID=5},
+                        new Donor{FirstName="Jessica", LastName="Wilson", Phone="555-573-9284", DateOfBirth=DateTime.Parse("1994-08-12"), BloodTypeID=6}
+                    };
+
+                    context.Donor.AddRange(donors);
+                    context.SaveChanges();
+                }
+
+                //Appointments
+                if (!context.Appointment.Any())
+                {
+                    var appointments = new Appointment[]
+                    {
+                       new Appointment{ DonorID = 1, NurseID = 1, AppointmentDateTime = DateTime.Now.AddDays(1), Location = "Auckland City Center", TypeOfAppointment = Appointment.AppointmentType.Donation, AppointmentStatus = Appointment.Status.Scheduled, DurationEndTime = 30},
+                       new Appointment{ DonorID = 2, NurseID = 2, AppointmentDateTime = DateTime.Now.AddDays(2), Location = "North Shore Clinic", TypeOfAppointment = Appointment.AppointmentType.Consulting, AppointmentStatus = Appointment.Status.Scheduled, DurationEndTime = 15}
+                    };
+
+                    context.Appointment.AddRange(appointments);
+                    context.SaveChanges();
+                }
+
+                //MedicalForms
+                if (!context.MedicalForm.Any())
+                {
+                    var medicalForms = new MedicalForm[]
+                    {
+                        new MedicalForm{NurseID=1, AppointmentID=1, FormDate=DateTime.Now.AddDays(-2)},
+                        new MedicalForm{NurseID=2, AppointmentID=2, FormDate=DateTime.Now.AddDays(-1)}
+                    };
+                    context.MedicalForm.AddRange(medicalForms);
+                    context.SaveChanges();
+                }
+
+                //DonatedBlood
+                if (!context.DonatedBlood.Any())
+                {
+                    var donations = new DonatedBlood[]
+                    {
+                        new DonatedBlood{AppointmentID=1, DonorID=1, BloodTypeID=1, CollectionDate=DateTime.Now.AddDays(-5), ExpiryDate=DateTime.Now.AddDays(37), VolumeML=450.00m, BloodStatus=DonatedBlood.Status.Approved},
+                        new DonatedBlood{AppointmentID=2, DonorID=2, BloodTypeID=2, CollectionDate=DateTime.Now.AddDays(-4), ExpiryDate=DateTime.Now.AddDays(38), VolumeML=500.00m, BloodStatus=DonatedBlood.Status.Approved}
+                    };
+                    context.DonatedBlood.AddRange(donations);
+                    context.SaveChanges();
+                }
+
+                //Inventory
+                if (!context.Inventory.Any())
+                {
+                    var inventoryItems = new Inventory[]
+                    {
+                        new Inventory{DonationID=1, BloodTypeID=1, CurrentVolumeML=450.00m, StorageLocation="Fridge-A1", BloodStatus=Inventory.Status.Available},
+                        new Inventory{DonationID=2, BloodTypeID=2, CurrentVolumeML=500.00m, StorageLocation="Shelf-04", BloodStatus=Inventory.Status.Available}
+                    };
+
+                    context.Inventory.AddRange(inventoryItems);
                     context.SaveChanges();
                 }
 
@@ -114,60 +132,23 @@ namespace BloodProject3.Areas.Identity.Data
                         new Questions{FormQuestions="Have you or anyone in your household had diarrhoea and/or vomiting in the last 12 weeks?"},
                         new Questions{FormQuestions="Have you had a tattoo or piercing in the last 3 months?"},
                         new Questions{FormQuestions="Are you currently pregnant or have you given birth recently?"},
-                        new Questions{FormQuestions="Are you taking any prescription medications including iron?"},
+                        new Questions{FormQuestions="Are you currently taking any prescription medications including iron?"},
                         new Questions{FormQuestions="Have you travelled outside of New Zealand in the last 12 months?"}
                     };
                     context.Questions.AddRange(questions);
                     context.SaveChanges();
                 }
 
-                //MedicalForm
-                if (!context.MedicalForm.Any())
-                {
-                    var medicalForms = new MedicalForm[]
-                    {
-                        new MedicalForm{NurseID=1, AppointmentID=101, FormDate=DateTime.Now}
-                    };
-                    context.MedicalForm.AddRange(medicalForms);
-                    context.SaveChanges();
-                }
-
-                // Answers
+                //Answers
                 if (!context.Answers.Any())
                 {
-                    var Answers = new Answers[]
+                    var answers = new Answers[]
                     {
-                        new Answers{HealthQID=1, AppointmentID=1, QuestionAnswers="25", AnswerDate=DateTime.Now},
-                        new Answers{HealthQID=2, AppointmentID=1, QuestionAnswers="Yes", AnswerDate=DateTime.Now},
-                        new Answers{HealthQID=13, AppointmentID=1, QuestionAnswers="No", AnswerDate=DateTime.Now}
+                        new Answers{FormID=1, HealthQID=1, DonorID=1, AnswersText="25", AnswerDate=DateTime.Now.AddDays(-2)},
+                        new Answers{FormID=2, HealthQID=1, DonorID=2, AnswersText="34", AnswerDate=DateTime.Now.AddDays(-1)}
                     };
 
-                    context.Answers.AddRange(Answers);
-                    context.SaveChanges();
-                }
-
-                //DonatedBlood
-                if (!context.DonatedBlood.Any())
-                {
-                    var donations = new DonatedBlood[]
-                    {
-                       new DonatedBlood{AppointmentID=1, DonorID=1, BloodTypeID=1, CollectionDate=DateTime.Now.AddDays(-1), ExpiryDate=DateTime.Now.AddDays(41), VolumeML=450.00m, BloodStatus=DonatedBlood.Status.Approved},
-                       new DonatedBlood{AppointmentID=2, DonorID=2, BloodTypeID=2, CollectionDate=DateTime.Now.AddDays(-2), ExpiryDate=DateTime.Now.AddDays(40), VolumeML=500.00m, BloodStatus=DonatedBlood.Status.Approved}
-                    };
-                    context.DonatedBlood.AddRange(donations);
-                    context.SaveChanges();
-                }
-
-                // Inventory
-                if (!context.Inventory.Any())
-                {
-                    var inventoryItems = new Inventory[]
-                    {
-                        new Inventory{DonationID=1, BloodTypeID=1, CurrentVolumeML=4.50m, StorageLocation="Fridge-A1", BloodStatus=Inventory.Status.Available},
-                        new Inventory{DonationID=2, BloodTypeID=2, CurrentVolumeML=5.00m, StorageLocation="Shelf-04", BloodStatus=Inventory.Status.Available}
-                    };
-
-                    context.Inventory.AddRange(inventoryItems);
+                    context.Answers.AddRange(answers);
                     context.SaveChanges();
                 }
             }

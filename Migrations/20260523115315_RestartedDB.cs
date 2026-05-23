@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BloodProject3.Migrations
 {
     /// <inheritdoc />
-    public partial class BloodProject : Migration
+    public partial class RestartedDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,33 +17,15 @@ namespace BloodProject3.Migrations
                 {
                     AnswersID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    FormID = table.Column<int>(type: "int", nullable: false),
                     HealthQID = table.Column<int>(type: "int", nullable: false),
-                    AppointmentID = table.Column<int>(type: "int", nullable: false),
-                    QuestionAnswers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DonorID = table.Column<int>(type: "int", nullable: false),
+                    AnswersText = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AnswerDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Answers", x => x.AnswersID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Appointment",
-                columns: table => new
-                {
-                    AppointmentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DonorID = table.Column<int>(type: "int", nullable: false),
-                    NurseID = table.Column<int>(type: "int", nullable: false),
-                    AppointmentDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    AppointmentTimes = table.Column<int>(type: "int", nullable: false),
-                    TypeOfAppointment = table.Column<int>(type: "int", nullable: false),
-                    AppointmentStatus = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Appointment", x => x.AppointmentID);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,7 +73,7 @@ namespace BloodProject3.Migrations
                 {
                     BloodTypeID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BloodTypeName = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false)
+                    SelectedBloodType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,28 +90,13 @@ namespace BloodProject3.Migrations
                     BloodTypeID = table.Column<int>(type: "int", nullable: false),
                     DonorID = table.Column<int>(type: "int", nullable: false),
                     CollectionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    VolumeML = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    VolumeML = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
                     ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BloodStatus = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DonatedBlood", x => x.DonationID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Donor",
-                columns: table => new
-                {
-                    DonorID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    BloodTypeID = table.Column<int>(type: "int", nullable: false),
-                    LastDonationDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Donor", x => x.DonorID);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,7 +107,7 @@ namespace BloodProject3.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DonationID = table.Column<int>(type: "int", nullable: false),
                     BloodTypeID = table.Column<int>(type: "int", nullable: false),
-                    CurrentVolumeML = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CurrentVolumeML = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
                     StorageLocation = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     BloodStatus = table.Column<int>(type: "int", nullable: false)
                 },
@@ -150,51 +117,21 @@ namespace BloodProject3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicalForm",
-                columns: table => new
-                {
-                    FormID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NurseID = table.Column<int>(type: "int", nullable: false),
-                    AppointmentID = table.Column<int>(type: "int", nullable: false),
-                    FormDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MedicalForm", x => x.FormID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Nurse",
                 columns: table => new
                 {
                     NurseID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     JobRole = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EmployedStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LicenseNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    LicenseNumber = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Nurse", x => x.NurseID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Profile",
-                columns: table => new
-                {
-                    ProfileID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profile", x => x.ProfileID);
                 });
 
             migrationBuilder.CreateTable(
@@ -203,7 +140,7 @@ namespace BloodProject3.Migrations
                 {
                     HealthQID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FormQuestions = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FormQuestions = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -316,6 +253,92 @@ namespace BloodProject3.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Donor",
+                columns: table => new
+                {
+                    DonorID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BloodTypeID = table.Column<int>(type: "int", nullable: false),
+                    LastDonationDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Donor", x => x.DonorID);
+                    table.ForeignKey(
+                        name: "FK_Donor_BloodType_BloodTypeID",
+                        column: x => x.BloodTypeID,
+                        principalTable: "BloodType",
+                        principalColumn: "BloodTypeID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MedicalForm",
+                columns: table => new
+                {
+                    FormID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NurseID = table.Column<int>(type: "int", nullable: false),
+                    AppointmentID = table.Column<int>(type: "int", nullable: false),
+                    FormDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicalForm", x => x.FormID);
+                    table.ForeignKey(
+                        name: "FK_MedicalForm_Nurse_NurseID",
+                        column: x => x.NurseID,
+                        principalTable: "Nurse",
+                        principalColumn: "NurseID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Appointment",
+                columns: table => new
+                {
+                    AppointmentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DonorID = table.Column<int>(type: "int", nullable: false),
+                    NurseID = table.Column<int>(type: "int", nullable: false),
+                    AppointmentDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TypeOfAppointment = table.Column<int>(type: "int", nullable: false),
+                    AppointmentStatus = table.Column<int>(type: "int", nullable: false),
+                    DurationEndTime = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointment", x => x.AppointmentID);
+                    table.ForeignKey(
+                        name: "FK_Appointment_Donor_DonorID",
+                        column: x => x.DonorID,
+                        principalTable: "Donor",
+                        principalColumn: "DonorID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Appointment_Nurse_NurseID",
+                        column: x => x.NurseID,
+                        principalTable: "Nurse",
+                        principalColumn: "NurseID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointment_DonorID",
+                table: "Appointment",
+                column: "DonorID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointment_NurseID",
+                table: "Appointment",
+                column: "NurseID");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -354,6 +377,16 @@ namespace BloodProject3.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Donor_BloodTypeID",
+                table: "Donor",
+                column: "BloodTypeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicalForm_NurseID",
+                table: "MedicalForm",
+                column: "NurseID");
         }
 
         /// <inheritdoc />
@@ -381,13 +414,7 @@ namespace BloodProject3.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BloodType");
-
-            migrationBuilder.DropTable(
                 name: "DonatedBlood");
-
-            migrationBuilder.DropTable(
-                name: "Donor");
 
             migrationBuilder.DropTable(
                 name: "Inventory");
@@ -396,19 +423,22 @@ namespace BloodProject3.Migrations
                 name: "MedicalForm");
 
             migrationBuilder.DropTable(
-                name: "Nurse");
-
-            migrationBuilder.DropTable(
-                name: "Profile");
-
-            migrationBuilder.DropTable(
                 name: "Questions");
+
+            migrationBuilder.DropTable(
+                name: "Donor");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Nurse");
+
+            migrationBuilder.DropTable(
+                name: "BloodType");
         }
     }
 }
