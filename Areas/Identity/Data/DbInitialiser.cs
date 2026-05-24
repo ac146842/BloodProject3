@@ -144,8 +144,8 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var answers = new Answers[]
                     {
-                        new Answers{FormID=1, HealthQID=1, DonorID=1, AnswersText="25", AnswerDate=DateTime.Now.AddDays(-2)},
-                        new Answers{FormID=2, HealthQID=1, DonorID=2, AnswersText="34", AnswerDate=DateTime.Now.AddDays(-1)}
+                        new Answers{FormID=1, HealthQID=1, DonorID=1, AnswersBool=true, AnswerDate=DateTime.Now.AddDays(-2)},
+                        new Answers{FormID=2, HealthQID=1, DonorID=2, AnswersBool=false, AnswerDate=DateTime.Now.AddDays(-1)}
                     };
 
                     context.Answers.AddRange(answers);

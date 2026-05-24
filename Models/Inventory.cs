@@ -27,10 +27,11 @@ namespace BloodProject3.Models
         [Required]
         [ForeignKey("BloodTypeID")]
         public int BloodTypeID { get; set; }
+        public virtual BloodType BloodType { get; set; }
 
         [Required(ErrorMessage = "Volume is required")] //required field with error message
         [Display(Name = "Current Volume (ML)")] //displays on web page as current volume
-        //6 total digits, 2 after decimal (FIXED: changed from 3 to 6 to prevent SQL overflow errors)
+        //6 total digits, 2 after decimal
         [Column(TypeName = "decimal(6, 2)")]
         public decimal CurrentVolumeML { get; set; }
 

@@ -4,6 +4,7 @@ using BloodProject3.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodProject3.Migrations
 {
     [DbContext(typeof(BloodProject3DbContext))]
-    partial class BloodProject3DbContextModelSnapshot : ModelSnapshot
+    [Migration("20260524093131_DB1")]
+    partial class DB1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +36,9 @@ namespace BloodProject3.Migrations
                     b.Property<DateTime>("AnswerDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("AnswersBool")
-                        .HasColumnType("bit");
+                    b.Property<string>("AnswersText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DonorID")
                         .HasColumnType("int");
@@ -46,8 +50,6 @@ namespace BloodProject3.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("AnswersID");
-
-                    b.HasIndex("DonorID");
 
                     b.ToTable("Answers");
                 });
@@ -498,17 +500,6 @@ namespace BloodProject3.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("BloodProject3.Models.Answers", b =>
-                {
-                    b.HasOne("BloodProject3.Models.Donor", "Donor")
-                        .WithMany()
-                        .HasForeignKey("DonorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Donor");
                 });
 
             modelBuilder.Entity("BloodProject3.Models.Appointment", b =>

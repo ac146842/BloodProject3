@@ -10,6 +10,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Nurse Name</th>
             <th>Appointment Details</th>
             <th>@Html.DisplayNameFor(model => model.FormDate)</th>
@@ -20,6 +21,7 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>@item.FormID</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nurse.FirstName)
                     @Html.DisplayFor(modelItem => item.Nurse.LastName)

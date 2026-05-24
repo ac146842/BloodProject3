@@ -3,11 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
+<h1>Index</h1><p>
+<a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -16,7 +13,7 @@
                 @Html.DisplayNameFor(model => model.DonationID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BloodTypeID)
+                Blood Type
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CurrentVolumeML)
@@ -31,29 +28,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonationID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BloodTypeID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentVolumeML)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StorageLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BloodStatus)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BloodBankID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BloodBankID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BloodBankID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonationID)
+                </td>
+                <td>
+                    @* This displays the related blood type description/value *@
+                    @Html.DisplayFor(modelItem => item.BloodType.SelectedBloodType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentVolumeML)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StorageLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodStatus)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BloodBankID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.BloodBankID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BloodBankID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

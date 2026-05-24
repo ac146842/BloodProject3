@@ -3,9 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
 <h1>Edit</h1>
-
 <h4>Answers</h4>
 <hr />
 <div class="row">
@@ -13,31 +11,40 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AnswersID" />
+
             <div class="form-group">
-                <label asp-for="FormID" class="control-label"></label>
+                <label asp-for="DonorID" class="control-label">Donor</label>
+                <select asp-for="DonorID" class="form-control" asp-items="ViewBag.DonorID"></select>
+                <span asp-validation-for="DonorID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HealthQID" class="control-label">Question</label>
+                <select asp-for="HealthQID" class="form-control" asp-items="ViewBag.HealthQID"></select>
+                <span asp-validation-for="HealthQID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FormID" class="control-label">Medical Form ID</label>
                 <input asp-for="FormID" class="form-control" />
                 <span asp-validation-for="FormID" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="HealthQID" class="control-label"></label>
-                <input asp-for="HealthQID" class="form-control" />
-                <span asp-validation-for="HealthQID" class="text-danger"></span>
+                <label asp-for="AnswersBool" class="control-label">Answer</label>
+                <select asp-for="AnswersBool" class="form-control">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+                <span asp-validation-for="AnswersBool" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DonorID" class="control-label"></label>
-                <input asp-for="DonorID" class="form-control" />
-                <span asp-validation-for="DonorID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AnswersText" class="control-label"></label>
-                <input asp-for="AnswersText" class="form-control" />
-                <span asp-validation-for="AnswersText" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="AnswerDate" class="control-label"></label>
                 <input asp-for="AnswerDate" class="form-control" />
                 <span asp-validation-for="AnswerDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -50,5 +57,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

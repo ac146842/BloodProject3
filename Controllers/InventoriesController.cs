@@ -22,7 +22,10 @@ namespace BloodProject3.Controllers
         // GET: Inventories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Inventory.ToListAsync());
+            var inventory = _context.Inventory
+                .Include(i => i.BloodType);
+
+            return View(await inventory.ToListAsync());
         }
 
         // GET: Inventories/Details/5
