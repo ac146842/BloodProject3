@@ -26,6 +26,21 @@ namespace BloodProject3.Controllers
             return View(await appointments.ToListAsync());
         }
 
+        // GET: Appointments/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var appointment = await _context.Appointment
+                .Include(a => a.Donor)
+                .Include(a => a.Nurse)
+                .FirstOrDefaultAsync(m => m.AppointmentID == id);
+
+            if (appointment == null) return NotFound();
+
+            return View(appointment);
+        }
+
         // GET: Appointments/Create
         public IActionResult Create()
         {
@@ -86,11 +101,40 @@ namespace BloodProject3.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Re-populate lists if model state is invalid so the view doesn't crash
             ViewBag.DonorList = new SelectList(_context.Donor.Select(d => new { Id = d.DonorID, Name = $"{d.FirstName} {d.LastName}" }), "Id", "Name", appointment.DonorID);
             ViewBag.NurseList = new SelectList(_context.Nurse.Select(n => new { Id = n.NurseID, Name = $"{n.FirstName} {n.LastName}" }), "Id", "Name", appointment.NurseID);
 
             return View(appointment);
+        }
+
+        // GET: Appointments/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var appointment = await _context.Appointment
+                .Include(a => a.Donor)
+                .Include(a => a.Nurse)
+                .FirstOrDefaultAsync(m => m.AppointmentID == id);
+
+            if (appointment == null) return NotFound();
+
+            return View(appointment);
+        }
+
+        // POST: Appointments/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var appointment = await _context.Appointment.FindAsync(id);
+            if (appointment != null)
+            {
+                _context.Appointment.Remove(appointment);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool AppointmentExists(int id) => _context.Appointment.Any(e => e.AppointmentID == id);
