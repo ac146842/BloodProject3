@@ -33,8 +33,9 @@ namespace BloodProject3.Migrations
                     b.Property<DateTime>("AnswerDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("AnswersBool")
-                        .HasColumnType("bit");
+                    b.Property<string>("AnswersText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DonorID")
                         .HasColumnType("int");
@@ -46,8 +47,6 @@ namespace BloodProject3.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("AnswersID");
-
-                    b.HasIndex("DonorID");
 
                     b.ToTable("Answers");
                 });
@@ -207,8 +206,6 @@ namespace BloodProject3.Migrations
                         .HasColumnType("nvarchar(15)");
 
                     b.HasKey("BloodBankID");
-
-                    b.HasIndex("BloodTypeID");
 
                     b.ToTable("Inventory");
                 });
@@ -500,17 +497,6 @@ namespace BloodProject3.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BloodProject3.Models.Answers", b =>
-                {
-                    b.HasOne("BloodProject3.Models.Donor", "Donor")
-                        .WithMany()
-                        .HasForeignKey("DonorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Donor");
-                });
-
             modelBuilder.Entity("BloodProject3.Models.Appointment", b =>
                 {
                     b.HasOne("BloodProject3.Models.Donor", "Donor")
@@ -531,17 +517,6 @@ namespace BloodProject3.Migrations
                 });
 
             modelBuilder.Entity("BloodProject3.Models.Donor", b =>
-                {
-                    b.HasOne("BloodProject3.Models.BloodType", "BloodType")
-                        .WithMany()
-                        .HasForeignKey("BloodTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BloodType");
-                });
-
-            modelBuilder.Entity("BloodProject3.Models.Inventory", b =>
                 {
                     b.HasOne("BloodProject3.Models.BloodType", "BloodType")
                         .WithMany()

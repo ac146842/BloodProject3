@@ -29,10 +29,10 @@
             @Html.DisplayFor(model => model.DonorID)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AnswersBool)
+            @Html.DisplayNameFor(model => model.AnswersText)
         </dt>
         <dd class = "col-sm-10">
-            @(Model.AnswersBool ? "Yes" : "No")
+            @Html.DisplayFor(model => model.AnswersText)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AnswerDate)

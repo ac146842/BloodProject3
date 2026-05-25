@@ -1,8 +1,12 @@
-﻿using BloodProject3.Areas.Identity.Data;
-using BloodProject3.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using BloodProject3.Areas.Identity.Data;
+using BloodProject3.Models;
 
 namespace BloodProject3.Controllers
 {
@@ -15,28 +19,42 @@ namespace BloodProject3.Controllers
             _context = context;
         }
 
-        private void PopulateViewBag(object selectedDonor = null, object selectedForm = null, object selectedQuestion = null)
-        {
-            ViewBag.DonorID = new SelectList(_context.Donor.Select(d => new { Id = d.DonorID, Name = $"{d.FirstName} {d.LastName}" }), "Id", "Name", selectedDonor);
-            ViewBag.FormID = new SelectList(_context.MedicalForm, "FormID", "FormID", selectedForm);
-            ViewBag.HealthQID = new SelectList(_context.Questions, "HealthQID", "FormQuestions", selectedQuestion);
-        }
-
+        // GET: Answers
         public async Task<IActionResult> Index()
         {
-            var answers = _context.Answers.Include(a => a.Donor);
-            return View(await answers.ToListAsync());
+            return View(await _context.Answers.ToListAsync());
         }
 
+        // GET: Answers/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var answers = await _context.Answers
+                .FirstOrDefaultAsync(m => m.AnswersID == id);
+            if (answers == null)
+            {
+                return NotFound();
+            }
+
+            return View(answers);
+        }
+
+        // GET: Answers/Create
         public IActionResult Create()
         {
-            PopulateViewBag();
             return View();
         }
 
+        // POST: Answers/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AnswersID,FormID,HealthQID,DonorID,AnswersBool,AnswerDate")] Answers answers)
+        public async Task<IActionResult> Create([Bind("AnswersID,FormID,HealthQID,DonorID,AnswersText,AnswerDate")] Answers answers)
         {
             if (ModelState.IsValid)
             {
@@ -44,32 +62,96 @@ namespace BloodProject3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            PopulateViewBag(answers.DonorID, answers.FormID, answers.HealthQID);
             return View(answers);
         }
 
+        // GET: Answers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             var answers = await _context.Answers.FindAsync(id);
-            if (answers == null) return NotFound();
-            PopulateViewBag(answers.DonorID, answers.FormID, answers.HealthQID);
+            if (answers == null)
+            {
+                return NotFound();
+            }
             return View(answers);
         }
 
+        // POST: Answers/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AnswersID,FormID,HealthQID,DonorID,AnswersBool,AnswerDate")] Answers answers)
+        public async Task<IActionResult> Edit(int id, [Bind("AnswersID,FormID,HealthQID,DonorID,AnswersText,AnswerDate")] Answers answers)
         {
-            if (id != answers.AnswersID) return NotFound();
+            if (id != answers.AnswersID)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Update(answers);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    _context.Update(answers);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AnswersExists(answers.AnswersID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            PopulateViewBag(answers.DonorID, answers.FormID, answers.HealthQID);
             return View(answers);
+        }
+
+        // GET: Answers/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var answers = await _context.Answers
+                .FirstOrDefaultAsync(m => m.AnswersID == id);
+            if (answers == null)
+            {
+                return NotFound();
+            }
+
+            return View(answers);
+        }
+
+        // POST: Answers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var answers = await _context.Answers.FindAsync(id);
+            if (answers != null)
+            {
+                _context.Answers.Remove(answers);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool AnswersExists(int id)
+        {
+            return _context.Answers.Any(e => e.AnswersID == id);
         }
     }
 }
