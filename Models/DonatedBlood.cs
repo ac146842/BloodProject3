@@ -22,14 +22,17 @@ namespace BloodProject3.Models
         [Required] //required appointment id and fk
         [ForeignKey("AppointmentID")]
         public int AppointmentID { get; set; }
+        public virtual Appointment Appointment { get; set; }
 
         [Required]
         [ForeignKey("BloodTypeID")] //required bloodtype id and fk
         public int BloodTypeID { get; set; }
+        public virtual BloodType BloodType { get; set; }
 
         [Required]
         [ForeignKey("DonorID")] //required donor id and fk
         public int DonorID { get; set; }
+        public virtual Donor Donor { get; set; }
 
         [Required(ErrorMessage = "Collection date is required")] //required collectiondate
         [DataType(DataType.Date)] //ensures ui shows a date pickter
@@ -41,6 +44,7 @@ namespace BloodProject3.Models
         [Column(TypeName = "decimal(6, 2)")] // Formats the decimal for the Database with max number length being 5
         [Range(0.01, 500.00, ErrorMessage = "Volume must be between 0.01 and 500 ML")] //ensures volume is between 0.01 and 500
         [Display(Name = "Volume (ML)")] //displays name as Volume ML
+        [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
         public decimal VolumeML { get; set; }
 
         [DataType(DataType.Date)]

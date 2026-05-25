@@ -27,6 +27,7 @@ namespace BloodProject3.Models
         [Required]
         [ForeignKey("BloodTypeID")]
         public int BloodTypeID { get; set; }
+        public virtual BloodType BloodType { get; set; }
 
         [Required(ErrorMessage = "Volume is required")] //required field with error message
         [Display(Name = "Current Volume (ML)")] //displays on web page as current volume

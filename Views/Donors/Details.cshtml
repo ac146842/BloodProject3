@@ -10,41 +10,56 @@
     <h4>Donor</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Phone)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Phone)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DateOfBirth)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DateOfBirth)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BloodTypeID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BloodTypeID)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LastDonationDate)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastDonationDate)
+        <dd class="col-sm-10">
+            @{
+                var lastDonationDate = Model.DonatedBloods?
+                    .Where(d => d.BloodStatus == DonatedBlood.Status.Approved)
+                    .OrderByDescending(d => d.CollectionDate)
+                    .Select(d => d.CollectionDate)
+                    .FirstOrDefault();
+
+                if (lastDonationDate != null && lastDonationDate != DateTime.MinValue)
+                {
+                    @lastDonationDate.Value.ToString("dd MMM yyyy")
+                }
+                else
+                {
+                    <span class="text-muted">No donation history recorded</span>
+                }
+            }
         </dd>
     </dl>
 </div>

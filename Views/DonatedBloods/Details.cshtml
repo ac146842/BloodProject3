@@ -10,46 +10,60 @@
     <h4>DonatedBlood</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.AppointmentID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.AppointmentID)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BloodTypeID)
+        <dt class="col-sm-2">
+            Blood Type
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BloodTypeID)
+        <dd class="col-sm-10">
+            @if (Model.BloodType != null)
+            {
+                @Model.BloodType.SelectedBloodType.ToString()
+            }
+            else
+            {
+                <span class="text-muted">N/A</span>
+            }
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DonorID)
+        <dt class="col-sm-2">
+            Donor Name
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DonorID)
+        <dd class="col-sm-10">
+            @if (Model.Donor != null)
+            {
+                @Html.DisplayFor(model => model.Donor.FullName)
+            }
+            else
+            {
+                <span class="text-muted">Unknown Donor</span>
+            }
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CollectionDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CollectionDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.VolumeML)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.VolumeML)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ExpiryDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ExpiryDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BloodStatus)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BloodStatus)
         </dd>
     </dl>

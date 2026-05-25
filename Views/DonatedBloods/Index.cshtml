@@ -12,60 +12,62 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AppointmentID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BloodTypeID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DonorID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CollectionDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolumeML)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpiryDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BloodStatus)
-            </th>
+            <th>Appointment Details</th>
+            <th>Blood Type</th>
+            <th>Donor Name</th>
+            <th>@Html.DisplayNameFor(model => model.CollectionDate)</th>
+            <th>@Html.DisplayNameFor(model => model.VolumeML)</th>
+            <th>@Html.DisplayNameFor(model => model.ExpiryDate)</th>
+            <th>@Html.DisplayNameFor(model => model.BloodStatus)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppointmentID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BloodTypeID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonorID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CollectionDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VolumeML)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpiryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BloodStatus)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DonationID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DonationID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DonationID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Appointment != null)
+                    {
+                        <strong>@item.Appointment.AppointmentDateTime.ToString("hh:mm tt")</strong>
+                        <br />
+                        <small class="text-muted">@item.Appointment.Location</small>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">No Match Found for ID: @item.AppointmentID</span>
+                    }
+                </td>
+                <td>
+                    @if (item.BloodType != null)
+                    {
+                        @item.BloodType.SelectedBloodType.ToString()
+                    }
+                    else
+                    {
+                        <span class="text-muted">N/A</span>
+                    }
+                </td>
+                <td>
+                    @if (item.Donor != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Donor.FullName)
+                    }
+                    else
+                    {
+                        <span class="text-muted">Unknown Donor</span>
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.CollectionDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.VolumeML)</td>
+                <td>@Html.DisplayFor(modelItem => item.ExpiryDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.BloodStatus)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DonationID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.DonationID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DonationID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

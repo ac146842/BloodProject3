@@ -9,7 +9,7 @@ namespace BloodProject3.Models
         [Key] //primary key
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonorID { get; set; }
-
+        
         [Required(ErrorMessage = "First name is required.")]
         [StringLength(50)] //max 50 characters
         [Display(Name = "First Name")]
@@ -19,6 +19,7 @@ namespace BloodProject3.Models
         [StringLength(50)] //max 50 characters 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
 
         [Required]
         [StringLength(15)] //max 15
@@ -40,5 +41,6 @@ namespace BloodProject3.Models
         [Display(Name = "Last Donation Date")]
         [NoFutureDate(ErrorMessage = "Last donation date cannot be set in the future.")]
         public DateTime? LastDonationDate { get; set; }
+        public virtual ICollection<DonatedBlood> DonatedBloods { get; set; }
     }
 }

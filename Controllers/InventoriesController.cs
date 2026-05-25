@@ -22,7 +22,10 @@ namespace BloodProject3.Controllers
         // GET: Inventories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Inventory.ToListAsync());
+            // Fixed: Added .Include(i => i.BloodType) to pull the blood type values
+            return View(await _context.Inventory
+                .Include(i => i.BloodType)
+                .ToListAsync());
         }
 
         // GET: Inventories/Details/5
@@ -34,6 +37,7 @@ namespace BloodProject3.Controllers
             }
 
             var inventory = await _context.Inventory
+                .Include(i => i.BloodType)
                 .FirstOrDefaultAsync(m => m.BloodBankID == id);
             if (inventory == null)
             {
@@ -46,12 +50,16 @@ namespace BloodProject3.Controllers
         // GET: Inventories/Create
         public IActionResult Create()
         {
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypeID = new SelectList(bloodTypeList, "Value", "Text");
             return View();
         }
 
         // POST: Inventories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BloodBankID,DonationID,BloodTypeID,CurrentVolumeML,StorageLocation,BloodStatus")] Inventory inventory)
@@ -62,6 +70,12 @@ namespace BloodProject3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypeID = new SelectList(bloodTypeList, "Value", "Text", inventory.BloodTypeID);
             return View(inventory);
         }
 
@@ -78,12 +92,16 @@ namespace BloodProject3.Controllers
             {
                 return NotFound();
             }
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypeID = new SelectList(bloodTypeList, "Value", "Text", inventory.BloodTypeID);
             return View(inventory);
         }
 
         // POST: Inventories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BloodBankID,DonationID,BloodTypeID,CurrentVolumeML,StorageLocation,BloodStatus")] Inventory inventory)
@@ -113,6 +131,12 @@ namespace BloodProject3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypeID = new SelectList(bloodTypeList, "Value", "Text", inventory.BloodTypeID);
             return View(inventory);
         }
 
@@ -125,6 +149,7 @@ namespace BloodProject3.Controllers
             }
 
             var inventory = await _context.Inventory
+                .Include(i => i.BloodType)
                 .FirstOrDefaultAsync(m => m.BloodBankID == id);
             if (inventory == null)
             {

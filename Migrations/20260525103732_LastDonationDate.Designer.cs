@@ -4,6 +4,7 @@ using BloodProject3.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodProject3.Migrations
 {
     [DbContext(typeof(BloodProject3DbContext))]
-    partial class BloodProject3DbContextModelSnapshot : ModelSnapshot
+    [Migration("20260525103732_LastDonationDate")]
+    partial class LastDonationDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,10 +141,6 @@ namespace BloodProject3.Migrations
 
                     b.HasKey("DonationID");
 
-                    b.HasIndex("AppointmentID");
-
-                    b.HasIndex("BloodTypeID");
-
                     b.HasIndex("DonorID");
 
                     b.ToTable("DonatedBlood");
@@ -212,8 +211,6 @@ namespace BloodProject3.Migrations
                         .HasColumnType("nvarchar(15)");
 
                     b.HasKey("BloodBankID");
-
-                    b.HasIndex("BloodTypeID");
 
                     b.ToTable("Inventory");
                 });
@@ -526,43 +523,14 @@ namespace BloodProject3.Migrations
 
             modelBuilder.Entity("BloodProject3.Models.DonatedBlood", b =>
                 {
-                    b.HasOne("BloodProject3.Models.Appointment", "Appointment")
-                        .WithMany()
-                        .HasForeignKey("AppointmentID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("BloodProject3.Models.BloodType", "BloodType")
-                        .WithMany()
-                        .HasForeignKey("BloodTypeID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("BloodProject3.Models.Donor", "Donor")
+                    b.HasOne("BloodProject3.Models.Donor", null)
                         .WithMany("DonatedBloods")
                         .HasForeignKey("DonorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Appointment");
-
-                    b.Navigation("BloodType");
-
-                    b.Navigation("Donor");
                 });
 
             modelBuilder.Entity("BloodProject3.Models.Donor", b =>
-                {
-                    b.HasOne("BloodProject3.Models.BloodType", "BloodType")
-                        .WithMany()
-                        .HasForeignKey("BloodTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BloodType");
-                });
-
-            modelBuilder.Entity("BloodProject3.Models.Inventory", b =>
                 {
                     b.HasOne("BloodProject3.Models.BloodType", "BloodType")
                         .WithMany()

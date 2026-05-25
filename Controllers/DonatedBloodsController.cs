@@ -22,7 +22,11 @@ namespace BloodProject3.Controllers
         // GET: DonatedBloods
         public async Task<IActionResult> Index()
         {
-            return View(await _context.DonatedBlood.ToListAsync());
+            return View(await _context.DonatedBlood
+                .Include(d => d.Donor)
+                .Include(d => d.BloodType)
+                .Include(d => d.Appointment)
+                .ToListAsync());
         }
 
         // GET: DonatedBloods/Details/5
@@ -34,6 +38,9 @@ namespace BloodProject3.Controllers
             }
 
             var donatedBlood = await _context.DonatedBlood
+                .Include(d => d.Donor)
+                .Include(d => d.BloodType)
+                .Include(d => d.Appointment)
                 .FirstOrDefaultAsync(m => m.DonationID == id);
             if (donatedBlood == null)
             {
@@ -46,23 +53,26 @@ namespace BloodProject3.Controllers
         // GET: DonatedBloods/Create
         public IActionResult Create()
         {
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypes = new SelectList(bloodTypeList, "Value", "Text");
+
             return View();
         }
 
         // POST: DonatedBloods/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DonationID,AppointmentID,BloodTypeID,DonorID,VolumeML,BloodStatus")] DonatedBlood donatedBlood)
         {
-            // 1. Remove date properties from validation checking since the user isn't inputting them
             ModelState.Remove("CollectionDate");
             ModelState.Remove("ExpiryDate");
 
             if (ModelState.IsValid)
             {
-                // 2. Automatically applies date calculations 
                 donatedBlood.CollectionDate = DateTime.Now;
                 donatedBlood.ExpiryDate = DateTime.Now.AddDays(42);
 
@@ -70,6 +80,14 @@ namespace BloodProject3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypes = new SelectList(bloodTypeList, "Value", "Text");
+
             return View(donatedBlood);
         }
 
@@ -86,12 +104,18 @@ namespace BloodProject3.Controllers
             {
                 return NotFound();
             }
+
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypes = new SelectList(bloodTypeList, "Value", "Text", donatedBlood.BloodTypeID);
+
             return View(donatedBlood);
         }
 
         // POST: DonatedBloods/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DonationID,AppointmentID,BloodTypeID,DonorID,CollectionDate,VolumeML,ExpiryDate,BloodStatus")] DonatedBlood donatedBlood)
@@ -121,6 +145,14 @@ namespace BloodProject3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypes = new SelectList(bloodTypeList, "Value", "Text", donatedBlood.BloodTypeID);
+
             return View(donatedBlood);
         }
 
@@ -133,6 +165,9 @@ namespace BloodProject3.Controllers
             }
 
             var donatedBlood = await _context.DonatedBlood
+                .Include(d => d.Donor)
+                .Include(d => d.BloodType)
+                .Include(d => d.Appointment)
                 .FirstOrDefaultAsync(m => m.DonationID == id);
             if (donatedBlood == null)
             {

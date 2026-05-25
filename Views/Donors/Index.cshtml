@@ -3,8 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Index</h1><p>
-<a asp-action="Create">Create New</a>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -50,7 +53,22 @@
                     @Html.DisplayFor(modelItem => item.BloodType.SelectedBloodType)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastDonationDate)
+                    @{
+                        var lastDonation = item.DonatedBloods?
+                            .Where(d => d.BloodStatus == DonatedBlood.Status.Approved)
+                            .OrderByDescending(d => d.CollectionDate)
+                            .Select(d => d.CollectionDate)
+                            .FirstOrDefault();
+
+                        if (lastDonation != null && lastDonation != DateTime.MinValue)
+                        {
+                            @lastDonation.Value.ToString("dd MMM yyyy")
+                        }
+                        else
+                        {
+                            <span class="text-muted">No donations yet</span>
+                        }
+                    }
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.DonorID">Edit</a> |
@@ -59,4 +77,5 @@
                 </td>
             </tr>
         }
-    </tbody></table>
+    </tbody>
+</table>

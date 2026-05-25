@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BloodProject3.Areas.Identity.Data;
 using BloodProject3.Models;
+
 namespace BloodProject3.Controllers
 {
     public class DonorsController : Controller
@@ -21,7 +22,7 @@ namespace BloodProject3.Controllers
         // GET: Donors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Donor.Include(d => d.BloodType).ToListAsync());
+            return View(await _context.Donor.Include(d => d.BloodType).Include(d => d.DonatedBloods).ToListAsync());
         }
 
         // GET: Donors/Details/5
@@ -34,6 +35,7 @@ namespace BloodProject3.Controllers
 
             var donor = await _context.Donor
                 .Include(d => d.BloodType)
+                .Include(d => d.DonatedBloods)
                 .FirstOrDefaultAsync(m => m.DonorID == id);
             if (donor == null)
             {

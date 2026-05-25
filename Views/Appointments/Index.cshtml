@@ -1,22 +1,20 @@
 ﻿@model IEnumerable<BloodProject3.Models.Appointment>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Appointments Index";
 }
 
-<h1>Index</h1>
-<p><a asp-action="Create">Create New</a></p>
+<h1>Appointments</h1>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
-            <th>Donor Name</th>
-            <th>Nurse Name</th>
-            <th>@Html.DisplayNameFor(model => model.AppointmentDateTime)</th>
+            <th>Appointment Time</th>
             <th>@Html.DisplayNameFor(model => model.Location)</th>
-            <th>@Html.DisplayNameFor(model => model.TypeOfAppointment)</th>
-            <th>@Html.DisplayNameFor(model => model.AppointmentStatus)</th>
-            <th>@Html.DisplayNameFor(model => model.DurationEndTime)</th>
+            <th>Donor Name</th>
             <th></th>
         </tr>
     </thead>
@@ -25,16 +23,21 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Donor.FirstName) @Html.DisplayFor(modelItem => item.Donor.LastName)
+                    <strong>@item.AppointmentDateTime.ToString("hh:mm tt")</strong>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nurse.FirstName) @Html.DisplayFor(modelItem => item.Nurse.LastName)
+                    @Html.DisplayFor(modelItem => item.Location)
                 </td>
-                <td>@Html.DisplayFor(modelItem => item.AppointmentDateTime)</td>
-                <td>@Html.DisplayFor(modelItem => item.Location)</td>
-                <td>@Html.DisplayFor(modelItem => item.TypeOfAppointment)</td>
-                <td>@Html.DisplayFor(modelItem => item.AppointmentStatus)</td>
-                <td>@Html.DisplayFor(modelItem => item.DurationEndTime)</td>
+                <td>
+                    @if (item.Donor != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Donor.FullName)
+                    }
+                    else
+                    {
+                        <span class="text-muted">No Donor Assigned</span>
+                    }
+                </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.AppointmentID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.AppointmentID">Details</a> |
