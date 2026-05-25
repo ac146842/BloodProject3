@@ -19,7 +19,7 @@ namespace BloodProject3.Models
         [Required]
         [ForeignKey("AppointmentID")]
         public int AppointmentID { get; set; }
-        public Appointment Appointment { get; set; } = new Appointment();
+        public Appointment Appointment { get; set; } //= new Appointment(); was problem , good for write up documentation on errors
 
         [Required]
         [DataType(DataType.DateTime)]
