@@ -27,10 +27,6 @@ using (var scope = app.Services.CreateScope()) //creates admin role if it doesn'
         await roleManager.CreateAsync(new IdentityRole("Admin"));
 }
 
-//user account
-//email "ac146842@avcol.school.nz"
-//password "Password123."
-
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
