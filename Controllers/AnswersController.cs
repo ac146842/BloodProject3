@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BloodProject3.Areas.Identity.Data;
 using BloodProject3.Models;
-
 namespace BloodProject3.Controllers
 {
     public class AnswersController : Controller
@@ -22,7 +21,7 @@ namespace BloodProject3.Controllers
         // GET: Answers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Answers.ToListAsync());
+            return View(await _context.Answers.Include(a => a.Questions).Include(a => a.Donor).ToListAsync());
         }
 
         // GET: Answers/Details/5
@@ -78,6 +77,8 @@ namespace BloodProject3.Controllers
             {
                 return NotFound();
             }
+            // Added: Generates the list of questions to populate the drop-down menu, auto-selecting the current question
+            ViewData["HealthQID"] = new SelectList(_context.Questions, "HealthQID", "FormQuestions", answers.HealthQID);
             return View(answers);
         }
 
@@ -113,6 +114,8 @@ namespace BloodProject3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            // Added: Re-populates the select list if form validation fails and view returns
+            ViewData["HealthQID"] = new SelectList(_context.Questions, "HealthQID", "FormQuestions", answers.HealthQID);
             return View(answers);
         }
 

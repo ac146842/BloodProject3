@@ -3,12 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Index</h1><p><a asp-action="Create">Create New</a></p>
 <table class="table">
     <thead>
         <tr>
@@ -31,29 +26,47 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FormID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HealthQID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonorID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnswersText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnswerDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AnswersID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AnswersID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AnswersID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormID)
+                </td>
+                <td>
+                    @if (item.Questions != null && !string.IsNullOrEmpty(item.Questions.FormQuestions))
+                    {
+                        var text = item.Questions.FormQuestions;
+                        @(text.Length > 40 ? text.Substring(0, 40) + "..." : text)
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.HealthQID)
+                    }
+                </td>
+                <td>
+                    @if (item.Donor != null && !string.IsNullOrEmpty(item.Donor.FirstName) && !string.IsNullOrEmpty(item.Donor.LastName))
+                    {
+                        @item.Donor.FirstName
+                        <span> </span>
+                        @item.Donor.LastName.Substring(0, 1)
+                        <span>.</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.DonorID)
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnswersText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnswerDate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AnswersID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AnswersID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AnswersID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody></table>

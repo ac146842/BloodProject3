@@ -29,8 +29,7 @@
                 <td>
                     @if (item.Appointment != null)
                     {
-                        <strong>@item.Appointment.AppointmentDateTime.ToString("hh:mm tt")</strong>
-                        <br />
+                        @item.Appointment.AppointmentDateTime.ToString("hh:mm tt")
                         <small class="text-muted">@item.Appointment.Location</small>
                     }
                     else
