@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BloodProject3.Models
 {
-    // C#
     public class MedicalForm
     {
         [Key]

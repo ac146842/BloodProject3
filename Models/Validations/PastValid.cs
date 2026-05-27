@@ -8,7 +8,6 @@ namespace BloodProject3.Validation
         {
             if (value is DateTime dateValue)
             {
-                // Comparing against Date component so today's date is perfectly valid
                 if (dateValue.Date < DateTime.Today)
                 {
                     return new ValidationResult(ErrorMessage ?? "Date cannot be in the past.");
