@@ -19,7 +19,8 @@
         font-size: 1.05rem;
         line-height: 1.6;
         max-width: 65ch;
-    }   
+    } 
+    
 
     .Carouselcontainer {
         margin-top: 20rem;
@@ -28,22 +29,42 @@
         max-width: 200px;
     }
 
-    .PHE {
+
+    .CardsContainer {
         display: flex;
         justify-content: space-around;
         background-color: darkgray;
-        margin-top: 20rem;
+        margin-top: 15rem;
 
     }
 
-    .PHE div {
-            background-color: #f1f1f1;
-            margin: 10px;
-            padding: 20px;
-            font-size: 1rem;
-            max-width: 65ch;
-            
-        }
+    .container1 {
+        background-color: #95c9e1;
+        margin: 10px;
+        padding: 20px;
+        font-size: 1rem;
+        max-width: 65ch;
+        flex-grow: 1;
+        height: 20rem;
+    }
+
+    .container2 {
+        background-color: #f1f1f1;
+        margin: 10px;
+        padding: 20px;
+        font-size: 1rem;
+        max-width: 65ch;
+        flex-grow: 1;
+    }
+
+    .container3 {
+        background-color: #ea9e50;
+        margin: 10px;
+        padding: 20px;
+        font-size: 1rem;
+        max-width: 65ch;
+        flex-grow: 1;
+    }
 </style>
 
 @{
@@ -124,31 +145,43 @@
     <div>abcd</div>
     -->
 
-    <div class="PHE">
-        
-        <div>
-            Please bring a valid form of ID and fill out a Donor details form.
-            Completing the form ensures your health information is complete and
-            you consent to testing.
+    <div class="CardsContainer">
+        <div class="card">
+            <div class="container1">
+                <h1>Preparation</h1>
+                <p>
+                    Please bring a valid form of ID and fill out a Donor details form.
+                    Completing the form ensures your health information is complete and
+                    you consent to testing.
+                </p>
+            </div>
         </div>
-
-        <div>
-            After you've completed the form, a finger prick test will be needed in
-            order to check your haemoglobin level. This is a confidential process
-            and no one may  accompany you except children under the age of 5. This
-            is to ensure the interview will be done in a consistent manner and free
-            from any external influence.
+        <div class="card">
+            <div class="container2">
+                <h1>Health Assessment</h1>
+                <p>
+                    After you've completed the form, a finger prick test will be needed in
+                    order to check your haemoglobin level. This is a confidential process
+                    and no one may  accompany you except children under the age of 5. This
+                    is to ensure the interview will be done in a consistent manner and free
+                    from any external influence.
+                </p>
+            </div>
         </div>
-
-        <div>
-            New donors can donate blood between the ages 16 and 71
-            Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer
-            You must weigh 50 kg or more and be atleast 150 cm tall
-            You must be in good health at the time you donate
-            You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)
+        <div class="card">
+            <div class="container3">
+                <h1>Eligibility Criteria</h1>
+                <p>
+                    New donors can donate blood between the ages 16 and 71
+                    Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer
+                    You must weigh 50 kg or more and be atleast 150 cm tall
+                    You must be in good health at the time you donate
+                    You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)
+                </p>
+            </div>
         </div>
-
     </div>
+
 
 </body>
 
