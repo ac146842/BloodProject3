@@ -1,70 +1,104 @@
-﻿<style>  
-    .header-container {
-        padding: 3rem;
-        margin: 2rem 0;
-        margin-left: 4rem;
-        max-width: 900px;
-        border-radius: 4px;
-    }
+﻿﻿<style>
+     /* TEXT */
+     @@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-    .Header1 {
-        font-family: sans-serif;
-        font-weight: 700;
-        font-size: 1.75rem;
-        margin-bottom: 1.5rem;      
-    }
+     body {
+         font-family: 'Inter', sans-serif;
+     }
+     
+     /* UPPER PAGE */
 
-    .DonationP {
-        font-family: sans-serif;
-        font-size: 1.05rem;
-        line-height: 1.6;
-        max-width: 65ch;
-    } 
-    
+     .header-container {
+         padding: 3rem;
+         margin: 2rem 0;
+         margin-left: 4rem;
+         max-width: 900px;
+         border-radius: 4px;
+     }
 
-    .Carouselcontainer {
-        margin-top: 20rem;
-        margin-bottom: 2rem;
-        max-height: 200px;
-        max-width: 200px;
-    }
+     .Header1 {
+         font-family: sans-serif;
+         font-weight: 700;
+         font-size: 1.75rem;
+         margin-bottom: 1.5rem;
+     }
 
+     .DonationP {
+         font-family: sans-serif;
+         font-size: 1.05rem;
+         line-height: 1.6;
+         max-width: 65ch;
+     }
 
-    .CardsContainer {
-        display: flex;
-        justify-content: space-around;
-        background-color: darkgray;
-        margin-top: 15rem;
+     /* CAROUSEL */
 
-    }
+     .Carouselcontainer {
+         margin-top: 20rem;
+         margin-bottom: 2rem;
+         max-height: 200px;
+         max-width: 200px;
+     }
 
-    .container1 {
-        background-color: #95c9e1;
-        margin: 10px;
-        padding: 20px;
-        font-size: 1rem;
-        max-width: 65ch;
-        flex-grow: 1;
-        height: 20rem;
-    }
+     /* CARDS */
 
-    .container2 {
-        background-color: #f1f1f1;
-        margin: 10px;
-        padding: 20px;
-        font-size: 1rem;
-        max-width: 65ch;
-        flex-grow: 1;
-    }
+     .CardsContainer {
+         display: flex;
+         justify-content: space-around;
+         background-color: darkgray;
+         margin-top: 15rem;
+         height: 400px;
+     }
 
-    .container3 {
-        background-color: #ea9e50;
-        margin: 10px;
-        padding: 20px;
-        font-size: 1rem;
-        max-width: 65ch;
-        flex-grow: 1;
-    }
+     .card {
+         border-radius: 50px;
+         outline: 3px solid #000000;
+     }
+
+     .container1 {
+         background-color: #95c9e1;
+         margin: 10px;
+         padding: 20px;
+         font-size: 1rem;
+         max-width: 65ch;
+         flex-grow: 1;
+         height: 20rem;
+         border-radius: 50px;        
+     }
+
+     .container2 {
+         background-color: #f1f1f1;
+         margin: 10px;
+         padding: 20px;
+         font-size: 1rem;
+         max-width: 65ch;
+         flex-grow: 1;
+         border-radius: 50px;
+     }
+
+     .container3 {
+         background-color: #ea9e50;
+         margin: 10px;
+         padding: 20px;
+         font-size: 1rem;
+         max-width: 65ch;
+         flex-grow: 1;
+         border-radius: 50px;
+     }
+
+     /* BOTTOM PAGE */
+     
+     .abt {
+         margin-top: 3rem;
+         margin-bottom: 2rem;
+         text-align: center;
+     }
+
+     .acd {
+         margin-top: 3rem;
+         margin-bottom: 2rem;
+         text-align: left;
+         max-width: 65ch;
+     }
 </style>
 
 @{
@@ -72,26 +106,26 @@
 }
 <body>
 
-<div class="header-container">
-    <div>
-        <h1 class="Header1">Welcome to the Blood Donation App!</h1>
+    <div class="header-container">
+        <div>
+            <h1 class="Header1">Donations save lives.</h1>
+        </div>
+
+        <div>
+            <p class="DonationP">
+                Every drop of blood goes towards someone in need.
+                Blood cannot be synthetically made, and patients rely
+                entirely on donors for everything ranging from surgeries
+                to blood disorders. By donating, you provide doctors to
+                help patients and individuals a second chance at life.
+                A single donation takes less than an hour but can save up
+                to three lives!
+            </p>
+        </div>
     </div>
 
-    <div>
-        <p class="DonationP">
-            Every drop of blood goes towards someone in need.
-            Blood cannot be synthetically made, and patients rely
-            entirely on donors for everything ranging from surgeries
-            to blood disorders. By donating, you provide doctors to
-            help patients and individuals a second chance at life.
-            A single donation takes less than an hour but can save up
-            to three lives!
-        </p>
-    </div>
-</div>
 
-
-   <div class="Carouselcontainer">
+    <div class="Carouselcontainer">
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">
@@ -118,33 +152,6 @@
         </div>
     </div>
 
-    <!--
-    <div class="PHE">
-        
-        <p class="Prep">
-            Please bring a valid form of ID and fill out a Donor details form. 
-            Completing the form ensures your health information is complete and 
-            you consent to testing.
-        </p> 
-        <p class="Health">
-            After you've completed the form, a finger prick test will be needed in 
-            order to check your haemoglobin level. This is a confidential process 
-            and no one may  accompany you except children under the age of 5. This 
-            is to ensure the interview will be done in a consistent manner and free 
-            from any external influence.
-        </p>
-        <p class="Eligibility">
-            New donors can donate blood between the ages 16 and 71
-            Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer
-            You must weigh 50 kg or more and be atleast 150 cm tall
-            You must be in good health at the time you donate
-            You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)
-        </p>
-    </div>
-
-    <div>abcd</div>
-    -->
-
     <div class="CardsContainer">
         <div class="card">
             <div class="container1">
@@ -158,7 +165,8 @@
         </div>
         <div class="card">
             <div class="container2">
-                <h1>Health Assessment</h1>
+                <h1>Health</h1>
+                <h1>Assessment</h1>
                 <p>
                     After you've completed the form, a finger prick test will be needed in
                     order to check your haemoglobin level. This is a confidential process
@@ -170,19 +178,30 @@
         </div>
         <div class="card">
             <div class="container3">
-                <h1>Eligibility Criteria</h1>
-                <p>
-                    New donors can donate blood between the ages 16 and 71
-                    Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer
-                    You must weigh 50 kg or more and be atleast 150 cm tall
-                    You must be in good health at the time you donate
-                    You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)
-                </p>
+                <h1>Eligibility</h1>
+                <h1>Criteria</h1>
+                    <ul>
+                        <li>New donors can donate blood between the ages 16 and 71</li>
+                        <li>Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer</li>
+                        <li>You must weigh 50 kg or more and be atleast 150 cm tall</li>
+                        <li>You must be in good health at the time you donate</li>
+                        <li>You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)</li>
+                    </ul>
             </div>
         </div>
     </div>
 
+    <div class="abt">
+        <h1>All blood types can donate blood!</h1>
+    </div>
 
+    <div class="acd">
+        <p>Anybody can donate blood, with O 
+            negative being the only bloodtype 
+            that can be safely given to anybody! 
+            This is because O negative have no antigens 
+            in their blood red cells, causing no reaction 
+            in other peoples immune system. This makes it 
+            essential for emergency situations.</p>
+    </div>
 </body>
-
-
