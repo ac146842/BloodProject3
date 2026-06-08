@@ -19,13 +19,13 @@
       .Header1 {
           font-family: sans-serif;
           font-weight: 700;
-          font-size: 1.75rem;
+          font-size: 1.5rem;
           margin-bottom: 1.5rem;
       }
 
       .DonationP {
           font-family: sans-serif;
-          font-size: 1.05rem;
+          font-size: 1.25rem;
           line-height: 1.6;
           max-width: 65ch;
       }
@@ -50,12 +50,8 @@
       }
 
       .card {
-          border-radius: 50px;
-          outline: 3px solid #000000;
-      }
-
-      .container1 {
-          background-color: #95c9e1;
+          display: flex;
+          background-color: #ffffff;
           margin: 10px;
           padding: 20px;
           font-size: 1rem;
@@ -63,26 +59,7 @@
           flex-grow: 1;
           height: 20rem;
           border-radius: 50px;
-      }
-
-      .container2 {
-          background-color: #f1f1f1;
-          margin: 10px;
-          padding: 20px;
-          font-size: 1rem;
-          max-width: 65ch;
-          flex-grow: 1;
-          border-radius: 50px;
-      }
-
-      .container3 {
-          background-color: #ea9e50;
-          margin: 10px;
-          padding: 20px;
-          font-size: 1rem;
-          max-width: 65ch;
-          flex-grow: 1;
-          border-radius: 50px;
+          outline: 3px solid #000000;
       }
 
       /* BOTTOM PAGE */
@@ -93,11 +70,16 @@
           text-align: center;
       }
 
-      .container p {
-          text-align: left;
+      .about {
+          display: flex;
           max-width: 65ch;
+          flex-direction: column;
+          margin-left: 5rem;
+          font-size: 1.25rem;
           
       }
+
+
 </style>
 
 @{
@@ -194,7 +176,7 @@
         <h1>All blood types can donate blood!</h1>
     </div>
 
-    <div class="abt">      
+    <div class="about">      
             <p>
                 Anybody can donate blood, with O
                 negative being the only bloodtype
@@ -204,14 +186,22 @@
                 in other peoples immune system. This makes it
                 essential for emergency situations.
             </p>
+
             <p>
-                Anybody can donate blood, with O
-                negative being the only bloodtype
-                that can be safely given to anybody!
-                This is because O negative have no antigens
-                in their blood red cells, causing no reaction
-                in other peoples immune system. This makes it
-                essential for emergency situations.
+            Approximately 6% to 8% of the world's population has 
+            O-negative (O-) blood making it quite rare compared 
+            to other blood types making up 13% of hospital blood requests.
             </p>
     </div>
+
+    <div class="card" style="margin-left: auto;">
+        <div class="bloodtypes">
+            <h1>BLOOD TYPES</h1>
+            <p>
+                Please bring a valid form of ID and fill out a Donor details form.
+                Completing the form ensures your health information is complete and
+                you consent to testing.
+            </p>
+        </div>
+      </div>  
 </body>
