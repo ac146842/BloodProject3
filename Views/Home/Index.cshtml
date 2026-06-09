@@ -2,8 +2,15 @@
       /* TEXT */
       @@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+      * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+      }
+
       body {
           font-family: 'Inter', sans-serif;
+          background-color: #f8f9fa;
       }
      
       /* UPPER PAGE */
@@ -46,7 +53,8 @@
           justify-content: space-around;
           background-color: darkgray;
           margin-top: 15rem;
-          height: 400px;
+          padding: 20px 0;
+          flex-wrap: wrap; 
       }
 
       .card {
@@ -58,7 +66,7 @@
           max-width: 65ch;
           flex-grow: 1;
           height: 20rem;
-          border-radius: 50px;
+          border-radius: 24px;
           outline: 3px solid #000000;
       }
 
@@ -70,15 +78,35 @@
           text-align: center;
       }
 
-      .about {
+      /* BOTTOM PAGE CONTAINER */
+
+      .bottom-section-container {
           display: flex;
-          max-width: 65ch;
-          flex-direction: column;
-          margin-left: 5rem;
-          font-size: 1.25rem;
-          
+          justify-content: space-between; 
+          align-items: center; 
+          margin-top: 5rem; 
+          margin-bottom: 4rem; 
+          padding: 0 4rem; 
       }
 
+      .columntext {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem; 
+      }
+
+      .about {
+          max-width: 65ch;
+          font-size: 1.25rem;
+          line-height: 1.6;
+      }
+
+      .card.bottom-card {
+          margin: 0; 
+          max-width: 45ch;
+          height: auto; 
+          min-height: 20rem;
+      }
 
 </style>
 
@@ -135,19 +163,15 @@
 
     <div class="CardsContainer">
         <div class="card">
-            <div class="container1">
                 <h1>Preparation</h1>
                 <p>
                     Please bring a valid form of ID and fill out a Donor details form.
                     Completing the form ensures your health information is complete and
                     you consent to testing.
                 </p>
-            </div>
         </div>
         <div class="card">
-            <div class="container2">
-                <h1>Health</h1>
-                <h1>Assessment</h1>
+            <h1>Health Assessment</h1>
                 <p>
                     After you've completed the form, a finger prick test will be needed in
                     order to check your haemoglobin level. This is a confidential process
@@ -155,12 +179,9 @@
                     is to ensure the interview will be done in a consistent manner and free
                     from any external influence.
                 </p>
-            </div>
         </div>
         <div class="card">
-            <div class="container3">
-                <h1>Eligibility</h1>
-                <h1>Criteria</h1>
+            <h1>Eligibility Criteria</h1>
                 <ul>
                     <li>New donors can donate blood between the ages 16 and 71</li>
                     <li>Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer</li>
@@ -168,7 +189,6 @@
                     <li>You must be in good health at the time you donate</li>
                     <li>You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)</li>
                 </ul>
-            </div>
         </div>
     </div>
 
@@ -176,32 +196,40 @@
         <h1>All blood types can donate blood!</h1>
     </div>
 
-    <div class="about">      
-            <p>
-                Anybody can donate blood, with O
-                negative being the only bloodtype
-                that can be safely given to anybody!
-                This is because O negative have no antigens
-                in their blood red cells, causing no reaction
-                in other peoples immune system. This makes it
-                essential for emergency situations.
-            </p>
+    <div class="bottom-section-container">
 
-            <p>
-            Approximately 6% to 8% of the world's population has 
-            O-negative (O-) blood making it quite rare compared 
-            to other blood types making up 13% of hospital blood requests.
-            </p>
-    </div>
+        <div class="columntext">
+            <div class="about">
+                <p>
+                    Anybody can donate blood, with O
+                    negative being the only bloodtype
+                    that can be safely given to anybody!
+                    This is because O negative have no antigens
+                    in their blood red cells, causing no reaction
+                    in other peoples immune system. This makes it
+                    essential for emergency situations.
+                </p>
+            </div>
 
-    <div class="card" style="margin-left: auto;">
-        <div class="bloodtypes">
-            <h1>BLOOD TYPES</h1>
-            <p>
-                Please bring a valid form of ID and fill out a Donor details form.
-                Completing the form ensures your health information is complete and
-                you consent to testing.
-            </p>
+            <div class="about">
+                <p>
+                    Approximately 6% to 8% of the world's population has
+                    O-negative (O-) blood making it quite rare compared
+                    to other blood types making up 13% of hospital blood requests.
+                </p>
+            </div>
         </div>
-      </div>  
+
+        <div class="card bottom-card">
+            <div>
+                <h1>BLOOD TYPES</h1>
+                <p>
+                    Please bring a valid form of ID and fill out a Donor details form.
+                    Completing the form ensures your health information is complete and
+                    you consent to testing.
+                </p>
+            </div>
+        </div>
+
+    </div>
 </body>
