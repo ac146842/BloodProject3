@@ -10,7 +10,7 @@
 
       body {
           font-family: 'Inter', sans-serif;
-          background-color: #f8f9fa;
+          background-color: #FFC7D4;
       }
      
       /* UPPER PAGE */
@@ -40,7 +40,7 @@
       /* CAROUSEL */
 
       .Carouselcontainer {
-          margin-top: 20rem;
+          margin-top: 3rem; /* FIXED: Reduced from 20rem to fit 768px height */
           margin-bottom: 2rem;
           max-height: 200px;
           max-width: 200px;
@@ -52,23 +52,29 @@
           display: flex;
           justify-content: space-around;
           background-color: darkgray;
-          margin-top: 15rem;
+          margin-top: 3rem; /* FIXED: Reduced from 15rem to fit 768px height */
           padding: 20px 0;
-          flex-wrap: wrap; 
+          flex-wrap: nowrap;
       }
 
       .card {
           display: flex;
+          flex-direction: column; /* FIXED: Keeps card contents stacked neatly */
           background-color: #ffffff;
           margin: 10px;
           padding: 20px;
           font-size: 1rem;
-          max-width: 65ch;
+          max-width: 32%;
           flex-grow: 1;
-          height: 20rem;
+          min-height: 22rem; /* FIXED: Changed from fixed height so text doesn't overflow */
           border-radius: 24px;
           outline: 3px solid #000000;
       }
+
+          /* FIXED: Keeps bullet points inside the card boundaries */
+          .card ul {
+              padding-left: 20px;
+          }
 
       /* BOTTOM PAGE */
      
@@ -82,17 +88,19 @@
 
       .bottom-section-container {
           display: flex;
-          justify-content: space-between; 
-          align-items: center; 
-          margin-top: 5rem; 
-          margin-bottom: 4rem; 
-          padding: 0 4rem; 
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-top: 5rem;
+          margin-bottom: 4rem;
+          padding: 0 4rem;
+          gap: 2rem;
       }
 
       .columntext {
           display: flex;
           flex-direction: column;
-          gap: 2rem; 
+          gap: 2rem;
+          flex: 1;
       }
 
       .about {
@@ -102,9 +110,10 @@
       }
 
       .card.bottom-card {
-          margin: 0; 
+          margin: 0;
           max-width: 45ch;
-          height: auto; 
+          flex-shrink: 0;
+          height: auto;
           min-height: 20rem;
       }
 

@@ -42,3 +42,19 @@ body {
         font-weight: bold;
         color: #b30000; /* A blood-red accent color fits your project! */
     }
+
+
+/* nav bar */
+.custom-blood-nav {
+    background-color: #6B1D1D !important;
+}
+
+    .custom-blood-nav .nav-link,
+    .custom-blood-nav .navbar-brand {
+        color: #ffffff !important;
+    }
+
+        .custom-blood-nav .nav-link:hover {
+            color: #f8f9fa !important;
+            opacity: 0.8;
+        }
