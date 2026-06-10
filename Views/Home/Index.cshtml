@@ -10,7 +10,8 @@
 
       body {
           font-family: 'Inter', sans-serif;
-          background-color: #FFC7D4;
+          color: #212529;
+          background-color: #f8f9fa;
       }
      
       /* UPPER PAGE */
@@ -40,7 +41,7 @@
       /* CAROUSEL */
 
       .Carouselcontainer {
-          margin-top: 3rem; /* FIXED: Reduced from 20rem to fit 768px height */
+          margin-top: 3rem;
           margin-bottom: 2rem;
           max-height: 200px;
           max-width: 200px;
@@ -51,30 +52,25 @@
       .CardsContainer {
           display: flex;
           justify-content: space-around;
-          background-color: darkgray;
-          margin-top: 3rem; /* FIXED: Reduced from 15rem to fit 768px height */
+          margin-top: 3rem;
           padding: 20px 0;
           flex-wrap: nowrap;
       }
 
       .card {
           display: flex;
-          flex-direction: column; /* FIXED: Keeps card contents stacked neatly */
+          flex-direction: column; 
           background-color: #ffffff;
           margin: 10px;
           padding: 20px;
           font-size: 1rem;
-          max-width: 32%;
+          max-width: 25%;
           flex-grow: 1;
-          min-height: 22rem; /* FIXED: Changed from fixed height so text doesn't overflow */
+          min-height: 23rem;
           border-radius: 24px;
           outline: 3px solid #000000;
       }
-
-          /* FIXED: Keeps bullet points inside the card boundaries */
-          .card ul {
-              padding-left: 20px;
-          }
+   
 
       /* BOTTOM PAGE */
      
@@ -110,7 +106,6 @@
       }
 
       .card.bottom-card {
-          margin: 0;
           max-width: 45ch;
           flex-shrink: 0;
           height: auto;

@@ -32,29 +32,22 @@ body {
 
 
 .home-content {
-    margin-top: 50px; /* Gives space from the nav bar */
-    text-align: left; /* Ensures text is left-aligned */
-    padding: 20px; /* Internal padding for the content */
+    margin-top: 50px; 
+    text-align: left; 
+    padding: 20px;
 }
 
-    /* Optional: Make the heading look a bit punchier */
-    .home-content h1 {
-        font-weight: bold;
-        color: #b30000; /* A blood-red accent color fits your project! */
-    }
 
 
 /* nav bar */
 .custom-blood-nav {
-    background-color: #6B1D1D !important;
+    background-color: #080F0F;
 }
 
-    .custom-blood-nav .nav-link,
-    .custom-blood-nav .navbar-brand {
-        color: #ffffff !important;
-    }
+.navbar-brand {
+    color: #FFFFFF;
+}
 
-        .custom-blood-nav .nav-link:hover {
-            color: #f8f9fa !important;
-            opacity: 0.8;
-        }
+.nav-link {
+    color: #FFFFFF;
+}
