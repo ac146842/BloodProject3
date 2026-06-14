@@ -1,181 +1,167 @@
-﻿﻿﻿<style>
-      /* TEXT */
-      @@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+﻿<style>
+    /* TEXT  */
+    @@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-      * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-      }
+    /* UPPER PAGE CONTENTS */
+    .header-container {
+        padding: 3rem 1rem;
+        margin: 2rem auto;
+        max-width: 1100px;
+        width: 100%;
+    }
 
-      body {
-          font-family: 'Inter', sans-serif;
-          color: #212529;
-          background-color: #f8f9fa;
-      }
-     
-      /* UPPER PAGE */
+    .Header1 {
+        font-family: sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
 
-      .header-container {
-          padding: 3rem;
-          margin: 2rem 0;
-          margin-left: 4rem;
-          max-width: 900px;
-          border-radius: 4px;
-      }
+    .DonationP {
+        font-family: sans-serif;
+        font-size: 1.25rem;
+        line-height: 1.6;
+        max-width: 65ch;
+    }
 
-      .Header1 {
-          font-family: sans-serif;
-          font-weight: 700;
-          font-size: 1.5rem;
-          margin-bottom: 1.5rem;
-      }
+    /* CAROUSEL */
+    .Carouselcontainer {
+        margin: 3rem auto 2rem auto;
+        width: 100%;
+        max-width: 1100px;
+        padding: 0 1rem;
+    }
 
-      .DonationP {
-          font-family: sans-serif;
-          font-size: 1.25rem;
-          line-height: 1.6;
-          max-width: 65ch;
-      }
+    .carousel-inner img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
 
-      /* CAROUSEL */
+    /* CARDS */
+    .CardsContainer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 3rem;
+        padding: 20px 1rem;
+        gap: 20px;
+    }
 
-      .Carouselcontainer {
-          margin-top: 3rem;
-          margin-bottom: 2rem;
-          max-height: 200px;
-          max-width: 200px;
-      }
+    .card {
+        display: flex;
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 20px;
+        font-size: 1rem;
+        flex: 1;
+        min-height: 23rem;
+        border-radius: 24px;
+        outline: 3px solid #000000;
+    }
 
-      /* CARDS */
+    /* BOTTOM SECTION */
+    .abt {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
 
-      .CardsContainer {
-          display: flex;
-          justify-content: space-around;
-          margin-top: 3rem;
-          padding: 20px 0;
-          flex-wrap: nowrap;
-      }
+    .bottom-section-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 5rem auto 4rem auto;
+        max-width: 1100px;
+        padding: 0 1rem;
+        gap: 2rem;
+    }
 
-      .card {
-          display: flex;
-          flex-direction: column; 
-          background-color: #ffffff;
-          margin: 10px;
-          padding: 20px;
-          font-size: 1rem;
-          max-width: 25%;
-          flex-grow: 1;
-          min-height: 23rem;
-          border-radius: 24px;
-          outline: 3px solid #000000;
-      }
-   
+    .columntext {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        flex: 1;
+    }
 
-      /* BOTTOM PAGE */
-     
-      .abt {
-          margin-top: 3rem;
-          margin-bottom: 2rem;
-          text-align: center;
-      }
+    .about {
+        max-width: 65ch;
+        font-size: 1.25rem;
+        line-height: 1.6;
+    }
 
-      /* BOTTOM PAGE CONTAINER */
-
-      .bottom-section-container {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin-top: 5rem;
-          margin-bottom: 4rem;
-          padding: 0 4rem;
-          gap: 2rem;
-      }
-
-      .columntext {
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
-          flex: 1;
-      }
-
-      .about {
-          max-width: 65ch;
-          font-size: 1.25rem;
-          line-height: 1.6;
-      }
-
-      .card.bottom-card {
-          max-width: 45ch;
-          flex-shrink: 0;
-          height: auto;
-          min-height: 20rem;
-      }
-
+    .card.bottom-card {
+        max-width: 45ch;
+        width: 100%;
+        flex-shrink: 0;
+        height: auto;
+        min-height: 20rem;
+    }
 </style>
 
 @{
     ViewData["Title"] = "Home Page";
 }
-<body>
-
-    <div class="header-container">
-        <div>
-            <h1 class="Header1">Donations save lives.</h1>
-        </div>
-
-        <div>
-            <p class="DonationP">
-                Every drop of blood goes towards someone in need.
-                Blood cannot be synthetically made, and patients rely
-                entirely on donors for everything ranging from surgeries
-                to blood disorders. By donating, you provide doctors to
-                help patients and individuals a second chance at life.
-                A single donation takes less than an hour but can save up
-                to three lives!
-            </p>
-        </div>
-    </div>
 
 
-    <div class="Carouselcontainer">
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="4000">
-                    <img src="https://i.pinimg.com/originals/5d/e9/c9/5de9c9d977fc980d9c248222f9c5fede.png" class="d-block w-100" alt="N1">
-                </div>
-                <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://thf.bing.com/th/id/OIP.zo4GATtI3AVNI9vREuP3KwAAAA?o=7&cb=thfc1falconrm=3&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="N2">
-                </div>
-                <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://tse3.mm.bing.net/th/id/OIP.4JXwBEwIEeMEVNjh6gTDnQHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="N3">
-                </div>
-                <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://tse1.mm.bing.net/th/id/OIP.ZFeXpolVf-wNwiUH6iRIPQHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="N4">
-                </div>
+
+        <div class="header-container">
+            <div>
+                <h1 class="Header1">Donations save lives.</h1>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
 
-    <div class="CardsContainer">
-        <div class="card">
+            <div>
+                <p class="DonationP">
+                    Every drop of blood goes towards someone in need.
+                    Blood cannot be synthetically made, and patients rely
+                    entirely on donors for everything ranging from surgeries
+                    to blood disorders. By donating, you provide doctors to
+                    help patients and individuals a second chance at life.
+                    A single donation takes less than an hour but can save up
+                    to three lives!
+                </p>
+            </div>
+        </div>
+
+
+        <div class="Carouselcontainer">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="4000">
+                        <img src="https://i.pinimg.com/originals/5d/e9/c9/5de9c9d977fc980d9c248222f9c5fede.png" class="d-block w-100" alt="N1">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <img src="https://thf.bing.com/th/id/OIP.zo4GATtI3AVNI9vREuP3KwAAAA?o=7&cb=thfc1falconrm=3&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="N2">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.4JXwBEwIEeMEVNjh6gTDnQHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="N3">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.ZFeXpolVf-wNwiUH6iRIPQHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="N4">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="CardsContainer">
+            <div class="card">
                 <h1>Preparation</h1>
                 <p>
                     Please bring a valid form of ID and fill out a Donor details form.
                     Completing the form ensures your health information is complete and
                     you consent to testing.
                 </p>
-        </div>
-        <div class="card">
-            <h1>Health Assessment</h1>
+            </div>
+            <div class="card">
+                <h1>Health Assessment</h1>
                 <p>
                     After you've completed the form, a finger prick test will be needed in
                     order to check your haemoglobin level. This is a confidential process
@@ -183,9 +169,9 @@
                     is to ensure the interview will be done in a consistent manner and free
                     from any external influence.
                 </p>
-        </div>
-        <div class="card">
-            <h1>Eligibility Criteria</h1>
+            </div>
+            <div class="card">
+                <h1>Eligibility Criteria</h1>
                 <ul>
                     <li>New donors can donate blood between the ages 16 and 71</li>
                     <li>Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer</li>
@@ -193,47 +179,46 @@
                     <li>You must be in good health at the time you donate</li>
                     <li>You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)</li>
                 </ul>
-        </div>
-    </div>
-
-    <div class="abt">
-        <h1>All blood types can donate blood!</h1>
-    </div>
-
-    <div class="bottom-section-container">
-
-        <div class="columntext">
-            <div class="about">
-                <p>
-                    Anybody can donate blood, with O
-                    negative being the only bloodtype
-                    that can be safely given to anybody!
-                    This is because O negative have no antigens
-                    in their blood red cells, causing no reaction
-                    in other peoples immune system. This makes it
-                    essential for emergency situations.
-                </p>
-            </div>
-
-            <div class="about">
-                <p>
-                    Approximately 6% to 8% of the world's population has
-                    O-negative (O-) blood making it quite rare compared
-                    to other blood types making up 13% of hospital blood requests.
-                </p>
             </div>
         </div>
 
-        <div class="card bottom-card">
-            <div>
-                <h1>BLOOD TYPES</h1>
-                <p>
-                    Please bring a valid form of ID and fill out a Donor details form.
-                    Completing the form ensures your health information is complete and
-                    you consent to testing.
-                </p>
-            </div>
+        <div class="abt">
+            <h1>All blood types can donate blood!</h1>
         </div>
 
-    </div>
-</body>
+        <div class="bottom-section-container">
+
+            <div class="columntext">
+                <div class="about">
+                    <p>
+                        Anybody can donate blood, with O
+                        negative being the only bloodtype
+                        that can be safely given to anybody!
+                        This is because O negative have no antigens
+                        in their blood red cells, causing no reaction
+                        in other peoples immune system. This makes it
+                        essential for emergency situations.
+                    </p>
+                </div>
+
+                <div class="about">
+                    <p>
+                        Approximately 6% to 8% of the world's population has
+                        O-negative (O-) blood making it quite rare compared
+                        to other blood types making up 13% of hospital blood requests.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card bottom-card">
+                <div>
+                    <h1>BLOOD TYPES</h1>
+                    <p>
+                        Please bring a valid form of ID and fill out a Donor details form.
+                        Completing the form ensures your health information is complete and
+                        you consent to testing.
+                    </p>
+                </div>
+            </div>
+
+        </div>
