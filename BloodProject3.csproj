@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Identity\Data\SQL\Complex\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
