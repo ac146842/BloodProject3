@@ -46,18 +46,35 @@
         margin-top: 3rem;
         padding: 20px 1rem;
         gap: 20px;
+        flex-wrap: wrap;
     }
 
     .card {
         display: flex;
         flex-direction: column;
         background-color: #ffffff;
-        padding: 20px;
-        font-size: 1rem;
+        padding: 35px 25px;
         flex: 1;
-        min-height: 23rem;
-        border-radius: 24px;
-        outline: 3px solid #000000;
+        border-radius: 12px;
+        border: 1px solid #cccccc;
+        width: 400px;
+        height: 350px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .card h1 {
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .card p, .card li {
+        line-height: 1.4;
+        font-size: 0.85rem; 
+    }
+
+    .card ul {
+        padding-left: 1.2rem; 
+        margin: 0;
     }
 
     /* BOTTOM SECTION */
@@ -67,7 +84,7 @@
         text-align: center;
     }
 
-    .bottom-section-container {
+    .bottom-container {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -186,7 +203,7 @@
             <h1>All blood types can donate blood!</h1>
         </div>
 
-        <div class="bottom-section-container">
+        <div class="bottom-container">
 
             <div class="columntext">
                 <div class="about">

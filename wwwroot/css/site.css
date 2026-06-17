@@ -24,7 +24,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    min-height: 100vh;
+    min-height: 200px;
 }
 
 .page-container {
@@ -32,8 +32,8 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -72,7 +72,18 @@ body {
 
 footer {
     background-color: #232122;
-    color: #FFFFFF;
-    text-align: left padding: 20px 0;
-    margin-top: auto;
+    position: relative !important;
+    clear: both !important;
+    margin-top: 50px !important;
+    text-align: left;
+}
+
+.footer-head {
+    color: #FFF1FA !important;
+    text-align: left;
+}
+
+.footer-text {
+    color: #FFF1FA !important;
+    text-align: left;
 }

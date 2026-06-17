@@ -65,14 +65,14 @@
 
         <footer class="border-top footer text-muted">
             <div class="container">
+                <h1 class="footer-head">Blood Donation</h1>
 
-                <h1>Blood Donation</h1>
+                <a class="nav-link footer-text" id="login" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+                <a class="nav-link footer-text" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
 
-                <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-
-                <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-
-                &copy; 2026 - BloodProject3 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <p class="footer-text mt-3">
+                    &copy; 2026 - BloodProject3 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </p>
             </div>
         </footer>
     </div>
