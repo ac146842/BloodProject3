@@ -17,8 +17,9 @@ html {
     min-height: 100%;
 }
 
+
 body {
-    background-color: #A0E7E5 !important;
+    background-color: #f9b9b4 !important;
     padding: 40px 20px;
     display: flex;
     justify-content: center;
@@ -27,7 +28,7 @@ body {
 }
 
 .page-container {
-    background-color: #f8f9fa;
+    background-color: #fde5e3;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -36,6 +37,7 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    min-height: 200px;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -54,13 +56,23 @@ body {
 }
 /* nav bar */
 .custom-blood-nav {
-    background-color: #080F0F;
+    background-color: #232122 !important;
 }
 
 .navbar-brand {
-    color: #FFFFFF;
+    color: #FFF1FA;
 }
 
 .nav-link {
-    color: #FFFFFF !important;
+    color: #FFF1FA !important;
+}
+
+
+/* footer */
+
+footer {
+    background-color: #232122;
+    color: #FFFFFF;
+    text-align: left padding: 20px 0;
+    margin-top: auto;
 }
