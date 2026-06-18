@@ -114,6 +114,18 @@
         height: auto;
         min-height: 20rem;
     }
+
+    .blood-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .blood-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+        font-size: 0.9rem;
+    }
 </style>
 
 @{
@@ -230,11 +242,16 @@
             <div class="card bottom-card">
                 <div>
                     <h1>BLOOD TYPES</h1>
-                    <p>
-                        Please bring a valid form of ID and fill out a Donor details form.
-                        Completing the form ensures your health information is complete and
-                        you consent to testing.
-                    </p>
+                    <ul class="blood-list">
+                        <li>A Positive (A+)</li>
+                        <li>A Negative (A-)</li>
+                        <li>B Positive (B+)</li>
+                        <li>B Negative (B-)</li>
+                        <li>AB Positive (AB+)</li>
+                        <li>AB Negative (AB-)</li>
+                        <li>O Positive (O+)</li>
+                        <li>O Negative (O-)</li>
+                    </ul>
                 </div>
             </div>
 
