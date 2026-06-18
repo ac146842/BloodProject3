@@ -1,25 +1,24 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BloodProject3.Areas.Identity.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BloodProject3DbContextConnection") ?? throw new InvalidOperationException("Connection string 'BloodProject3DbContextConnection' not found."); ;
 
 builder.Services.AddDbContext<BloodProject3DbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<BloodProject3DbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
-
 var app = builder.Build();
 
-DbInitialiser.AddData(app); //calls adddata method to seed the database
+DbInitialiser.AddData(app); // calls adddata method to seed the database
 
-using (var scope = app.Services.CreateScope()) //creates admin role if it doesn't exist
+using (var scope = app.Services.CreateScope()) // creates admin role if it doesn't exist
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -29,7 +28,7 @@ using (var scope = app.Services.CreateScope()) //creates admin role if it doesn'
 
 using (var scope = app.Services.CreateScope())
 {
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
     string adminID = "00000000000";
     string adminEmail = "BDstaff@org.nz";
@@ -40,13 +39,14 @@ using (var scope = app.Services.CreateScope())
 
     if (existingUser == null)
     {
-        // Only create a new ID if it doesnt exist yet
-        var user = new IdentityUser
+        var user = new User
         {
             Id = adminID,
             UserName = adminEmail,
             Email = adminEmail,
-            EmailConfirmed = true
+            EmailConfirmed = true,
+            FirstName = "System",      
+            LastName = "Admin"  
         };
 
         var result = await userManager.CreateAsync(user, adminPassword);
@@ -58,7 +58,7 @@ using (var scope = app.Services.CreateScope())
     else
     {
         // If user exists, ensures details are correct
-        //  Uses the 'existingUser' object because EF is already tracking it
+        // Uses the 'existingUser' object because EF is already tracking it
         if (!await userManager.IsInRoleAsync(existingUser, "Admin"))
         {
             await userManager.AddToRoleAsync(existingUser, "Admin");
@@ -78,14 +78,12 @@ else
     app.UseHsts();
 }
 
-
 app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapRazorPages();
-
 app.MapStaticAssets();
 
 app.MapControllerRoute(

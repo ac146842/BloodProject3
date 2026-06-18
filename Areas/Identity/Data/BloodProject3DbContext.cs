@@ -6,7 +6,7 @@ using BloodProject3.Models;
 
 namespace BloodProject3.Areas.Identity.Data;
 
-public class BloodProject3DbContext : IdentityDbContext<IdentityUser>
+public class BloodProject3DbContext : IdentityDbContext<User>
 {
     public BloodProject3DbContext(DbContextOptions<BloodProject3DbContext> options)
         : base(options)
