@@ -84,7 +84,7 @@ body {
 }
 
 .button-register {
-    background-color: #1C0304;
+    background-color: #0A0A0A;
 }
 
 .navbar-nav .nav-link {
@@ -92,7 +92,6 @@ body {
 }
 
 /* tables */
-
 
 .table {
     width: 100% !important;
