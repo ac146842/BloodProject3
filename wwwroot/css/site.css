@@ -61,11 +61,51 @@ body {
 
 .navbar-brand {
     color: #FFF1FA;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding-left: 20px;
 }
 
-.nav-link {
+
+.navbar-nav .nav-link.button-login,
+.navbar-nav .nav-link.button-register {
+    color: #FFF1FA !important;
+    border-radius: 12px;
+    text-align: center;
+    width: 90px;
+    padding: 8px 10px;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.button-login {
+    background-color: #E9444E;
+}
+
+.button-register {
+    background-color: #1C0304;
+}
+
+.navbar-nav .nav-link {
     color: #FFF1FA !important;
 }
+
+/* tables */
+
+
+.table {
+    width: 100% !important;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-color: #dee2e6;
+}
+
+.table-striped {
+    --bs-table-striped-bg: #FE8B71;
+    --bs-table-accent-bg: #fde5e3;
+}
+
 
 
 /* footer */
