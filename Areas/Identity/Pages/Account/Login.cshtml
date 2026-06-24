@@ -6,42 +6,27 @@
 }
 
 <div class="login">
-    <h1 class="header">@ViewData["Title"]</h1>
-    <div>
-        <div>
-            <section>
-                <form id="account" method="post">
-                    <hr />
+    <h1 class="login-title">Login</h1>
+    <p class="login-text">Please enter your details to sign in</p>
 
-                    <h1 style="padding: 20px;">Please enter your details sign in</h1>
+    <form id="account" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
-                    <div class="form-boxes">
-                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                    <div class="form-floating">
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                        <label asp-for="Input.Email" class="form-label">Email</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating">
-                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.Password" class="form-label">Password</label>
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
-                        <div>
-                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                        </div>
-                        <div>
-                            <p>
-                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                            </p>
-                            <p>
-                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                            </p>
-                        </div>
-                </form>
-            </section>
+        <div class="form-boxes">
+            <div class="form-floating">
+                <input asp-for="Input.Email" class="form-control round" autocomplete="username" aria-required="true" placeholder="Enter your email" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating">
+                <input asp-for="Input.Password" class="form-control round" autocomplete="current-password" aria-required="true" placeholder="Enter your password" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <button id="login-submit" type="submit" class="btn btn-login round">Login</button>
+            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-register round">Register</a>
         </div>
-    </div>
+    </form>
 </div>
 
 @section Scripts {
@@ -49,29 +34,62 @@
 }
 
 <style>
+    #account {
+        width: 100%;
+    }
+
     .login {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 70vh;
-        padding: 100px;
+        max-width: 400px;
+        margin: 60px auto;
+        text-align: center;
+        font-family: sans-serif;
+        min-height: 80vh;
     }
 
-    #account {
-        width: 100%;
+    .login-title {
+        color: #6C4A60;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .login-text {
+        color: #5A6A85;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+        font-weight: 500;
     }
 
     .form-boxes {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
-        border-radius: 30px;
-        border-color: lightgrey;
+        gap: 1.2rem;
     }
 
-    .form-floating {
-        margin: 0 auto;
-        padding: 0 auto;
+    .round {
+        border-radius: 50px !important;
+        padding: 12px 24px !important;
+        height: 50px !important;
+    }
+
+    .btn-login {
+        background-color: #E9444E !important;
+        color: white !important;
+        height: 50px;
+        font-weight: 600;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    .btn-register {
+        background-color: #333E48 !important;
+        color: white !important;
+        height: 50px;
+        font-weight: 600;
+        font-size: 1rem;
+        width: 100%;
     }
 </style>
