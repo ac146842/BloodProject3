@@ -22,7 +22,7 @@ namespace BloodProject3.Models
         public string FullName => $"{FirstName} {LastName}";
 
         [Required]
-        [StringLength(15)] //max 15
+        [StringLength(11)] //max 11
         [Phone] //ensures input is a valid phone number format
         [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Phone must be in the format 000-000-0000")]
         public string Phone { get; set; }
@@ -42,5 +42,6 @@ namespace BloodProject3.Models
         [NoFutureDate(ErrorMessage = "Last donation date cannot be set in the future.")]
         public DateTime? LastDonationDate { get; set; }
         public virtual ICollection<DonatedBlood> DonatedBloods { get; set; }
+
     }
 }
