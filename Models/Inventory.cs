@@ -30,19 +30,18 @@ namespace BloodProject3.Models
         public virtual BloodType BloodType { get; set; }
 
         [Required(ErrorMessage = "Volume is required")] //required field with error message
-        [Display(Name = "Current Volume (ML)")] //displays on web page as current volume
-        //6 total digits, 2 after decimal (FIXED: changed from 3 to 6 to prevent SQL overflow errors)
-        [Column(TypeName = "decimal(6, 2)")]
+        [Display(Name = "Current Volume (ML)")] // display as "Last Donation Date" in the UI
+        [Column(TypeName = "decimal(6, 2)")] //6 total digits, 2 after decimal
         public decimal CurrentVolumeML { get; set; }
 
-        [Required] //required
+        [Required(ErrorMessage = "Storage location is required.")] //required to be filled
         [StringLength(15, ErrorMessage = "Location code cannot exceed 15 characters")] //max string length can be 15 with error message
-        [Display(Name = "Storage Location")] //displays on web page as storage location
+        [Display(Name = "Storage Location")] // display as "Storage Location" in the UI
         //'Fridge-A1', 'Shelf-04'
         public string StorageLocation { get; set; }
 
-        [Required] //required
-        [Display(Name = "Inventory Status")] //displays as inventory status
+        [Required(ErrorMessage = "Inventory status is required.")] //required to be filled
+        [Display(Name = "Inventory Status")] // display as "Inventory Status" in the UI
         public Status BloodStatus { get; set; }
     }
 }

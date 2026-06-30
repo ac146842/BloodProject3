@@ -10,25 +10,26 @@ namespace BloodProject3.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonorID { get; set; }
         
-        [Required(ErrorMessage = "First name is required.")]
+        [Required(ErrorMessage = "First name is required.")] //required to be filled
         [StringLength(50)] //max 50 characters
-        [Display(Name = "First Name")]
+        [Display(Name = "First Name")] // display as "First Name" in the UI
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Last name is required.")]
+        [Required(ErrorMessage = "Last name is required.")] //required to be filled
         [StringLength(50)] //max 50 characters 
-        [Display(Name = "Last Name")]
+        [Display(Name = "Last Name")] // display as "Last Name" in the UI
         public string LastName { get; set; }
         public string FullName => $"{FirstName} {LastName}";
 
-        [Required]
-        [StringLength(11)] //max 11
+        [Required(ErrorMessage = "Phone number is required.")] //required to be filled
+        [StringLength(15)] //max 15 characters
         [Phone] //ensures input is a valid phone number format
+        [Display(Name = "Phone Number")] // display as "Phone Number" in the UI
         [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Phone must be in the format 000-000-0000")]
         public string Phone { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Date of birth is required.")] //required to be filled
+        [DataType(DataType.Date)] //ensures input is a valid date format
         [NoFutureDate(ErrorMessage = "Date of birth cannot be set in the future.")]
         public DateTime DateOfBirth { get; set; }
 
@@ -37,8 +38,10 @@ namespace BloodProject3.Models
         public int BloodTypeID { get; set; }
         public virtual BloodType BloodType { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Last Donation Date")]
+
+        [Required(ErrorMessage = "Last donation date is required.")] //required to be filled
+        [DataType(DataType.Date)] //ensures input is a valid date format
+        [Display(Name = "Last Donation Date")] // display as "Last Donation Date" in the UI
         [NoFutureDate(ErrorMessage = "Last donation date cannot be set in the future.")]
         public DateTime? LastDonationDate { get; set; }
         public virtual ICollection<DonatedBlood> DonatedBloods { get; set; }
