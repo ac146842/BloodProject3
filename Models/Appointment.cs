@@ -6,6 +6,7 @@ namespace BloodProject3.Models
 {
     public class Appointment
     {
+        //check for multiple appointments during the same time
         public enum AppointmentType
         {
             Consulting = 1,

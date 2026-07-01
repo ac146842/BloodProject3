@@ -4,10 +4,10 @@
     ViewData["Title"] = "Appointments";
 }
 
-<h1>Appointments</h1>
+<h1 class="table-header">Appointments</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="btn-create">
+    <a asp-action="Create" class="btn btn-dark">Create</a>
 </p>
 <table class="table table-striped">
     <thead>
@@ -38,10 +38,10 @@
                         <span class="text-muted">No Donor Assigned</span>
                     }
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.AppointmentID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.AppointmentID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.AppointmentID">Delete</a>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@item.AppointmentID" class="btn btn-dark">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.AppointmentID" class="btn btn-dark">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.AppointmentID" class="btn btn-dark">Delete</a>
                 </td>
             </tr>
         }

@@ -45,6 +45,7 @@ body {
     text-align: left;
     padding: 20px;
 }
+
 /* nav bar */
 .custom-blood-nav {
     background-color: #232122 !important;
@@ -90,15 +91,25 @@ body {
     margin-right: auto !important;
     margin-bottom: 1rem;
     color: #212529;
-    border-color: #dee2e6;
+    border-color: #232122;
 }
 
 .table-striped {
     --bs-table-striped-bg: #fea996;
-    --bs-table-accent-bg: #f9b9b4;
+    --bs-table-accent-bg: #fde5e3;
 }
 
+.table-header {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    margin-left: 20px !important;
+}
 
+.btn-create {
+    display: flex;
+    justify-content: end;
+    margin: 20px;
+}
 
 /* footer */
 
