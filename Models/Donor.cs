@@ -39,11 +39,11 @@ namespace BloodProject3.Models
         public virtual BloodType BloodType { get; set; }
 
 
-        [Required(ErrorMessage = "Last donation date is required.")] //required to be filled
         [DataType(DataType.Date)] //ensures input is a valid date format
         [Display(Name = "Last Donation Date")] // display as "Last Donation Date" in the UI
         [NoFutureDate(ErrorMessage = "Last donation date cannot be set in the future.")]
         public DateTime? LastDonationDate { get; set; }
+
         public virtual ICollection<DonatedBlood> DonatedBloods { get; set; }
 
     }
