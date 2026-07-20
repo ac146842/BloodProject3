@@ -4,12 +4,12 @@
     ViewData["Title"] = "Questions";
 }
 
-<h1>Questions</h1>
+<h1 class="table-header">Questions</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="btn-create">
+    <a asp-action="Create" class="btn btn-dark">Create</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -24,10 +24,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FormQuestions)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.HealthQID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.HealthQID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.HealthQID">Delete</a>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@item.HealthQID" class="btn btn-dark">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.HealthQID" class="btn btn-dark">Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.HealthQID" class="btn btn-dark">Delete</a>
             </td>
         </tr>
 }

@@ -4,12 +4,12 @@
     ViewData["Title"] = "Medical Forms";
 }
 
-<h1>Medical Forms</h1>
+<h1 class="table-header">Medical Forms</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="btn-create">
+    <a asp-action="Create" class="btn btn-dark">Create</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>FormID</th>
@@ -37,10 +37,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FormDate)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.FormID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.FormID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.FormID">Delete</a>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@item.FormID" class="btn btn-dark">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.FormID" class="btn btn-dark">Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.FormID" class="btn btn-dark">Delete</a>
                 </td>
             </tr>
         }

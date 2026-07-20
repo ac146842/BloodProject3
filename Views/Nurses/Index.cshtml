@@ -4,12 +4,12 @@
     ViewData["Title"] = "Nurses";
 }
 
-<h1>Nurses</h1>
+<h1 class="table-header">Nurses</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="btn-create">
+    <a asp-action="Create" class="btn btn-dark">Create</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -54,10 +54,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LicenseNumber)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.NurseID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NurseID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NurseID">Delete</a>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@item.NurseID" class="btn btn-dark">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.NurseID" class="btn btn-dark">Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.NurseID" class="btn btn-dark">Delete</a>
             </td>
         </tr>
 }
