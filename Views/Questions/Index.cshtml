@@ -24,7 +24,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FormQuestions)
             </td>
-                <td class="text-end">
+                <td class="text-end text-nowrap">
                     <a asp-action="Edit" asp-route-id="@item.HealthQID" class="btn btn-dark">Edit</a> 
                     <a asp-action="Details" asp-route-id="@item.HealthQID" class="btn btn-dark">Details</a> 
                     <a asp-action="Delete" asp-route-id="@item.HealthQID" class="btn btn-dark">Delete</a>
