@@ -111,6 +111,23 @@ body {
     margin: 20px;
 }
 
+/* edit */
+
+.edit-header {
+    margin-left: 40px !important;
+    padding: 10px;
+}
+
+.control-label {
+    padding: 5px;
+}
+
+
+.form-group {
+    margin-left: 40px !important;
+    padding: 10px;
+}
+
 /* footer */
 
 footer {
