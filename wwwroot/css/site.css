@@ -71,16 +71,26 @@ body {
     margin: 0 5px;
 }
 
+
+
+.navbar-nav .nav-link {
+    color: #FFF1FA !important;
+}
+
+/* buttons */
+
+.btn-primary {
+    background-color: #232122;
+    border-color: #4a90e2;
+    color: #FFF1FA;
+}
+
 .button-login {
     background-color: #E9444E;
 }
 
 .button-register {
     background-color: #0A0A0A;
-}
-
-.navbar-nav .nav-link {
-    color: #FFF1FA !important;
 }
 
 /* tables */
