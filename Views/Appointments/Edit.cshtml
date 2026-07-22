@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group column-space">
-                <label asp-for="AppointmentDateTime" class="control-label"></label>
+                <label asp-for="AppointmentDateTime" class="control-label">Appointment Date & Time</label>
                 <input asp-for="AppointmentDateTime" class="form-control" />
                 <span asp-validation-for="AppointmentDateTime" class="text-danger"></span>
             </div>
@@ -43,22 +43,17 @@
             </div>
 
             <div class="form-group column-space">
-                <label asp-for="TypeOfAppointment" class="control-label"></label>
+                <label asp-for="TypeOfAppointment" class="control-label">Type Of Appointment</label>
                 <select asp-for="TypeOfAppointment" class="form-control" asp-items="Html.GetEnumSelectList<Appointment.AppointmentType>()"></select>
                 <span asp-validation-for="TypeOfAppointment" class="text-danger"></span>
             </div>
 
             <div class="form-group column-space">
-                <label asp-for="AppointmentStatus" class="control-label"></label>
+                <label asp-for="AppointmentStatus" class="control-label">Appointment Status</label>
                 <select asp-for="AppointmentStatus" class="form-control" asp-items="Html.GetEnumSelectList<Appointment.Status>()"></select>
                 <span asp-validation-for="AppointmentStatus" class="text-danger"></span>
             </div>
 
-            <div class="form-group column-space">
-                <label asp-for="DurationEndTime" class="control-label"></label>
-                <input asp-for="DurationEndTime" class="form-control" />
-                <span asp-validation-for="DurationEndTime" class="text-danger"></span>
-            </div>
 
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
