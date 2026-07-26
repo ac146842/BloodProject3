@@ -37,7 +37,7 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "Collection date is required")] //required collectiondate
         [DataType(DataType.Date)] //ensures ui shows a date pickter
         [Display(Name = "Date Collected")] //displays name on webpage as date collected
-        [NoFutureDateAttribute(ErrorMessage = "Collection Date cannot be in the future.")]
+        [NoFutureDateAttribute(ErrorMessage = "Collection Date cannot be in the future.")] //Need to change
         public DateTime CollectionDate { get; set; }
 
         [Required(ErrorMessage = "Please enter the volume")] //required volume amount
