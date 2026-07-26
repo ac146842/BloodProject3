@@ -1,7 +1,7 @@
 ﻿using BloodProject3.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+//add navigation properties
 namespace BloodProject3.Models
 {
     public class Appointment

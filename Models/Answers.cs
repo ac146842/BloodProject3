@@ -14,7 +14,8 @@ namespace BloodProject3.Models
         public int FormID { get; set; }
 
         [Display(Name = "Questions")]
-        [ForeignKey("HealthQID")]  //foreign key to HealthQuestions
+        //remove fkhealthqID
+        [ForeignKey("HealthQID")]  //foreign key to HealthQuestions 
         public int HealthQID { get; set; }
 
         [ForeignKey("HealthQID")] // Fixed: Maps relationship directly to the existing HealthQID field above to prevent migration conflicts

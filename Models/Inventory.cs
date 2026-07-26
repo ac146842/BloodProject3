@@ -43,5 +43,8 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "Inventory status is required.")] //required to be filled
         [Display(Name = "Inventory Status")] // display as "Inventory Status" in the UI
         public Status BloodStatus { get; set; }
+
+        //add navigation property
+        //public virtual DonatedBlood DonatedBlood { get; set; }
     }
 }

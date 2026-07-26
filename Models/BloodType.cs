@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+//add navigation properties
 namespace BloodProject3.Models
 {
     public class BloodType
