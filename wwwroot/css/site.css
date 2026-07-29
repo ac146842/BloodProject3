@@ -93,6 +93,13 @@ body {
     background-color: #0A0A0A;
 }
 
+.btn-create {
+    display: flex;
+    justify-content: end;
+    margin: 20px;
+}
+
+
 /* tables */
 
 .table {
@@ -115,11 +122,6 @@ body {
     margin-left: 20px !important;
 }
 
-.btn-create {
-    display: flex;
-    justify-content: end;
-    margin: 20px;
-}
 
 /* details page */
 
@@ -128,19 +130,42 @@ body {
 /* edit page */
 
 .edit-header {
-    margin-left: 40px !important;
-    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.control-label {
-    padding: 5px;
+.edit-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
+.btn-save, .btn-back {
+    background: #232122;
+    color: #fff;
+    border-radius: 20px;
+    padding: 6px 16px;
+    margin-bottom: 5px;
+}
 
 .form-group {
-    margin-left: 40px !important;
-    padding: 10px;
+    border-radius: 12px;
+    padding: 15px;
 }
+
+.form-control {
+    border-radius: 12px;
+    border: 2px solid rgba(35, 33, 34, 0.5); 
+    color: #000000; 
+}
+
+    .form-control:focus {
+        border-color: #e63946;
+        outline: none;
+    }
 
 /* footer */
 
