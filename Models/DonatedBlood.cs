@@ -16,20 +16,24 @@ namespace BloodProject3.Models
         }
 
         [Key] //primary key
+        [Display(Name = "Donation ID")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonationID { get; set; }
 
         [Required] //required appointment id and fk
+        [Display(Name = "Appointment ID")]
         [ForeignKey("AppointmentID")]
         public int AppointmentID { get; set; }
         public virtual Appointment Appointment { get; set; }
 
         [Required]
+        [Display(Name = "Blood Type ID")]
         [ForeignKey("BloodTypeID")] //required bloodtype id and fk
         public int BloodTypeID { get; set; }
         public virtual BloodType BloodType { get; set; }
 
         [Required]
+        [Display(Name = "Donor ID")]
         [ForeignKey("DonorID")] //required donor id and fk
         public int DonorID { get; set; }
         public virtual Donor Donor { get; set; }
@@ -52,6 +56,7 @@ namespace BloodProject3.Models
         public DateTime ExpiryDate { get; set; }
 
         [Required] //required field
+        [Display(Name = "Blood Status")]
         public Status BloodStatus { get; set; }
     }
 }

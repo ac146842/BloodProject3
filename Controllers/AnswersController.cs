@@ -77,7 +77,6 @@ namespace BloodProject3.Controllers
             {
                 return NotFound();
             }
-            // Added: Generates the list of questions to populate the drop-down menu, auto-selecting the current question
             ViewData["HealthQID"] = new SelectList(_context.Questions, "HealthQID", "FormQuestions", answers.HealthQID);
             return View(answers);
         }
@@ -114,7 +113,6 @@ namespace BloodProject3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            // Added: Re-populates the select list if form validation fails and view returns
             ViewData["HealthQID"] = new SelectList(_context.Questions, "HealthQID", "FormQuestions", answers.HealthQID);
             return View(answers);
         }

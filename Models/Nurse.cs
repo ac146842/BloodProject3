@@ -8,6 +8,7 @@ namespace BloodProject3.Models
     public class Nurse
     {
         [Key]
+        [Display(Name = "Nurse ID")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NurseID { get; set; }
 
@@ -23,6 +24,7 @@ namespace BloodProject3.Models
 
         [Required]
         [StringLength(15)] //max 15
+        [Display(Name = "Phone Number")]
         [Phone] //ensures input is a valid phone number format
         public string Phone { get; set; }
 
@@ -34,7 +36,7 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "Start date is required.")]
         [DataType(DataType.Date)]
         [Display(Name = "Employment Start Date")]
-        [NoPastDate(ErrorMessage = "Start date cannot be in the past.")] // Custom validation attribute to prevent past dates
+        [NoPastDate(ErrorMessage = "Start date cannot be in the past.")] // ill change this later
         public DateTime EmployedStartDate { get; set; }
 
         [Required(ErrorMessage = "License Number is required.")]

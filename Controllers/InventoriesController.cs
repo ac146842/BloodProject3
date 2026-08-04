@@ -22,7 +22,6 @@ namespace BloodProject3.Controllers
         // GET: Inventories
         public async Task<IActionResult> Index()
         {
-            // Fixed: Added .Include(i => i.BloodType) to pull the blood type values
             return View(await _context.Inventory
                 .Include(i => i.BloodType)
                 .ToListAsync());

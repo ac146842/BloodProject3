@@ -3,71 +3,83 @@
 @{
     ViewData["Title"] = "Answers";
 }
-<h1 class="table-header">Answers</h1>
-<p class="btn-create"><a asp-action="Create" class="btn btn-dark">Create</a></p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FormID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HealthQID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DonorID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AnswersText)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AnswerDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FormID)
-                </td>
-                <td>
-                    @if (item.Questions != null && !string.IsNullOrEmpty(item.Questions.FormQuestions))
-                    {
-                        var text = item.Questions.FormQuestions;
-                        @(text.Length > 40 ? text.Substring(0, 40) + "..." : text)
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.HealthQID)
-                    }
-                </td>
-                <td>
-                    @if (item.Donor != null && !string.IsNullOrEmpty(item.Donor.FirstName) && !string.IsNullOrEmpty(item.Donor.LastName))
-                    {
-                        @item.Donor.FirstName
-                        <span> </span>
-                        @item.Donor.LastName.Substring(0, 1)
-                        <span>.</span>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.DonorID)
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AnswersText)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AnswerDate)
-                </td>
-                <td class="text-end">
-                    <a asp-action="Edit" asp-route-id="@item.AnswersID" class="btn btn-dark">Edit</a> 
-                    <a asp-action="Details" asp-route-id="@item.AnswersID" class="btn btn-dark">Details</a> 
-                    <a asp-action="Delete" asp-route-id="@item.AnswersID" class="btn btn-dark">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody></table>
+
+<h1 class="index-header">Answers</h1>
+
+<div class="index-card shadow-sm border-0 rounded-3 overflow-hidden">
+    <div class="p-0">
+
+        <table class="table table-custom mb-0">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FormID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Questions)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Donor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AnswersText)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AnswerDate)
+                    </th>
+                    <th class="text-end">
+                        <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FormID)
+                        </td>
+                        <td>
+                            @(item.Questions != null && !string.IsNullOrEmpty(item.Questions.FormQuestions)
+                                ? (item.Questions.FormQuestions.Length > 40
+                                    ? item.Questions.FormQuestions.Substring(0, 40) + "..."
+                                    : item.Questions.FormQuestions)
+                                : item.HealthQID)
+                        </td>
+                        <td>
+                            @(item.Donor != null && !string.IsNullOrEmpty(item.Donor.FirstName) && !string.IsNullOrEmpty(item.Donor.LastName)
+                                ? $"{item.Donor.FirstName} {item.Donor.LastName[0]}."
+                                : item.DonorID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AnswersText)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AnswerDate)
+                        </td>
+
+                        <td class="text-end">
+                            <a asp-action="Edit" asp-route-id="@item.AnswersID" class="btn btn-dark btn-outline-secondary">Edit</a>
+
+                            <a href="#delete-modal-@item.AnswersID" class="btn btn-dark btn-outline-danger">Delete</a>
+
+                            <div id="delete-modal-@item.AnswersID" class="css-modal-overlay text-start">
+                                <div class="custom-modal">
+                                    <div class="custom-modal-body">
+                                        <p class="text-muted fw-semibold small mb-0 text-center">Are you sure you want to delete this record?</p>
+                                    </div>
+                                    <div class="custom-modal-actions">
+                                        <a href="#" class="btn-modal-cancel">Cancel</a>
+                                        <a asp-action="Delete" asp-route-id="@item.AnswersID" class="btn-modal-delete">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

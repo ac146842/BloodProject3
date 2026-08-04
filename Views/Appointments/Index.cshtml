@@ -6,16 +6,16 @@
 
 <h1 class="table-header">Appointments</h1>
 
-<p class="btn-create">
-    <a asp-action="Create" class="btn btn-dark">Create</a>
-</p>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Appointment Time</th>
             <th>@Html.DisplayNameFor(model => model.Location)</th>
             <th>Donor Name</th>
-            <th></th>
+
+            <th class="text-end py-2">
+                <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -39,9 +39,22 @@
                     }
                 </td>
                 <td class="text-end">
-                    <a asp-action="Edit" asp-route-id="@item.AppointmentID" class="btn btn-dark">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.AppointmentID" class="btn btn-dark">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.AppointmentID" class="btn btn-dark">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.AppointmentID" class="btn btn-dark btn-outline-secondary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.AppointmentID" class="btn btn-dark btn-outline-secondary">Details</a>
+
+                    <a href="#delete-modal-@item.AppointmentID" class="btn btn-dark btn-outline-danger">Delete</a>
+
+                    <div id="delete-modal-@item.AppointmentID" class="css-modal-overlay text-start">
+                        <div class="custom-modal">
+                            <div class="custom-modal-body">
+                                <p class="text-muted fw-semibold small mb-0 text-center">Are you sure you want to delete this record?</p>
+                            </div>
+                            <div class="custom-modal-actions">
+                                <a href="#" class="btn-modal-cancel">Cancel</a>
+                                <a asp-action="Delete" asp-route-id="@item.AppointmentID" class="btn-modal-delete">Delete</a>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }

@@ -11,7 +11,7 @@ namespace BloodProject3.Models
 
         [Required(ErrorMessage = "Question text cannot be empty.")]
         [StringLength(500)]
-        [Display(Name = "Question Text")]
+        [Display(Name = "Questions")]
         public string FormQuestions { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-//add navigation properties
 namespace BloodProject3.Models
 {
+    //add navigation properties
     public class BloodType
     {
         public enum BloodGroup //display name is whats display to the user on the web page
@@ -19,11 +19,12 @@ namespace BloodProject3.Models
         }
 
         [Key] //primary key 
+        [Display(Name = "Blood Type ID")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BloodTypeID { get; set; }
 
         [Required] //required field
-        //invalid selected column name selectedbloodtype
+        [Display(Name = "Blood Type")]
         public BloodGroup SelectedBloodType { get; set; }
     }
 }

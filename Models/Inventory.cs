@@ -15,16 +15,19 @@ namespace BloodProject3.Models
         }
 
         [Key] //primary key
+        [Display(Name = "Blood Bank ID")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BloodBankID { get; set; }
 
         //fk and required field
         [Required]
+        [Display(Name = "Donation ID")]
         [ForeignKey("DonationID")]
         public int DonationID { get; set; }
 
         //fk and required field
         [Required]
+        [Display(Name = "Blood Type ID")]
         [ForeignKey("BloodTypeID")]
         public int BloodTypeID { get; set; }
         public virtual BloodType BloodType { get; set; }

@@ -3,24 +3,27 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
+<!-- https://www.youtube.com/watch?v=isn7CpXnaBA -->
+@{
+    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @await RenderSectionAsync("Styles", required: false)
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BloodProject3</title>
-    <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BloodProject3.styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     <div class="page-container">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm custom-blood-nav border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-sm custom-blood-nav">
                 <div class="container-fluid">
-
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blood Donation</a>
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -29,35 +32,35 @@
                     </button>
 
                     <div class="navbar-collapse collapse d-sm-inline-flex">
-                        <ul class="navbar-nav me-auto text-nowrap">
+                        <ul class="navbar-nav me-auto">
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Appointments" asp-action="Index">Appointments</a>
+                                    <a class="nav-link @(currentController == "Appointments" ? "active" : "")" asp-area="" asp-controller="Appointments" asp-action="Index">Appointments</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
+                                    <a class="nav-link @(currentController == "Questions" ? "active" : "")" asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Donors" asp-action="Index">Donors</a>
+                                    <a class="nav-link @(currentController == "Donors" ? "active" : "")" asp-area="" asp-controller="Donors" asp-action="Index">Donors</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Nurses" asp-action="Index">Nurses</a>
+                                    <a class="nav-link @(currentController == "Nurses" ? "active" : "")" asp-area="" asp-controller="Nurses" asp-action="Index">Nurses</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="MedicalForms" asp-action="Index">Medical Forms</a>
+                                    <a class="nav-link @(currentController == "MedicalForms" ? "active" : "")" asp-area="" asp-controller="MedicalForms" asp-action="Index">Medical Forms</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Answers" asp-action="Index">Answers</a>
+                                    <a class="nav-link @(currentController == "Answers" ? "active" : "")" asp-area="" asp-controller="Answers" asp-action="Index">Answers</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="BloodTypes" asp-action="Index">Blood Types</a>
+                                    <a class="nav-link @(currentController == "BloodTypes" ? "active" : "")" asp-area="" asp-controller="BloodTypes" asp-action="Index">Blood Types</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Inventories" asp-action="Index">Inventories</a>
+                                    <a class="nav-link @(currentController == "Inventories" ? "active" : "")" asp-area="" asp-controller="Inventories" asp-action="Index">Inventories</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="DonatedBloods" asp-action="Index">Donated Bloods</a>
+                                    <a class="nav-link @(currentController == "DonatedBloods" ? "active" : "")" asp-area="" asp-controller="DonatedBloods" asp-action="Index">Donated Bloods</a>
                                 </li>
                             }
                         </ul>
@@ -73,40 +76,28 @@
             @RenderBody()
         </main>
 
-        <footer class="border-top footer text-muted">
+        <footer>
             <div class="container">
-                <h1 class="footer-head">Blood Donation</h1>
+                <h1 class="footer-head mb-3">Blood Donation</h1>
 
-                <ul class="navbar-nav">
+                <ul class="navbar-nav d-flex flex-column">
                     @if (SignInManager.IsSignedIn(User))
                     {
-
                         <li class="nav-item">
-                            <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)!</a>
+                            <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account settings (@UserManager.GetUserName(User))</a>
                         </li>
-
                         <li class="nav-item">
                             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button id="logout" type="submit" class="nav-link btn btn-link border-0">Logout</button>
+                                <button id="logout" type="submit" class="nav-link btn btn-link border-0">Log out</button>
                             </form>
                         </li>
                     }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link me-2 button-login" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link button-register" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                        </li>
-                    }
+                </ul>
 
-                <a class="nav-link footer-text" id="login" asp-area="Identity" asp-page="/Account/Login">Log in</a>
-                <a class="nav-link footer-text" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-
-                <p class="footer-text mt-3">
-                    &copy; 2026 - BloodProject3 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </p>
+                <div class="footer-text mt-3">
+                    <p class="mb-1">&copy; 2026 - BloodProject3</p>
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
             </div>
         </footer>
     </div>

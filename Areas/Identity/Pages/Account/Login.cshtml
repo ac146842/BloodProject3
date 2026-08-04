@@ -13,12 +13,12 @@
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
         <div class="form-boxes">
-            <div class="form-floating">
+            <div>
                 <input asp-for="Input.Email" class="form-control round" autocomplete="username" aria-required="true" placeholder="Enter your email" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
 
-            <div class="form-floating">
+            <div>
                 <input asp-for="Input.Password" class="form-control round" autocomplete="current-password" aria-required="true" placeholder="Enter your password" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
@@ -32,6 +32,8 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+
 
 <style>
     #account {
@@ -50,18 +52,7 @@
         min-height: 80vh;
     }
 
-    .login-title {
-        color: #6C4A60;
-        font-weight: 600;
-        margin-bottom: 5px;
-    }
 
-    .login-text {
-        color: #5A6A85;
-        font-size: 0.95rem;
-        margin-bottom: 25px;
-        font-weight: 500;
-    }
 
     .form-boxes {
         display: flex;

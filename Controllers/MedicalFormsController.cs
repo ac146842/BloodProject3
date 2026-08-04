@@ -22,7 +22,6 @@ namespace BloodProject3.Controllers
         // GET: MedicalForms
         public async Task<IActionResult> Index()
         {
-            // Included Appointment and Donor so the Index view can display friendly info
             var medicalForms = _context.MedicalForm
                 .Include(m => m.Nurse)
                 .Include(m => m.Appointment)

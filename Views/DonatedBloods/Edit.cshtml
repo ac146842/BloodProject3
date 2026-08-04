@@ -3,60 +3,66 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<div class="edit-header">
+    <div>
+        <h1>Edit</h1>
+        <h3>Donated Blood</h3>
+    </div>
 
-<h1>Edit</h1>
-
-<h4>DonatedBlood</h4>
-<hr />
+    <div class="edit-actions">
+        <button type="submit" form="editForm" class="btn-save">Save</button>
+        <a asp-action="Index" class="btn-back">Back to List</a>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form id="editForm" asp-action="Edit" class="edit-form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="DonationID" />
+
             <div class="form-group">
                 <label asp-for="AppointmentID" class="control-label"></label>
                 <input asp-for="AppointmentID" class="form-control" />
                 <span asp-validation-for="AppointmentID" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="BloodTypeID" class="control-label">Blood Type</label>
                 <select asp-for="BloodTypeID" class="form-control" asp-items="ViewBag.BloodTypes"></select>
                 <span asp-validation-for="BloodTypeID" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DonorID" class="control-label"></label>
                 <input asp-for="DonorID" class="form-control" />
                 <span asp-validation-for="DonorID" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="CollectionDate" class="control-label"></label>
                 <input asp-for="CollectionDate" class="form-control" />
                 <span asp-validation-for="CollectionDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="VolumeML" class="control-label"></label>
                 <input asp-for="VolumeML" class="form-control" />
                 <span asp-validation-for="VolumeML" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ExpiryDate" class="control-label"></label>
                 <input asp-for="ExpiryDate" class="form-control" />
                 <span asp-validation-for="ExpiryDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="BloodStatus" class="control-label"></label>
                 <input asp-for="BloodStatus" class="form-control" />
                 <span asp-validation-for="BloodStatus" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

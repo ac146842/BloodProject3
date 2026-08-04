@@ -1,24 +1,15 @@
 ﻿@model BloodProject3.Models.Answers
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Answers";
 }
 
-
 <div class="edit-header">
-    <div>
-        <h1>Edit</h1>
-        <h3>Answers</h3>
-    </div>
-
-    <div class="edit-actions">
-        <button type="submit" form="editForm" class="btn-save">Save</button>
-        <a asp-action="Index" class="btn-back">Back to List</a>
-    </div>
+    <h1>Edit details for Answers</h1>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="edit-boxes col-md-4">
         <form id="editForm" asp-action="Edit" class="edit-form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AnswersID" />
@@ -51,6 +42,11 @@
                 <label asp-for="AnswerDate" class="control-label"></label>
                 <input asp-for="AnswerDate" class="form-control" />
                 <span asp-validation-for="AnswerDate" class="text-danger"></span>
+            </div>
+
+            <div class="edit-actions">
+                <button type="submit" form="editForm" class="btn btn-dark btn-outline-secondary">Save</button>
+                <a asp-action="Index" class="btn btn-dark btn-outline-secondary">Back to List</a>
             </div>
         </form>
     </div>

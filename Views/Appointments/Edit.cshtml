@@ -1,16 +1,18 @@
 ﻿@model BloodProject3.Models.Appointment
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Appointments";
 }
 
-<h1 class="table-header">Edit</h1>
 
-<h4 class="edit-header">Appointment</h4>
+<div class="edit-header">
+    <h1>Edit details for Appointments</h1>
+</div>
+
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form id="editForm" asp-action="Edit" class="edit-form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AppointmentID" />
 
@@ -53,17 +55,8 @@
                 <select asp-for="AppointmentStatus" class="form-control" asp-items="Html.GetEnumSelectList<Appointment.Status>()"></select>
                 <span asp-validation-for="AppointmentStatus" class="text-danger"></span>
             </div>
-
-
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
         </form>
     </div>
-</div>
-
-<div style="margin: 20px; padding: 10px;" >
-    <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>
 
 @section Scripts {
@@ -72,3 +65,7 @@
     }
 }
 
+<div class="edit-actions">
+    <button type="submit" form="editForm" class="btn-save">Save</button>
+    <a asp-action="Index" class="btn-back">Back to List</a>
+</div>

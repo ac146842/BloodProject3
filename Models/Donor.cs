@@ -7,6 +7,7 @@ namespace BloodProject3.Models
     public class Donor
     {
         [Key] //primary key
+        [Display(Name = "Donor ID")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonorID { get; set; }
         
@@ -30,11 +31,13 @@ namespace BloodProject3.Models
 
         [Required(ErrorMessage = "Date of birth is required.")] //required to be filled
         [DataType(DataType.Date)] //ensures input is a valid date format
+        [Display(Name = "Date Of Birth")]
         [NoFutureDate(ErrorMessage = "Date of birth cannot be set in the future.")]
         public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Blood type is required.")] //fk to the bloodtype table and error message is given
         [ForeignKey("BloodTypeID")]
+        [Display(Name = "Blood Type ID")]
         public int BloodTypeID { get; set; }
         public virtual BloodType BloodType { get; set; }
 

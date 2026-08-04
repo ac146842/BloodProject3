@@ -45,11 +45,12 @@
         </dt>
         <dd class="col-sm-10">
             @{
+                // Gets the most recent approved donation date from the DonatedBloods collection, or returns null if there are no approved donations.
                 var lastDonationDate = Model.DonatedBloods?
-                    .Where(d => d.BloodStatus == DonatedBlood.Status.Approved)
-                    .OrderByDescending(d => d.CollectionDate)
-                    .Select(d => d.CollectionDate)
-                    .FirstOrDefault();
+                .Where(d => d.BloodStatus == DonatedBlood.Status.Approved)
+                .OrderByDescending(d => d.CollectionDate)
+                .Select(d => (DateTime?)d.CollectionDate)
+                .FirstOrDefault();
 
                 if (lastDonationDate != null && lastDonationDate != DateTime.MinValue)
                 {
