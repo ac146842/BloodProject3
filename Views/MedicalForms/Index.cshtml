@@ -4,58 +4,64 @@
     ViewData["Title"] = "Medical Forms";
 }
 
-<h1 class="table-header">Medical Forms</h1>
+<h1 class="index-header">Medical Forms</h1>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Form ID</th>
-            <th>Nurse Name</th>
-            <th>Appointment Details</th>
-            <th>@Html.DisplayNameFor(model => model.FormDate)</th>
-            
-            <th class="text-end py-2">
-                <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.FormID
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nurse.FirstName)
-                    @Html.DisplayFor(modelItem => item.Nurse.LastName)
-                </td>
-                <td>
-                    @item.Appointment.Donor.FirstName @item.Appointment.Donor.LastName
-                    (@item.Appointment.AppointmentDateTime.ToString("dd/MM/yyyy"))
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FormDate)
-                </td>
-                <td class="text-end">
-                    <a asp-action="Edit" asp-route-id="@item.FormID" class="btn btn-dark btn-outline-secondary">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.FormID" class="btn btn-dark btn-outline-secondary">Details</a>
+<div class="index-card shadow-sm border-0 rounded-3 overflow-hidden">
+    <div class="p-0">
 
-                    <a href="#delete-modal-@item.FormID" class="btn btn-dark btn-outline-danger">Delete</a>
+        <table class="table table-custom mb-0">
+            <thead>
+                <tr>
+                    <th>Form ID</th>
+                    <th>Nurse Name</th>
+                    <th>Appointment Details</th>
+                    <th>@Html.DisplayNameFor(model => model.FormDate)</th>
 
-                    <div id="delete-modal-@item.FormID" class="css-modal-overlay text-start">
-                        <div class="custom-modal">
-                            <div class="custom-modal-body">
-                                <p class="text-muted fw-semibold small mb-0 text-center">Are you sure you want to delete this record?</p>
+                    <th class="text-end py-2">
+                        <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.FormID
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nurse.FirstName)
+                            @Html.DisplayFor(modelItem => item.Nurse.LastName)
+                        </td>
+                        <td>
+                            @item.Appointment.Donor.FirstName @item.Appointment.Donor.LastName
+                            (@item.Appointment.AppointmentDateTime.ToString("dd/MM/yyyy"))
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FormDate)
+                        </td>
+                        <td class="text-end">
+                            <a asp-action="Edit" asp-route-id="@item.FormID" class="btn btn-dark btn-outline-secondary">Edit</a>
+
+                            <a href="#delete-modal-@item.FormID" class="btn btn-dark btn-outline-danger">Delete</a>
+
+                            <div id="delete-modal-@item.FormID" class="css-modal-overlay text-start">
+                                <div class="custom-modal">
+                                    <div class="custom-modal-body">
+                                        <p class="text-muted fw-semibold small mb-0 text-center">Are you sure you want to delete this record?</p>
+                                    </div>
+                                    <div class="custom-modal-actions">
+                                        <a href="#" class="btn-modal-cancel">Cancel</a>
+                                        <a asp-action="Delete" asp-route-id="@item.FormID" class="btn-modal-delete">Delete</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="custom-modal-actions">
-                                <a href="#" class="btn-modal-cancel">Cancel</a>
-                                <a asp-action="Delete" asp-route-id="@item.FormID" class="btn-modal-delete">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

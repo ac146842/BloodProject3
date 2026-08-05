@@ -11,7 +11,7 @@
 
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="edit-boxes col-md-4">
         <form id="editForm" asp-action="Edit" class="edit-form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AppointmentID" />
@@ -55,6 +55,11 @@
                 <select asp-for="AppointmentStatus" class="form-control" asp-items="Html.GetEnumSelectList<Appointment.Status>()"></select>
                 <span asp-validation-for="AppointmentStatus" class="text-danger"></span>
             </div>
+
+            <div class="edit-actions">
+                <button type="submit" form="editForm" class="btn btn-dark btn-outline-secondary">Save</button>
+                <a asp-action="Index" class="btn btn-dark btn-outline-secondary">Back to List</a>
+            </div>
         </form>
     </div>
 </div>
@@ -64,8 +69,3 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
-<div class="edit-actions">
-    <button type="submit" form="editForm" class="btn-save">Save</button>
-    <a asp-action="Index" class="btn-back">Back to List</a>
-</div>

@@ -4,43 +4,48 @@
     ViewData["Title"] = "Blood Types";
 }
 
-<h1 class="table-header">Blood Types</h1>
+<h1 class="index-header">Blood Types</h1>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SelectedBloodType)
-            </th>
-            
-            <th class="text-end py-2">
-                <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SelectedBloodType)
-                </td>
-                <td class="text-end">
-                    <a href="#delete-modal-@item.BloodTypeID" class="btn btn-dark btn-outline-danger">Delete</a>
+<div class="index-card shadow-sm border-0 rounded-3 overflow-hidden">
+    <div class="p-0">
+        <table class="table table-custom mb-0">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SelectedBloodType)
+                    </th>
 
-                    <div id="delete-modal-@item.BloodTypeID" class="css-modal-overlay text-start">
-                        <div class="custom-modal">
-                            <div class="custom-modal-body">
-                                <p class="text-muted fw-semibold small mb-0 text-center">Are you sure you want to delete this record?</p>
+                    <th class="text-end py-2">
+                        <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SelectedBloodType)
+                        </td>
+                        <td class="text-end">
+                            <a href="#delete-modal-@item.BloodTypeID" class="btn btn-dark btn-outline-danger">Delete</a>
+
+                            <div id="delete-modal-@item.BloodTypeID" class="css-modal-overlay text-start">
+                                <div class="custom-modal">
+                                    <div class="custom-modal-body">
+                                        <p class="text-muted fw-semibold small mb-0 text-center">Are you sure you want to delete this record?</p>
+                                    </div>
+                                    <div class="custom-modal-actions">
+                                        <a href="#" class="btn-modal-cancel">Cancel</a>
+                                        <a asp-action="Delete" asp-route-id="@item.BloodTypeID" class="btn-modal-delete">Delete</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="custom-modal-actions">
-                                <a href="#" class="btn-modal-cancel">Cancel</a>
-                                <a asp-action="Delete" asp-route-id="@item.BloodTypeID" class="btn-modal-delete">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
