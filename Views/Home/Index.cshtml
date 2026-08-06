@@ -2,142 +2,143 @@
     :root {
         /* Primary Colors */
         --colour-text: #495057;
+        /* TEXT  */
+        @@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-    /* TEXT  */
-    @@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+        .header-container,
+        .card,
+        .bottom-container,
+        .abt, 
+        .bottom-card,
+        .blood-list {
+            color: var(--colour-text);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
 
-    div {
-        color: var(--colour-text);
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
+        /* UPPER PAGE CONTENTS */
+        .header-container {
+            padding: 40px 20px;
+            margin: 2rem auto;
+            max-width: 1100px;
+            width: 100%;
+        }
 
-    /* UPPER PAGE CONTENTS */
-    .header-container {
-        padding: 40px 20px;
-        margin: 2rem auto;
-        max-width: 1100px;
-        width: 100%;
-    }
+        .Header1 {
+            font-family: sans-serif;
+            font-weight: 700;
+            font-size: 30px;
+            margin-bottom: 1.5rem;
+        }
 
-    .Header1 {
-        font-family: sans-serif;
-        font-weight: 700;
-        font-size: 30px;
-        margin-bottom: 1.5rem;
-    }
+        .DonationP {
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            font-family: sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 65ch;
+        }
+        /* CAROUSEL */
+        .Carouselcontainer {
+            margin: 3rem auto 2rem auto;
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 1rem;
+        }
 
-    .DonationP {
-        font-weight: 400;
-        letter-spacing: 0.5px;
-        font-family: sans-serif;
-        font-size: 15px;
-        line-height: 1.6;
-        max-width: 65ch;
-    }
+        .carousel-inner img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        /* CARDS */
+        .CardsContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding: 20px 10px 50px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
 
-    /* CAROUSEL */
-    .Carouselcontainer {
-        margin: 3rem auto 2rem auto;
-        width: 100%;
-        max-width: 1100px;
-        padding: 0 1rem;
-    }
+        .card {
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            padding: 50px 25px;
+            flex: 1;
+            border-radius: 12px;
+            border: 1px solid #cccccc;
+            width: 400px;
+            height: 350px;
+            aspect-ratio: 1 / 1;
+        }
 
-    .carousel-inner img {
-        width: 100%;
-        height: 350px;
-        object-fit: cover;
-        border-radius: 8px;
-    }
+            .card h1 {
+                font-size: 1.4rem;
+                margin-bottom: 0.75rem;
+            }
 
-    /* CARDS */
-    .CardsContainer {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 3rem;
-        padding: 20px 10px 50px;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
+            .card p, .card li {
+                line-height: 1.4;
+                font-size: 0.85rem;
+            }
 
-    .card {
-        display: flex;
-        flex-direction: column;
-        background-color: #ffffff;
-        padding: 50px 25px;
-        flex: 1;
-        border-radius: 12px;
-        border: 1px solid #cccccc;
-        width: 400px;
-        height: 350px;
-        aspect-ratio: 1 / 1;
-    }
+            .card ul {
+                padding-left: 1.2rem;
+                margin: 0;
+            }
+        /* BOTTOM SECTION */
+        .abt {
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
 
-    .card h1 {
-        font-size: 1.4rem;
-        margin-bottom: 0.75rem;
-    }
+        .bottom-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 5rem auto 4rem auto;
+            max-width: 1100px;
+            padding: 0 1rem;
+            gap: 2rem;
+        }
 
-    .card p, .card li {
-        line-height: 1.4;
-        font-size: 0.85rem; 
-    }
+        .columntext {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            flex: 1;
+        }
 
-    .card ul {
-        padding-left: 1.2rem; 
-        margin: 0;
-    }
+        .about {
+            max-width: 50ch;
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
 
-    /* BOTTOM SECTION */
-    .abt {
-        margin-top: 3rem;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
+        .card.bottom-card {
+            max-width: 45ch;
+            width: 100%;
+            flex-shrink: 0;
+            height: auto;
+            min-height: 20rem;
+        }
 
-    .bottom-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin: 5rem auto 4rem auto;
-        max-width: 1100px;
-        padding: 0 1rem;
-        gap: 2rem;
-    }
+        .blood-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
 
-    .columntext {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        flex: 1;
-    }
-
-    .about {
-        max-width: 50ch;
-        font-size: 1.25rem;
-        line-height: 1.6;
-    }
-
-    .card.bottom-card {
-        max-width: 45ch;
-        width: 100%;
-        flex-shrink: 0;
-        height: auto;
-        min-height: 20rem;
-    }
-
-    .blood-list {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .blood-list li {
-        padding: 8px 0;
-        border-bottom: 1px solid #eee;
-        font-size: 0.9rem;
-    }
+            .blood-list li {
+                padding: 8px 0;
+                border-bottom: 1px solid #eee;
+                font-size: 0.9rem;
+            }
 </style>
 
 @{

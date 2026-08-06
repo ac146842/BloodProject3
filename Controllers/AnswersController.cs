@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BloodProject3.Areas.Identity.Data;
+using BloodProject3.Models;
+using BloodProject3.Views;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BloodProject3.Areas.Identity.Data;
-using BloodProject3.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 namespace BloodProject3.Controllers
 {
     public class AnswersController : Controller
@@ -19,10 +20,59 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Answers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+        string sortOrder,
+        string currentFilter,
+        string searchString,
+        int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var students = from s in _context.Answers
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.LastName .Contains(searchString)
+                                       || s.FirstMidName .Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "Questions":
+                    students = students.OrderByDescending(s => s.Questions);
+                    break;
+                case "Donor":
+                    students = students.OrderBy(s => s.Donor);
+                    break;
+                case "AnswersText":
+                    students = students.OrderByDescending(s => s.AnswersText);
+                    break;
+                case "AnswerDate":
+                    students = students.OrderByDescending(s => s.AnswerDate);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.FormID);
+                    break;
+            }
+
+            int pageSize = 3;
+            return View(await PaginatedList<Answers>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
+
             return View(await _context.Answers.Include(a => a.Questions).Include(a => a.Donor).ToListAsync());
         }
+
 
         // GET: Answers/Details/5
         public async Task<IActionResult> Details(int? id)
