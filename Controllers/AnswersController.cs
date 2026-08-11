@@ -19,15 +19,16 @@ namespace BloodProject3.Controllers
             _context = context;
         }
 
-        // GET: Answers
-        public async Task<IActionResult> Index(
-        string sortOrder,
-        string currentFilter,
-        string searchString,
-        int? pageNumber)
+    // GET: Answers
+    public async Task<IActionResult> Index(
+    string sortOrder,
+    string currentFilter,
+    string searchString,
+    int? pageNumber)
         {
             ViewData["QuestionsSortParm"] = sortOrder == "Questions" ? "questions_desc" : "Questions";
             ViewData["DonorSortParm"] = sortOrder == "Donor" ? "donor_desc" : "Donor";
+            ViewData["AnswersIDSortParm"] = sortOrder == "AnswersID" ? "answersid_desc" : "AnswersID";
             ViewData["AnswersTextSortParm"] = sortOrder == "AnswersText" ? "answerstext_desc" : "AnswersText";
             ViewData["AnswerDateSortParm"] = sortOrder == "AnswerDate" ? "answerdate_desc" : "AnswerDate";
 
@@ -43,25 +44,26 @@ namespace BloodProject3.Controllers
             ViewData["CurrentFilter"] = searchString;
 
             var answers = from s in _context.Answers
-                           select s;
+                          select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                answers = answers.Where(s => s.QuestionsID.ToString().Contains(searchString)
-                                       || s.DonorID.ToString().Contains(searchString));
-
-
-
-
-
+                answers = answers.Where(s => s.HealthQID.ToString().Contains(searchString)
+                                       || s.DonorID.ToString().Contains(searchString)
+                                       || s.AnswersID.ToString().Contains(searchString)
+                                       || s.AnswersText.Contains(searchString)
+                                       || s.AnswerDate.ToString().Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "Questions":
-                    answers = answers.OrderBy(s => s.Questions);
+                    answers = answers.OrderBy(s => s.HealthQID);
                     break;
                 case "Donor":
-                    answers = answers.OrderBy(s => s.Donor);
+                    answers = answers.OrderBy(s => s.DonorID);
+                    break;
+                case "AnswersID":
+                    answers = answers.OrderBy(s => s.AnswersID);
                     break;
                 case "AnswersText":
                     answers = answers.OrderBy(s => s.AnswersText);
@@ -75,14 +77,9 @@ namespace BloodProject3.Controllers
             }
 
             int pageSize = 3;
-            return View(await PaginatedList<Answers>.CreateAsync(answers.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<Answers>.CreateAsync(answers.Include(a => a.Questions).Include(a => a.Donor).AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
-        // GET: Answers
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Answers.Include(a => a.Questions).Include(a => a.Donor).ToListAsync());
-        }
 
 
         // GET: Answers/Details/5
