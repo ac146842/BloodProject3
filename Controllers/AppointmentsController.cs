@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BloodProject3.Areas.Identity.Data;
+using BloodProject3.Models;
+using BloodProject3.Views;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BloodProject3.Areas.Identity.Data;
-using BloodProject3.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BloodProject3.Controllers
 {
@@ -20,10 +21,66 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Appointments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+        string sortOrder,
+        string currentFilter,
+        string searchString,
+        int? pageNumber)
         {
-            var appointments = _context.Appointment.Include(a => a.Donor).Include(a => a.Nurse);
-            return View(await appointments.ToListAsync());
+            ViewData["DonorIDSortParm"] = sortOrder == "DonorID" ? "donorid_desc" : "DonorID";
+            ViewData["NurseIDSortParm"] = sortOrder == "NurseID" ? "nurseid_desc" : "NurseID";
+            ViewData["AppointmentDateTimeSortParm"] = sortOrder == "AppointmentDateTime" ? "appointmentdatetime_desc" : "AppointmentDateTime";
+            ViewData["LocationSortParm"] = sortOrder == "Location" ? "location_desc" : "Location";
+            ViewData["TypeOfAppointmentSortParm"] = sortOrder == "TypeOfAppointment" ? "typeofappointment_desc" : "TypeOfAppointment";
+            ViewData["AppointmentStatusSortParm"] = sortOrder == "AppointmentStatus" ? "appointmentstatus_desc" : "AppointmentStatus";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var appointment = from s in _context.Appointment
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                appointment = appointment.Where(s => s.DonorID.ToString().Contains(searchString)
+                                       || s.NurseID.ToString().Contains(searchString)
+                                       || s.AppointmentDateTime.ToString().Contains(searchString)
+                                       || s.Location.ToString().Contains(searchString)
+                                       || s.TypeOfAppointment.ToString().Contains(searchString)
+                                       || s.AppointmentStatus.ToString().Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "DonorID":
+                    appointment = appointment.OrderBy(s => s.DonorID);
+                    break;
+                case "NurseID":
+                    appointment = appointment.OrderBy(s => s.NurseID);
+                    break;
+                case "AppointmentDateTime":
+                    appointment = appointment.OrderBy(s => s.AppointmentDateTime);
+                    break;
+                case "Location":
+                    appointment = appointment.OrderBy(s => s.Location);
+                    break;
+                case "TypeOfAppointment":
+                    appointment = appointment.OrderBy(s => s.TypeOfAppointment);
+                    break;
+                default:
+                    appointment = appointment.OrderBy(s => s.AppointmentID);
+                    break;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<Appointment>.CreateAsync(appointment.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Appointments/Details/5

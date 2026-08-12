@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BloodProject3.Areas.Identity.Data;
+using BloodProject3.Models;
+using BloodProject3.Views;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BloodProject3.Areas.Identity.Data;
-using BloodProject3.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BloodProject3.Controllers
 {
@@ -20,14 +21,54 @@ namespace BloodProject3.Controllers
         }
 
         // GET: MedicalForms
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+         string sortOrder,
+         string currentFilter,
+         string searchString,
+         int? pageNumber)
         {
-            var medicalForms = _context.MedicalForm
-                .Include(m => m.Nurse)
-                .Include(m => m.Appointment)
-                    .ThenInclude(a => a.Donor);
+            ViewData["NurseIDSortParm"] = sortOrder == "NurseID" ? "nurseid_desc" : "NurseID";
+            ViewData["AppointmentSortParm"] = sortOrder == "Appointment" ? "appointment_desc" : "Appointment";
+            ViewData["FormDateSortParm"] = sortOrder == "FormDate" ? "formdate_desc" : "FormDate";
 
-            return View(await medicalForms.ToListAsync());
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var MedicalForm = from s in _context.MedicalForm
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                MedicalForm = MedicalForm.Where(s => s.NurseID.ToString().Contains(searchString)
+                                       || s.AppointmentID.ToString().Contains(searchString)
+                                       || s.FormDate.ToString().Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "NurseID":
+                    MedicalForm = MedicalForm.OrderBy(s => s.NurseID);
+                    break;
+                case "Appointment":
+                    MedicalForm = MedicalForm.OrderBy(s => s.AppointmentID);
+                    break;
+                case "FormDate":
+                    MedicalForm = MedicalForm.OrderBy(s => s.FormDate);
+                    break;        
+                default:
+                    MedicalForm = MedicalForm.OrderBy(s => s.FormID);
+                    break;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<MedicalForm>.CreateAsync(MedicalForm.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: MedicalForms/Details/5

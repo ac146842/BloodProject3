@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BloodProject3.Areas.Identity.Data;
+using BloodProject3.Models;
+using BloodProject3.Views;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BloodProject3.Areas.Identity.Data;
-using BloodProject3.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BloodProject3.Controllers
 {
@@ -19,14 +20,73 @@ namespace BloodProject3.Controllers
             _context = context;
         }
 
-        // GET: DonatedBloods
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+         string sortOrder,
+         string currentFilter,
+         string searchString,
+         int? pageNumber)
         {
-            return View(await _context.DonatedBlood
-                .Include(d => d.Donor)
-                .Include(d => d.BloodType)
-                .Include(d => d.Appointment)
-                .ToListAsync());
+            ViewData["DonationIDSortParm"] = sortOrder == "DonationID" ? "donationid_desc" : "DonationID";
+            ViewData["AppointmentIDSortParm"] = sortOrder == "AppointmentID" ? "appointmentid_desc" : "AppointmentID";
+            ViewData["BloodTypeIDSortParm"] = sortOrder == "BloodTypeID" ? "bloodtypeid_desc" : "BloodTypeID";
+            ViewData["DonorIDSortParm"] = sortOrder == "DonorID" ? "donorid_desc" : "DonorID";
+            ViewData["CollectionDateSortParm"] = sortOrder == "CollectionDate" ? "collectiondate_desc" : "CollectionDate";
+            ViewData["VolumeMLSortParm"] = sortOrder == "VolumeML" ? "volumeml_desc" : "VolumeML";
+            ViewData["BloodStatusSortParm"] = sortOrder == "BloodStatus" ? "bloodstatus_desc" : "BloodStatus";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var DonatedBloods = from s in _context.DonatedBlood
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                DonatedBloods = DonatedBloods.Where(s => s.DonationID.ToString().Contains(searchString)
+                                       || s.AppointmentID.ToString().Contains(searchString)
+                                       || s.BloodTypeID.ToString().Contains(searchString)
+                                       || s.DonorID.ToString().Contains(searchString)
+                                       || s.CollectionDate.ToString().Contains(searchString)
+                                       || s.VolumeML.ToString().Contains(searchString)
+                                       || s.BloodStatus.ToString().Contains(searchString));
+            }
+
+
+            //add both a default case and a case for each column
+            switch (sortOrder)
+            {
+                case "DonationID":
+                    DonatedBloods = DonatedBloods.OrderBy(s => s.DonationID);
+                    break;
+                case "DonorID":
+                    DonatedBloods = DonatedBloods.OrderBy(s => s.DonorID);
+                    break;
+                case "BloodTypeID":
+                    DonatedBloods = DonatedBloods.OrderBy(s => s.BloodTypeID);
+                    break;
+                case "CollectionDate":
+                    DonatedBloods = DonatedBloods.OrderBy(s => s.CollectionDate);
+                    break;
+                case "VolumeML":
+                    DonatedBloods = DonatedBloods.OrderBy(s => s.VolumeML);
+                    break;
+                case "BloodStatus":
+                    DonatedBloods = DonatedBloods.OrderBy(s => s.BloodStatus);
+                    break;
+                default:
+                    DonatedBloods = DonatedBloods.OrderBy(s => s.DonationID);
+                    break;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<DonatedBlood>.CreateAsync(DonatedBloods.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: DonatedBloods/Details/5

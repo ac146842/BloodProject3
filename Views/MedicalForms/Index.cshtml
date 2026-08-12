@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BloodProject3.Models.MedicalForm>
+﻿@model BloodProject3.Views.PaginatedList<BloodProject3.Models.MedicalForm>
 
 @{
     ViewData["Title"] = "Medical Forms";
@@ -15,7 +15,7 @@
                     <th>Form ID</th>
                     <th>Nurse Name</th>
                     <th>Appointment Details</th>
-                    <th>@Html.DisplayNameFor(model => model.FormDate)</th>
+                    <th>Form Date</th>
 
                     <th class="text-end py-2">
                         <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
@@ -64,4 +64,49 @@
         </table>
 
     </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+
+            @if (Model.HasPreviousPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-pageNumber="@(Model.PageIndex - 1)"
+                       asp-route-searchString="@ViewData["CurrentFilter"]"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]">
+                        Previous
+                    </a>
+                </li>
+            }
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-pageNumber="@i"
+                       asp-route-searchString="@ViewData["CurrentFilter"]"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]">
+                        @i
+                    </a>
+                </li>
+            }
+
+            @if (Model.HasNextPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-pageNumber="@(Model.PageIndex + 1)"
+                       asp-route-searchString="@ViewData["CurrentFilter"]"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]">
+                        Next
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </nav>
 </div>

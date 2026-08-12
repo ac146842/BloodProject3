@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BloodProject3.Areas.Identity.Data;
+using BloodProject3.Models;
+using BloodProject3.Views;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BloodProject3.Areas.Identity.Data;
-using BloodProject3.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BloodProject3.Controllers
 {
@@ -20,11 +21,64 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Inventories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+        string sortOrder,
+        string currentFilter,
+        string searchString,
+        int? pageNumber)
         {
-            return View(await _context.Inventory
-                .Include(i => i.BloodType)
-                .ToListAsync());
+            ViewData["DonationIDSortParm"] = sortOrder == "DonationID" ? "donationid_desc" : "DonationID";
+            ViewData["BloodTypeIDSortParm"] = sortOrder == "BloodTypeID" ? "bloodtypeid_desc" : "BloodTypeID";
+            ViewData["CurrentVolumeMLSortParm"] = sortOrder == "CurrentVolumeML" ? "currentvolumeml_desc" : "CurrentVolumeML";
+            ViewData["StorageLocationSortParm"] = sortOrder == "StorageLocation" ? "storagelocation_desc" : "StorageLocation";
+            ViewData["BloodStatusSortParm"] = sortOrder == "BloodStatus" ? "bloodstatus_desc" : "BloodStatus";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var inventories = from s in _context.Inventory
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                inventories = inventories.Where(s => s.DonationID.ToString().Contains(searchString)
+                                       || s.BloodTypeID.ToString().Contains(searchString)
+                                       || s.CurrentVolumeML.ToString().Contains(searchString)
+                                       || s.StorageLocation.ToString().Contains(searchString)
+                                       || s.BloodStatus.ToString().Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Questions":
+                    inventories = inventories.OrderBy(s => s.DonationID);
+                    break;
+                case "Donor":
+                    inventories = inventories.OrderBy(s => s.BloodTypeID);
+                    break;
+                case "AnswersID":
+                    inventories = inventories.OrderBy(s => s.CurrentVolumeML);
+                    break;
+                case "AnswersText":
+                    inventories = inventories.OrderBy(s => s.StorageLocation);
+                    break;
+                case "AnswerDate":
+                    inventories = inventories.OrderBy(s => s.BloodStatus);
+                    break;
+                default:
+                    inventories = inventories.OrderBy(s => s.DonationID);
+                    break;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<Inventory>.CreateAsync(inventories.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Inventories/Details/5

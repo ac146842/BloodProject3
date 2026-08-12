@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BloodProject3.Areas.Identity.Data;
+using BloodProject3.Models;
+using BloodProject3.Views;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BloodProject3.Areas.Identity.Data;
-using BloodProject3.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BloodProject3.Controllers
 {
@@ -20,29 +21,70 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Donors
-        public async Task<IActionResult> Index()
+        // GET: Answers
+        public async Task<IActionResult> Index(
+        string sortOrder,
+        string currentFilter,
+        string searchString,
+        int? pageNumber)
         {
-            return View(await _context.Donor.Include(d => d.BloodType).Include(d => d.DonatedBloods).ToListAsync());
-        }
+            ViewData["FirstNameSortParm"] = sortOrder == "FirstName" ? "firstname_desc" : "FirstName";
+            ViewData["LastNameSortParm"] = sortOrder == "LastName" ? "lastname_desc" : "LastName";
+            ViewData["PhoneSortParm"] = sortOrder == "Phone" ? "phone_desc" : "Phone";
+            ViewData["DateOfBirthSortParm"] = sortOrder == "DateOfBirth" ? "dateofbirth_desc" : "DateOfBirth";
+            ViewData["BloodTypeIDSortParm"] = sortOrder == "BloodTypeID" ? "bloodtypeid_desc" : "BloodTypeID";
+            ViewData["LastDonationDateSortParm"] = sortOrder == "LastDonationDate" ? "lastdonationdate_desc" : "LastDonationDate";
 
-        // GET: Donors/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            if (searchString != null)
             {
-                return NotFound();
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
             }
 
-            var donor = await _context.Donor
-                .Include(d => d.BloodType)
-                .Include(d => d.DonatedBloods)
-                .FirstOrDefaultAsync(m => m.DonorID == id);
-            if (donor == null)
+            ViewData["CurrentFilter"] = searchString;
+
+            var donors = from s in _context.Donor
+                         select s;
+            if (!String.IsNullOrEmpty(searchString))
             {
-                return NotFound();
+                donors = donors.Where(s => s.FirstName.Contains(searchString)
+                                      || s.LastName.Contains(searchString)
+                                      || s.Phone.Contains(searchString)
+                                      || s.DateOfBirth.ToString().Contains(searchString)
+                                      || s.BloodTypeID.ToString().Contains(searchString)
+                                      || s.LastDonationDate.ToString().Contains(searchString));
             }
 
-            return View(donor);
+            switch (sortOrder)
+            {
+                case "FirstName":
+                    donors = donors.OrderBy(s => s.FirstName);
+                    break;
+                case "LastName":
+                    donors = donors.OrderBy(s => s.LastName);
+                    break;
+                case "Phone":
+                    donors = donors.OrderBy(s => s.Phone);
+                    break;
+                case "DateOfBirth":
+                    donors = donors.OrderBy(s => s.DateOfBirth);
+                    break;
+                case "BloodTypeID":
+                    donors = donors.OrderBy(s => s.BloodTypeID);
+                    break;
+                case "LastDonationDate":
+                    donors = donors.OrderBy(s => s.LastDonationDate);
+                    break;
+                default:
+                    donors = donors.OrderBy(s => s.DonorID);
+                    break;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<Donor>.CreateAsync(donors.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Donors/Create

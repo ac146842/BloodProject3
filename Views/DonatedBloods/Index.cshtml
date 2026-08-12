@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BloodProject3.Models.DonatedBlood>
+﻿@model BloodProject3.Views.PaginatedList<BloodProject3.Models.DonatedBlood>
 
 @{
     ViewData["Title"] = "Donated Blood";
@@ -14,10 +14,10 @@
                     <th>Appointment Details</th>
                     <th>Blood Type</th>
                     <th>Donor Name</th>
-                    <th>@Html.DisplayNameFor(model => model.CollectionDate)</th>
-                    <th>@Html.DisplayNameFor(model => model.VolumeML)</th>
-                    <th>@Html.DisplayNameFor(model => model.ExpiryDate)</th>
-                    <th>@Html.DisplayNameFor(model => model.BloodStatus)</th>
+                    <th>Collection Date</th>
+                    <th>Volume (mL)</th>
+                    <th>Expiry Date</th>
+                    <th>Blood Status</th>
 
                     <th class="text-end py-2">
                         <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
@@ -86,4 +86,49 @@
             </tbody>
         </table>
     </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+
+            @if (Model.HasPreviousPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-pageNumber="@(Model.PageIndex - 1)"
+                       asp-route-searchString="@ViewData["CurrentFilter"]"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]">
+                        Previous
+                    </a>
+                </li>
+            }
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-pageNumber="@i"
+                       asp-route-searchString="@ViewData["CurrentFilter"]"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]">
+                        @i
+                    </a>
+                </li>
+            }
+
+            @if (Model.HasNextPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-pageNumber="@(Model.PageIndex + 1)"
+                       asp-route-searchString="@ViewData["CurrentFilter"]"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]">
+                        Next
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </nav>
 </div>
