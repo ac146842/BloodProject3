@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BloodProject3.Views;
 namespace BloodProject3.Controllers
 {
     public class AnswersController : Controller
@@ -26,7 +27,7 @@ namespace BloodProject3.Controllers
     string searchString,
     int? pageNumber)
         {
-            ViewData["QuestionsSortParm"] = sortOrder == "Questions" ? "questions_desc" : "Questions";
+            ViewData["HealthQIDSortParm"] = sortOrder == "HealthQID" ? "healthqid_desc" : "HealthQID";
             ViewData["DonorSortParm"] = sortOrder == "Donor" ? "donor_desc" : "Donor";
             ViewData["AnswersIDSortParm"] = sortOrder == "AnswersID" ? "answersid_desc" : "AnswersID";
             ViewData["AnswersTextSortParm"] = sortOrder == "AnswersText" ? "answerstext_desc" : "AnswersText";
@@ -76,7 +77,7 @@ namespace BloodProject3.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 10;
             return View(await PaginatedList<Answers>.CreateAsync(answers.Include(a => a.Questions).Include(a => a.Donor).AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
