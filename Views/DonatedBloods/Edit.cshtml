@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label asp-for="CollectionDate" class="control-label"></label>
-                <input asp-for="CollectionDate" class="form-control" />
+                <input asp-for="CollectionDate" class="form-control" type="date" />
                 <span asp-validation-for="CollectionDate" class="text-danger"></span>
             </div>
 
@@ -52,13 +52,13 @@
 
             <div class="form-group">
                 <label asp-for="ExpiryDate" class="control-label"></label>
-                <input asp-for="ExpiryDate" class="form-control" />
+                <input asp-for="ExpiryDate" class="form-control" type="date" />
                 <span asp-validation-for="ExpiryDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="BloodStatus" class="control-label"></label>
-                <input asp-for="BloodStatus" class="form-control" />
+                <select asp-for="BloodStatus" class="form-control" asp-items="Html.GetEnumSelectList<DonatedBlood.Status>()"></select>
                 <span asp-validation-for="BloodStatus" class="text-danger"></span>
             </div>
 

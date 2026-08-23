@@ -1,8 +1,8 @@
 ﻿using BloodProject3.Validation;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-//add navigation properties
 namespace BloodProject3.Models
 {
     public class Nurse
@@ -13,34 +13,33 @@ namespace BloodProject3.Models
         public int NurseID { get; set; }
 
         [Required(ErrorMessage = "First name is required.")]
-        [StringLength(50)] //max 50 characters
+        [StringLength(50)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last name is required.")]
-        [StringLength(50)] //max 50 characters
+        [StringLength(50)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(15)] //max 15
+        [StringLength(15)]
         [Display(Name = "Phone Number")]
-        [Phone] //ensures input is a valid phone number format
+        [Phone]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Please specify the nurse's job role.")]
-        [StringLength(50)] //max string length of 50 characters
+        [StringLength(50)]
         [Display(Name = "Job Role")]
         public string JobRole { get; set; }
 
         [Required(ErrorMessage = "Start date is required.")]
         [DataType(DataType.Date)]
         [Display(Name = "Employment Start Date")]
-        [NoPastDate(ErrorMessage = "Start date cannot be in the past.")] // ill change this later
         public DateTime EmployedStartDate { get; set; }
 
         [Required(ErrorMessage = "License Number is required.")]
-        [StringLength(8)] //max string length of 50 characters
+        [StringLength(8)]
         [Display(Name = "License Number")]
         [RegularExpression(@"^[A-Z]{2}\d{6}$", ErrorMessage = "License must be 2 uppercase letters followed by 6 digits.")]
         public string LicenseNumber { get; set; }

@@ -40,21 +40,21 @@
 
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
+                <input asp-for="DateOfBirth" class="form-control" type="date" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="BloodType" class="control-label"></label>
-                <select asp-for="BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType.BloodGroup>()">
+                <label asp-for="BloodTypeID" class="control-label">Blood Type</label>
+                <select asp-for="BloodTypeID" class="form-control" asp-items="ViewBag.BloodTypes">
                     <option value="">-- Select Blood Type --</option>
                 </select>
-                <span asp-validation-for="BloodType" class="text-danger"></span>
+                <span asp-validation-for="BloodTypeID" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="LastDonationDate" class="control-label"></label>
-                <input asp-for="LastDonationDate" class="form-control" />
+                <input asp-for="LastDonationDate" class="form-control" type="date" />
                 <span asp-validation-for="LastDonationDate" class="text-danger"></span>
             </div>
 

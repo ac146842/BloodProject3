@@ -4,8 +4,6 @@
     ViewData["Title"] = "Edit Answers";
 }
 
-<!-- add labels to each box when box is empty or add tool tip -->
-
 <div class="edit-header">
     <h1>Edit details for Answers</h1>
 </div>
@@ -42,7 +40,7 @@
 
             <div class="form-group">
                 <label asp-for="AnswerDate" class="control-label"></label>
-                <input asp-for="AnswerDate" class="form-control" />
+                <input asp-for="AnswerDate" class="form-control" type="datetime-local" />
                 <span asp-validation-for="AnswerDate" class="text-danger"></span>
             </div>
 

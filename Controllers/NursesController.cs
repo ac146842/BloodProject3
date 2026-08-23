@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BloodProject3.Areas.Identity.Data;
 using BloodProject3.Models;
+using BloodProject3.Views;
 
 namespace BloodProject3.Controllers
 {
@@ -20,9 +21,46 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Nurses
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
-            return View(await _context.Nurse.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var nurses = _context.Nurse.AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                nurses = nurses.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    nurses = nurses.OrderByDescending(s => s.LastName);
+                    break;
+                default:
+                    nurses = nurses.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<Nurse>.CreateAsync(nurses.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Nurses/Details/5

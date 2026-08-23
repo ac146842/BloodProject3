@@ -44,8 +44,10 @@ namespace BloodProject3.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var inventories = from s in _context.Inventory
-                          select s;
+            var inventories = _context.Inventory
+                .Include(i => i.BloodType)
+                .AsQueryable();
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 inventories = inventories.Where(s => s.DonationID.ToString().Contains(searchString)

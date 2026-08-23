@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); 
 
 /*
     COLOURS
@@ -81,7 +81,6 @@ body {
     background-color: var(--color-primary) !important;
 }
 
-
 .navbar-brand {
     color: var(--text-light);
     font-family: sans-serif;
@@ -97,11 +96,9 @@ body {
         opacity: 0.9;
     }
 
-
 .navbar-nav .nav-link {
     color: var(--text-light) !important;
 }
-
 
 .navbar-nav.me-auto .nav-link {
     font-family: 'Inter', sans-serif !important;
@@ -119,9 +116,7 @@ body {
         color: var(--color-accent-focus) !important;
     }
 
-
-.navbar-nav.ms-auto .nav-link,
-.navbar-nav.ms-auto #logout {
+.navbar-nav.ms-auto .nav-link, .navbar-nav.ms-auto #logout {
     font-family: 'Inter', sans-serif !important;
     font-weight: 600;
     transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -135,9 +130,7 @@ body {
         opacity: 0.9;
     }
 
-
-.navbar-nav .nav-link.button-login,
-.navbar-nav .nav-link.button-register {
+.navbar-nav .nav-link.button-login, .navbar-nav .nav-link.button-register {
     font-family: 'Inter', sans-serif !important;
     font-weight: 400;
     color: var(--text-light) !important;
@@ -157,15 +150,13 @@ body {
     background-color: var(--color-secondary);
 }
 
-.navbar-nav .nav-link.button-login:hover,
-.navbar-nav .nav-link.button-login:focus {
+.navbar-nav .nav-link.button-login:hover, .navbar-nav .nav-link.button-login:focus {
     background-color: var(--color-accent-red) !important;
     color: var(--text-light) !important;
     opacity: 1 !important;
 }
 
-.navbar-nav .nav-link.button-register:hover,
-.navbar-nav .nav-link.button-register:focus {
+.navbar-nav .nav-link.button-register:hover, .navbar-nav .nav-link.button-register:focus {
     background-color: var(--color-secondary) !important;
     color: var(--text-light) !important;
     opacity: 1 !important;
@@ -187,7 +178,7 @@ footer {
 }
 
     footer .navbar-nav {
-        min-height: 80px; 
+        min-height: 80px;
     }
 
 
@@ -213,16 +204,11 @@ footer {
         footer .footer-text a:active {
             color: var(--color-accent-focus) !important;
         }
-
 /*
     BUTTONS
 */
 
-.btn:focus,
-.btn:active:focus,
-.btn-link.nav-link:focus,
-.form-control:focus,
-.form-check-input:focus {
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem #ffffff, 0 0 0 0.25rem var(--color-accent-focus);
 }
 
@@ -236,29 +222,38 @@ footer {
     transition: all 0.2s ease-in-out;
 }
 
-    .btn-outline-danger:hover {
-        color: #ffffff !important;
-    }
-
+.btn-outline-danger:hover {
+    color: #ffffff !important;
+}
 /*
     MODAL
 */
 
 .css-modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     background: rgba(37, 140, 251, 0.3);
     z-index: 9999;
-    display: flex; justify-content: center; align-items: center;
-    opacity: 0; pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
     transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.css-modal-overlay .custom-modal {
-    background: #f9b8b3; border-radius: 16px; padding: 24px 20px 10px; width: 280px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    transform: scale(0.8);
-    transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
+    .css-modal-overlay .custom-modal {
+        background: #f9b8b3;
+        border-radius: 16px;
+        padding: 24px 20px 10px;
+        width: 280px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        transform: scale(0.8);
+        transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
 
     .css-modal-overlay:target {
         opacity: 1;
@@ -275,8 +270,7 @@ footer {
     margin-top: 15px;
 }
 
-.btn-modal-cancel,
-.btn-modal-delete {
+.btn-modal-cancel, .btn-modal-delete {
     flex: 1;
     display: block;
     box-sizing: border-box;
@@ -325,6 +319,15 @@ footer {
         padding: 12px 16px;
     }
 
+        .table-custom thead th a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+            .table-custom thead th a:hover {
+                color: var(--color-accent-focus);
+            }
+
     .table-custom tbody td {
         background-color: #fde5e3;
         padding: 12px 16px;
@@ -338,7 +341,6 @@ footer {
         .table-custom tbody tr:hover td {
             background-color: #ffffff;
         }
-
 /*
    LOGIN AND REGISTER
 */
@@ -355,12 +357,9 @@ footer {
     margin-bottom: 25px;
     font-weight: 500;
 }
-
-
 /*
     EDIT PAGE
 */
-
 
 .edit-header {
     padding: 30px 20px 20px;
@@ -398,7 +397,7 @@ footer {
         }
 
     .edit-boxes .form-control {
-        border-radius: 100px !important; 
+        border-radius: 100px !important;
         text-align: center;
     }
 
@@ -410,10 +409,9 @@ footer {
     width: 100%;
 }
 
-/*
-    EDIT PAGE
+/* 
+    CREATE PAGE
 */
-
 
 .create-header {
     padding: 30px 20px 20px;
@@ -461,4 +459,61 @@ footer {
     align-items: center;
     margin-top: 24px;
     width: 100%;
+}
+
+/* 
+    PAGINATION
+*/
+
+.index-card {
+    box-shadow: none !important; 
+    background-color: transparent !important;
+    margin-bottom: 40px !important;
+}
+
+.index-card nav {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.index-card .pagination {
+    margin-bottom: 0;
+}
+
+
+.pagination .page-link {
+    background-color: var(--color-primary);
+    color: var(--text-light);
+    border: 1px solid var(--color-focus-border); 
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+
+    .pagination .page-link:hover,
+    .pagination .page-link:focus {
+        background-color: var(--color-primary);
+        color: var(--color-accent-focus) !important;
+        border-color: var(--color-focus-border);
+        box-shadow: none;
+        z-index: 2;
+    }
+
+
+.pagination .page-item.active .page-link {
+    background-color: var(--color-accent-red);
+    color: var(--text-light);
+    border-color: var(--color-focus-border);
+}
+
+.table-custom tbody {
+    min-height: 800px; 
+    display: table-row-group;
+}
+
+.index-card .p-0 {
+    min-height: 750px; 
 }

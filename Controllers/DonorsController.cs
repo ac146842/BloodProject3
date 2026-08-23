@@ -21,7 +21,6 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Donors
-        // GET: Answers
         public async Task<IActionResult> Index(
         string sortOrder,
         string currentFilter,
@@ -101,8 +100,6 @@ namespace BloodProject3.Controllers
         }
 
         // POST: Donors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DonorID,FirstName,LastName,Phone,DateOfBirth,BloodTypeID")] Donor donor)
@@ -137,12 +134,18 @@ namespace BloodProject3.Controllers
             {
                 return NotFound();
             }
+
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypes = new SelectList(bloodTypeList, "Value", "Text", donor.BloodTypeID);
+
             return View(donor);
         }
 
         // POST: Donors/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DonorID,FirstName,LastName,Phone,DateOfBirth,BloodTypeID")] Donor donor)
@@ -172,6 +175,14 @@ namespace BloodProject3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
+            {
+                Value = b.BloodTypeID.ToString(),
+                Text = b.SelectedBloodType.ToString()
+            }).ToList();
+            ViewBag.BloodTypes = new SelectList(bloodTypeList, "Value", "Text", donor.BloodTypeID);
+
             return View(donor);
         }
 

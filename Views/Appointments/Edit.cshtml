@@ -4,11 +4,9 @@
     ViewData["Title"] = "Edit Appointments";
 }
 
-
 <div class="edit-header">
     <h1>Edit details for Appointments</h1>
 </div>
-
 
 <div class="row">
     <div class="edit-boxes col-md-4">
@@ -16,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AppointmentID" />
 
-            <div class="form-group column-space">
+            <div class="form-group">
                 <label asp-for="DonorID" class="control-label">Donor</label>
                 <select asp-for="DonorID" class="form-control" asp-items="ViewBag.DonorList">
                     <option value="">-- Select Donor --</option>
@@ -24,7 +22,7 @@
                 <span asp-validation-for="DonorID" class="text-danger"></span>
             </div>
 
-            <div class="form-group column-space">
+            <div class="form-group">
                 <label asp-for="NurseID" class="control-label">Nurse</label>
                 <select asp-for="NurseID" class="form-control" asp-items="ViewBag.NurseList">
                     <option value="">-- Select Nurse --</option>
@@ -32,25 +30,31 @@
                 <span asp-validation-for="NurseID" class="text-danger"></span>
             </div>
 
-            <div class="form-group column-space">
+            <div class="form-group">
                 <label asp-for="AppointmentDateTime" class="control-label">Appointment Date & Time</label>
-                <input asp-for="AppointmentDateTime" class="form-control" />
+                <input asp-for="AppointmentDateTime" class="form-control" type="datetime-local" />
                 <span asp-validation-for="AppointmentDateTime" class="text-danger"></span>
             </div>
 
-            <div class="form-group column-space">
+            <div class="form-group">
+                <label asp-for="DurationEndTime" class="control-label"></label>
+                <input asp-for="DurationEndTime" class="form-control" type="number" min="1" max="60" />
+                <span asp-validation-for="DurationEndTime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Location" class="control-label"></label>
                 <input asp-for="Location" class="form-control" />
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
 
-            <div class="form-group column-space">
+            <div class="form-group">
                 <label asp-for="TypeOfAppointment" class="control-label">Type Of Appointment</label>
                 <select asp-for="TypeOfAppointment" class="form-control" asp-items="Html.GetEnumSelectList<Appointment.AppointmentType>()"></select>
                 <span asp-validation-for="TypeOfAppointment" class="text-danger"></span>
             </div>
 
-            <div class="form-group column-space">
+            <div class="form-group">
                 <label asp-for="AppointmentStatus" class="control-label">Appointment Status</label>
                 <select asp-for="AppointmentStatus" class="form-control" asp-items="Html.GetEnumSelectList<Appointment.Status>()"></select>
                 <span asp-validation-for="AppointmentStatus" class="text-danger"></span>

@@ -42,8 +42,12 @@ namespace BloodProject3.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var MedicalForm = from s in _context.MedicalForm
-                          select s;
+            var MedicalForm = _context.MedicalForm
+                .Include(m => m.Nurse)
+                .Include(m => m.Appointment)
+                    .ThenInclude(a => a.Donor)
+                .AsQueryable();
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 MedicalForm = MedicalForm.Where(s => s.NurseID.ToString().Contains(searchString)
@@ -61,7 +65,7 @@ namespace BloodProject3.Controllers
                     break;
                 case "FormDate":
                     MedicalForm = MedicalForm.OrderBy(s => s.FormDate);
-                    break;        
+                    break;
                 default:
                     MedicalForm = MedicalForm.OrderBy(s => s.FormID);
                     break;

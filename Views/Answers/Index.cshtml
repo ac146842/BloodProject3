@@ -3,9 +3,7 @@
 @{
     ViewData["Title"] = "Answers";
 }
-
 <h1 class="index-header">Answers</h1>
-
 <div class="index-card shadow-sm border-0 rounded-3 overflow-hidden">
     <div class="p-0">
 
@@ -13,28 +11,28 @@
             <thead>
                 <tr>
                     <th>
-                        <a asp-action="Index"
-                           asp-route-sortOrder="@ViewData["NameSortParm"]">
-                            Form ID
-                        </a>
+                        Form ID
                     </th>
 
-                </th>
+                    <th>
+                        Questions
+                    </th>
 
-                <th>
-                    Questions
-                </th>
+                    <th>
+                        Donor
+                    </th>
 
-                <th>
-                    Donor
-                </th>
+                    <th>
+                        Answer
+                    </th>
 
-                <th>
-                    Answer
-                </th>
+                    <th>
+                        Answer Date
+                    </th>
 
-                <th>
-                    Answer Date
+                    <th class="text-end py-2">
+                        <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
+                    </th>
                 </tr>
             </thead>
 

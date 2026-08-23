@@ -45,8 +45,12 @@ namespace BloodProject3.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var DonatedBloods = from s in _context.DonatedBlood
-                          select s;
+            var DonatedBloods = _context.DonatedBlood
+                .Include(d => d.Appointment)
+                .Include(d => d.BloodType)
+                .Include(d => d.Donor)
+                .AsQueryable();
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 DonatedBloods = DonatedBloods.Where(s => s.DonationID.ToString().Contains(searchString)
@@ -58,8 +62,6 @@ namespace BloodProject3.Controllers
                                        || s.BloodStatus.ToString().Contains(searchString));
             }
 
-
-            //add both a default case and a case for each column
             switch (sortOrder)
             {
                 case "DonationID":

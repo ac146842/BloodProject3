@@ -27,8 +27,8 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="BloodTypeID" class="control-label"></label>
-                <input asp-for="BloodTypeID" class="form-control" />
+                <label asp-for="BloodTypeID" class="control-label">Blood Type</label>
+                <select asp-for="BloodTypeID" class="form-control" asp-items="ViewBag.BloodTypeID"></select>
                 <span asp-validation-for="BloodTypeID" class="text-danger"></span>
             </div>
 
@@ -46,7 +46,7 @@
 
             <div class="form-group">
                 <label asp-for="BloodStatus" class="control-label"></label>
-                <select asp-for="BloodStatus" class="form-control"></select>
+                <select asp-for="BloodStatus" class="form-control" asp-items="Html.GetEnumSelectList<Inventory.Status>()"></select>
                 <span asp-validation-for="BloodStatus" class="text-danger"></span>
             </div>
 
