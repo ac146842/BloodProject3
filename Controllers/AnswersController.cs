@@ -21,14 +21,15 @@ namespace BloodProject3.Controllers
             _context = context;
         }
 
-    // GET: Answers
-    public async Task<IActionResult> Index(
-    string sortOrder,
-    string currentFilter,
-    string searchString,
-    int? pageNumber)
+        // GET: Answers
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
-            ViewData["HealthQIDSortParm"] = sortOrder == "HealthQID" ? "healthqid_desc" : "HealthQID";
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["HealthQIDSortParm"] = String.IsNullOrEmpty(sortOrder) ? "healthqid_desc" : "";
             ViewData["DonorSortParm"] = sortOrder == "Donor" ? "donor_desc" : "Donor";
             ViewData["AnswersIDSortParm"] = sortOrder == "AnswersID" ? "answersid_desc" : "AnswersID";
             ViewData["AnswersTextSortParm"] = sortOrder == "AnswersText" ? "answerstext_desc" : "AnswersText";
@@ -47,6 +48,7 @@ namespace BloodProject3.Controllers
 
             var answers = from s in _context.Answers
                           select s;
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 answers = answers.Where(s => s.HealthQID.ToString().Contains(searchString)
@@ -58,20 +60,32 @@ namespace BloodProject3.Controllers
 
             switch (sortOrder)
             {
-                case "Questions":
-                    answers = answers.OrderBy(s => s.HealthQID);
+                case "healthqid_desc":
+                    answers = answers.OrderByDescending(s => s.HealthQID);
                     break;
                 case "Donor":
                     answers = answers.OrderBy(s => s.DonorID);
                     break;
+                case "donor_desc":
+                    answers = answers.OrderByDescending(s => s.DonorID);
+                    break;
                 case "AnswersID":
                     answers = answers.OrderBy(s => s.AnswersID);
+                    break;
+                case "answersid_desc":
+                    answers = answers.OrderByDescending(s => s.AnswersID);
                     break;
                 case "AnswersText":
                     answers = answers.OrderBy(s => s.AnswersText);
                     break;
+                case "answerstext_desc":
+                    answers = answers.OrderByDescending(s => s.AnswersText);
+                    break;
                 case "AnswerDate":
                     answers = answers.OrderBy(s => s.AnswerDate);
+                    break;
+                case "answerdate_desc":
+                    answers = answers.OrderByDescending(s => s.AnswerDate);
                     break;
                 default:
                     answers = answers.OrderBy(s => s.FormID);
