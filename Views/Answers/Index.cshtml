@@ -6,15 +6,19 @@
 
 <div>
     <h1 class="index-header">Answers</h1>
-    <form asp-action="Index" method="get">
-        <div class="form-actions no-color">
-            <p>
-                <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Search term" class="search"/>
-                <input type="submit" value="Search" class="btn btn-dark btn-outline-secondary" /> |
-                <a asp-action="Index" class="btn btn-dark btn-outline-secondary">Show full list</a>
-            </p>
-        </div>
-    </form>
+
+    <div class="search-form-container">
+        <form asp-action="Index" method="get">
+            <div class="searchWrapper">
+                <div>
+                    <a asp-action="Index" class="label">SHOW FULL LIST</a>
+                </div>
+                <div>
+                    <input id="searchInput" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Press enter to search" class="search" />
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="index-card shadow-sm border-0 rounded-3 overflow-hidden">
