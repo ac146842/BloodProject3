@@ -1,15 +1,11 @@
 ﻿@model BloodProject3.Models.Questions
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Questions";
 }
 <div class="edit-header">
-    <div>
-        <h1>Edit</h1>
-        <h3>Questions</h3>
-    </div>
+    <h1>Edit details for Questions</h1>
 </div>
-
 <div class="row">
     <div class="edit-boxes col-md-4">
         <form id="editForm" asp-action="Edit" class="edit-form">
@@ -21,6 +17,7 @@
                 <input asp-for="FormQuestions" class="form-control" />
                 <span asp-validation-for="FormQuestions" class="text-danger"></span>
             </div>
+
             <div class="edit-actions">
                 <button type="submit" form="editForm" class="btn btn-dark btn-outline-secondary">Save</button>
                 <a asp-action="Index" class="btn btn-dark btn-outline-secondary">Back to List</a>
@@ -34,3 +31,5 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+```

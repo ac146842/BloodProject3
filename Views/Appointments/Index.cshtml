@@ -3,11 +3,22 @@
 @{
     ViewData["Title"] = "Appointments";
 }
+<div>
+    <h1 class="index-header">Appointments</h1>
 
-<!-- fix only the time showing up on the index page -->
-
-<h1 class="index-header">Appointments</h1>
-
+    <div class="search-form-container">
+        <form asp-action="Index" method="get">
+            <div class="searchWrapper">
+                <div>
+                    <a asp-action="Index" class="label">SHOW FULL LIST</a>
+                </div>
+                <div>
+                    <input id="searchInput" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Press enter to search" class="search" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="index-card shadow-sm border-0 rounded-3 overflow-hidden">
     <div class="p-0">
         <table class="table table-custom mb-0">
@@ -26,7 +37,7 @@
                 {
                     <tr>
                         <td>
-                            @item.AppointmentDateTime.ToString("hh:mm tt")
+                            @item.AppointmentDateTime.ToString("dd/MM/yyyy hh:mm tt")
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Location)

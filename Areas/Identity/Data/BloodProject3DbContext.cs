@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BloodProject3.Models;
-using BloodProject3.Models;
 
 namespace BloodProject3.Areas.Identity.Data;
 

@@ -1,18 +1,10 @@
 ﻿@model BloodProject3.Models.DonatedBlood
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Donated Blood";
 }
 <div class="edit-header">
-    <div>
-        <h1>Edit</h1>
-        <h3>Donated Blood</h3>
-    </div>
-
-    <div class="edit-actions">
-        <button type="submit" form="editForm" class="btn-save">Save</button>
-        <a asp-action="Index" class="btn-back">Back to List</a>
-    </div>
+    <h1>Edit details for Donated Blood</h1>
 </div>
 <div class="row">
     <div class="edit-boxes col-md-4">
@@ -75,3 +67,5 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+```

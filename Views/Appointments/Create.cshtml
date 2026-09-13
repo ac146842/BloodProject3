@@ -1,66 +1,39 @@
 ﻿@model BloodProject3.Models.Appointment
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Appointments";
 }
-
-<h1>Create</h1>
-<h4>Appointment</h4>
-<hr />
+<div class="create-header">
+    <h1>Create page for Appointments</h1>
+</div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="create-boxes col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
             <div class="form-group">
                 <label asp-for="DonorID" class="control-label">Donor</label>
                 <select asp-for="DonorID" class="form-control" asp-items="ViewBag.DonorList">
-                    <option value="">-- Select a Donor --</option>
+                    <option value="">-- Select Donor --</option>
                 </select>
                 <span asp-validation-for="DonorID" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <label asp-for="NurseID" class="control-label">Nurse</label>
-                <select asp-for="NurseID" class="form-control" asp-items="ViewBag.NurseList">
-                    <option value="">-- Select a Nurse --</option>
-                </select>
-                <span asp-validation-for="NurseID" class="text-danger"></span>
-            </div>
-
             <div class="form-group">
                 <label asp-for="AppointmentDateTime" class="control-label"></label>
-                <input asp-for="AppointmentDateTime" class="form-control" />
+                <input asp-for="AppointmentDateTime" class="form-control" type="datetime-local" />
                 <span asp-validation-for="AppointmentDateTime" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="TypeOfAppointment" class="control-label"></label>
-                <select asp-for="TypeOfAppointment" class="form-control" asp-items="Html.GetEnumSelectList<BloodProject3.Models.Appointment.AppointmentType>()"></select>
-                <span asp-validation-for="TypeOfAppointment" class="text-danger"></span>
-            </div>
-
             <div class="form-group">
                 <label asp-for="AppointmentStatus" class="control-label"></label>
-                <select asp-for="AppointmentStatus" class="form-control" asp-items="Html.GetEnumSelectList<BloodProject3.Models.Appointment.Status>()"></select>
+                <select asp-for="AppointmentStatus" class="form-control" asp-items="Html.GetEnumSelectList<Appointment.Status>()"></select>
                 <span asp-validation-for="AppointmentStatus" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="create-actions">
+                <input type="submit" value="Create" class="btn btn-dark btn-outline-secondary" />
+                <a asp-action="Index" class="btn btn-dark btn-outline-secondary">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

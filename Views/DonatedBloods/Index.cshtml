@@ -3,9 +3,22 @@
 @{
     ViewData["Title"] = "Donated Blood";
 }
+<div>
+    <h1 class="index-header">Donated Blood</h1>
 
-<h1 class="index-header">Donated Blood</h1>
-
+    <div class="search-form-container">
+        <form asp-action="Index" method="get">
+            <div class="searchWrapper">
+                <div>
+                    <a asp-action="Index" class="label">SHOW FULL LIST</a>
+                </div>
+                <div>
+                    <input id="searchInput" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Press enter to search" class="search" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="index-card shadow-sm border-0 rounded-3 overflow-hidden">
     <div class="p-0">
         <table class="table table-custom mb-0">
@@ -20,7 +33,7 @@
                     <th>Blood Status</th>
 
                     <th class="text-end align-middle py-2">
-                        <a asp-action="Create" class="btn btn-dark btn-outline-secondary" style="max-height: 38px !important; white-space: nowrap !important; height: auto !important;">+ Create New</a>
+                        <a asp-action="Create" class="btn btn-dark btn-outline-secondary" style="max-height: 38px !important; white-space: nowrap !important; height: auto !important; ">+ Create New</a>
                     </th>
                 </tr>
             </thead>
@@ -32,7 +45,7 @@
                         <td>
                             @if (item.Appointment != null)
                             {
-                                @item.Appointment.AppointmentDateTime.ToString("hh:mm tt")
+                                @item.Appointment.AppointmentDateTime.ToString("dd/MM/yyyy hh:mm tt")
                                 <small class="text-dark">@item.Appointment.Location</small>
                             }
                             else

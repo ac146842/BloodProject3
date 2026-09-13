@@ -3,9 +3,22 @@
 @{
     ViewData["Title"] = "Medical Forms";
 }
+<div>
+    <h1 class="index-header">Medical Forms</h1>
 
-<h1 class="index-header">Medical Forms</h1>
-
+    <div class="search-form-container">
+        <form asp-action="Index" method="get">
+            <div class="searchWrapper">
+                <div>
+                    <a asp-action="Index" class="label">SHOW FULL LIST</a>
+                </div>
+                <div>
+                    <input id="searchInput" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Press enter to search" class="search" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="index-card shadow-sm border-0 rounded-3 overflow-hidden">
     <div class="p-0">
 
@@ -35,8 +48,18 @@
                             @Html.DisplayFor(modelItem => item.Nurse.LastName)
                         </td>
                         <td>
-                            @item.Appointment.Donor.FirstName @item.Appointment.Donor.LastName
-                            (@item.Appointment.AppointmentDateTime.ToString("dd/MM/yyyy"))
+                            @if (item.Appointment?.Donor != null)
+                            {
+                                @item.Appointment.Donor.FirstName @item.Appointment.Donor.LastName
+                            }
+                            else
+                            {
+                                <span class="text-muted">N/A</span>
+                            }
+                            @if (item.Appointment != null)
+                            {
+                                @:(@item.Appointment.AppointmentDateTime.ToString("dd/MM/yyyy"))
+                            }
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.FormDate)

@@ -1,13 +1,13 @@
 ﻿@model BloodProject3.Models.Donor
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Donor";
 }
-<h1>Create</h1>
-<h4>Donor</h4>
-<hr />
+<div class="create-header">
+    <h1>Create page for Donor</h1>
+</div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="create-boxes col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
+                <input asp-for="DateOfBirth" class="form-control" type="date" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -39,17 +39,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="LastDonationDate" class="control-label"></label>
-                <input asp-for="LastDonationDate" class="form-control" />
+                <input asp-for="LastDonationDate" class="form-control" type="date" />
                 <span asp-validation-for="LastDonationDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="create-actions">
+                <input type="submit" value="Create" class="btn btn-dark btn-outline-secondary" />
+                <a asp-action="Index" class="btn btn-dark btn-outline-secondary">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
