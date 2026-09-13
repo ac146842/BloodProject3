@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace BloodProject3.Controllers
 {
     public class AnswersController : Controller
@@ -45,12 +46,16 @@ namespace BloodProject3.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var answers = from s in _context.Answers
-                          select s;
+            var answers = _context.Answers
+                .Include(a => a.Questions)
+                .Include(a => a.Donor)
+                .AsQueryable();
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                answers = answers.Where(s => s.HealthQID.ToString().Contains(searchString)
+                answers = answers.Where(s => (s.Questions != null && s.Questions.FormQuestions.Contains(searchString))
+                                       || (s.Donor != null && (s.Donor.FirstName.Contains(searchString) || s.Donor.LastName.Contains(searchString)))
+                                       || s.HealthQID.ToString().Contains(searchString)
                                        || s.DonorID.ToString().Contains(searchString)
                                        || s.AnswersID.ToString().Contains(searchString)
                                        || s.AnswersText.Contains(searchString)
@@ -95,8 +100,6 @@ namespace BloodProject3.Controllers
             return View(await PaginatedList<Answers>.CreateAsync(answers.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
-
-
         // GET: Answers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -106,6 +109,8 @@ namespace BloodProject3.Controllers
             }
 
             var answers = await _context.Answers
+                .Include(a => a.Questions)
+                .Include(a => a.Donor)
                 .FirstOrDefaultAsync(m => m.AnswersID == id);
             if (answers == null)
             {
@@ -118,12 +123,11 @@ namespace BloodProject3.Controllers
         // GET: Answers/Create
         public IActionResult Create()
         {
+            ViewData["HealthQID"] = new SelectList(_context.Questions, "HealthQID", "FormQuestions");
             return View();
         }
 
         // POST: Answers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AnswersID,FormID,HealthQID,DonorID,AnswersText,AnswerDate")] Answers answers)
@@ -134,6 +138,7 @@ namespace BloodProject3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["HealthQID"] = new SelectList(_context.Questions, "HealthQID", "FormQuestions", answers.HealthQID);
             return View(answers);
         }
 
@@ -155,8 +160,6 @@ namespace BloodProject3.Controllers
         }
 
         // POST: Answers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AnswersID,FormID,HealthQID,DonorID,AnswersText,AnswerDate")] Answers answers)
@@ -199,6 +202,8 @@ namespace BloodProject3.Controllers
             }
 
             var answers = await _context.Answers
+                .Include(a => a.Questions)
+                .Include(a => a.Donor)
                 .FirstOrDefaultAsync(m => m.AnswersID == id);
             if (answers == null)
             {
