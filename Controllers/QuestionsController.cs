@@ -10,29 +10,36 @@ using BloodProject3.Models;
 
 namespace BloodProject3.Controllers
 {
+    // A controller to manage all CRUD functionality for the Questions model.
     public class QuestionsController : Controller
     {
+        // Database context field for access with stored records
         private readonly BloodProject3DbContext _context;
 
+        // A constructor to inject the database context into the controller
         public QuestionsController(BloodProject3DbContext context)
         {
             _context = context;
         }
 
         // GET: Questions
+        // Displays a list of question records.
         public async Task<IActionResult> Index()
         {
             return View(await _context.Questions.ToListAsync());
         }
 
         // GET: Questions/Details/5
+        // Displays details for a single question record by its ID
         public async Task<IActionResult> Details(int? id)
         {
+            // Returns 404 error if no ID is passed
             if (id == null)
             {
                 return NotFound();
             }
 
+            // Find matching question record
             var questions = await _context.Questions
                 .FirstOrDefaultAsync(m => m.HealthQID == id);
             if (questions == null)
@@ -44,18 +51,19 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Questions/Create
+        // Displays the form for adding new question details
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Questions/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Handles form submission to save a new question record to the database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("HealthQID,FormQuestions")] Questions questions)
         {
+            // Save question if all user inputs pass model validation
             if (ModelState.IsValid)
             {
                 _context.Add(questions);
@@ -66,6 +74,7 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Questions/Edit/5
+        // Displays the form to edit an existing question record
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,8 +91,7 @@ namespace BloodProject3.Controllers
         }
 
         // POST: Questions/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Handles saving updated question details
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("HealthQID,FormQuestions")] Questions questions)
@@ -102,6 +110,7 @@ namespace BloodProject3.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    // Checks if record was deleted by another user during edit
                     if (!QuestionsExists(questions.HealthQID))
                     {
                         return NotFound();
@@ -117,6 +126,7 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Questions/Delete/5
+        // Displays confirmation screen prior to deleting a record
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,6 +134,7 @@ namespace BloodProject3.Controllers
                 return NotFound();
             }
 
+            // Find matching question record
             var questions = await _context.Questions
                 .FirstOrDefaultAsync(m => m.HealthQID == id);
             if (questions == null)
@@ -135,6 +146,7 @@ namespace BloodProject3.Controllers
         }
 
         // POST: Questions/Delete/5
+        // Handles permanently removing a question record
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -149,6 +161,7 @@ namespace BloodProject3.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Helper method to verify if a question record exists in the database
         private bool QuestionsExists(int id)
         {
             return _context.Questions.Any(e => e.HealthQID == id);
