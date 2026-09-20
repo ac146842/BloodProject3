@@ -1,144 +1,175 @@
 ﻿<style>
+    /* Google Font Import (Must be at the top of the stylesheet) */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    /* CSS Variables & Global Settings */
     :root {
-        /* Primary Colors */
+        /* Default body text color */
         --colour-text: #495057;
-        /* TEXT  */
-        @@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    }
 
-        .header-container,
-        .card,
-        .bottom-container,
-        .abt, 
-        .bottom-card,
-        .blood-list {
-            color: var(--colour-text);
-            font-weight: 600;
-            letter-spacing: 0.5px;
+    /* Apply global font family and default text styles */
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+
+    .header-container,
+    .card,
+    .bottom-container,
+    .about-heading,
+    .bottom-card,
+    .blood-list {
+        color: var(--colour-text);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    /* UPPER PAGE SECTION */
+
+    /* Outer wrapper for the main header text */
+    .header-container {
+        padding: 40px 20px;
+        margin: 2rem auto;
+        max-width: 1100px;
+        width: 100%;
+    }
+
+    /* Main heading styling */
+    .main-heading {
+        font-family: sans-serif;
+        font-weight: 700;
+        font-size: 30px;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Introduction paragraph text */
+    .donation-description {
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        font-family: sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        max-width: 65ch;
+    }
+
+    /* IMAGE CAROUSEL SECTION */
+
+    /* Carousel container constraints */
+    .carousel-container {
+        margin: 3rem auto 2rem auto;
+        width: 100%;
+        max-width: 1100px;
+        padding: 0 1rem;
+    }
+
+    /* Forces carousel images size */
+    .carousel-inner img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    /* FEATURE CARDS SECTION */
+
+    /* Flexbox wrapper */
+    .cards-container {
+        display: flex;
+        justify-content: center;
+        margin: 3rem auto 0 auto;
+        max-width: 1100px;
+        padding: 20px 10px 50px;
+        gap: 20px;
+        flex-wrap: wrap; /* Allows cards to stack cleanly on smaller screens */
+    }
+
+    /* Card container styling */
+    .card {
+        display: flex;
+        flex-direction: column;
+        background-color: #ffffff;
+        padding: 40px 25px;
+        flex: 1 1 300px; /* Allows cards to shrink/grow responsively */
+        max-width: 350px;
+        border-radius: 12px;
+        border: 1px solid #cccccc;
+        box-sizing: border-box;
+    }
+
+        /* Card titles */
+        .card h1 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
         }
 
-        /* UPPER PAGE CONTENTS */
-        .header-container {
-            padding: 40px 20px;
-            margin: 2rem auto;
-            max-width: 1100px;
-            width: 100%;
+        /* Card body text */
+        .card p, .card li {
+            line-height: 1.4;
+            font-size: 0.85rem;
         }
 
-        .Header1 {
-            font-family: sans-serif;
-            font-weight: 700;
-            font-size: 30px;
-            margin-bottom: 1.5rem;
-        }
-
-        .DonationP {
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            font-family: sans-serif;
-            font-size: 15px;
-            line-height: 1.6;
-            max-width: 65ch;
-        }
-        /* CAROUSEL */
-        .Carouselcontainer {
-            margin: 3rem auto 2rem auto;
-            width: 100%;
-            max-width: 1100px;
-            padding: 0 1rem;
-        }
-
-        .carousel-inner img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        /* CARDS */
-        .CardsContainer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 3rem;
-            padding: 20px 10px 50px;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            display: flex;
-            flex-direction: column;
-            background-color: #ffffff;
-            padding: 50px 25px;
-            flex: 1;
-            border-radius: 12px;
-            border: 1px solid #cccccc;
-            width: 400px;
-            height: 350px;
-            aspect-ratio: 1 / 1;
-        }
-
-            .card h1 {
-                font-size: 1.4rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .card p, .card li {
-                line-height: 1.4;
-                font-size: 0.85rem;
-            }
-
-            .card ul {
-                padding-left: 1.2rem;
-                margin: 0;
-            }
-        /* BOTTOM SECTION */
-        .abt {
-            margin-top: 3rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .bottom-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin: 5rem auto 4rem auto;
-            max-width: 1100px;
-            padding: 0 1rem;
-            gap: 2rem;
-        }
-
-        .columntext {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            flex: 1;
-        }
-
-        .about {
-            max-width: 50ch;
-            font-size: 1.25rem;
-            line-height: 1.6;
-        }
-
-        .card.bottom-card {
-            max-width: 45ch;
-            width: 100%;
-            flex-shrink: 0;
-            height: auto;
-            min-height: 20rem;
-        }
-
-        .blood-list {
-            list-style-type: none;
-            padding: 0;
+        /* Card bullet points */
+        .card ul {
+            padding-left: 1.2rem;
             margin: 0;
         }
 
-            .blood-list li {
-                padding: 8px 0;
-                border-bottom: 1px solid #eee;
-                font-size: 0.9rem;
-            }
+    /* BOTTOM SECTION & BLOOD LIST */
+
+    /* Bottom section header */
+    .about-heading {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    /* Bottom content */
+    .bottom-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 5rem auto 4rem auto;
+        max-width: 1100px;
+        padding: 0 1rem;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    /* Left side paragraph */
+    .column-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        flex: 1 1 300px;
+    }
+
+    /* Text block constraint */
+    .about-text {
+        max-width: 50ch;
+        font-size: 1.25rem;
+        line-height: 1.6;
+    }
+
+    /* Bottom card styling */
+    .card.bottom-card {
+        max-width: 45ch;
+        width: 100%;
+        flex: 1 1 300px;
+        height: auto;
+        min-height: 20rem;
+    }
+
+    /* Blood types list styling */
+    .blood-list {
+        list-style-type: none; /* Removes default bullet points */
+        padding: 0;
+        margin: 0;
+    }
+
+        /* Individual blood type item row */
+        .blood-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
         }
 </style>
 
@@ -146,125 +177,139 @@
     ViewData["Title"] = "Home Page";
 }
 
+<!-- INTRO SECTION -->
+<div class="header-container">
+    <div>
+        <h1 class="main-heading">Donations save lives.</h1>
+    </div>
+    <div>
+        <p class="donation-description">
+            Every drop of blood goes towards someone in need.
+            Blood cannot be synthetically made, and patients rely
+            entirely on donors for everything ranging from surgeries
+            to blood disorders. By donating, you provide doctors to
+            help patients and individuals a second chance at life.
+            A single donation takes less than an hour but can save up
+            to three lives!
+        </p>
+    </div>
+</div>
 
-
-        <div class="header-container">
-            <div>
-                <h1 class="Header1">Donations save lives.</h1>
-            </div>
-
-            <div>
-                <p class="DonationP">
-                    Every drop of blood goes towards someone in need.
-                    Blood cannot be synthetically made, and patients rely
-                    entirely on donors for everything ranging from surgeries
-                    to blood disorders. By donating, you provide doctors to
-                    help patients and individuals a second chance at life.
-                    A single donation takes less than an hour but can save up
-                    to three lives!
-                </p>
-            </div>
-        </div>
-
-
-        <div class="Carouselcontainer">
-            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active" data-bs-interval="4000">
+<!-- IMAGE CAROUSEL SECTION (Bootstrap) -->
+<div class="carousel-container">
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active" data-bs-interval="4000">
                 <img src="~/Images/Untitled-1.jpg" class="d-block w-100" alt="N1">
-                    </div>
-                    <div class="carousel-item" data-bs-interval="4000">
-                        <img src="~/Images/picture.jpg" class="d-block w-100" alt="N2">
-                    </div>
-                    <div class="carousel-item" data-bs-interval="4000">
-                        <img src="~/Images/set-of-illustration-of-smiling-nurse-holding-a-clipboard-international-nurses-day-concept-vector.jpg" class="d-block w-100" alt="N3">
-                    </div>
-                    <div class="carousel-item" data-bs-interval="4000">
-                        <img src="~/Images/free-child-blood-type-chart-ts3ks.jpeg" class="d-block w-100" alt="N4">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item" data-bs-interval="4000">
+                <img src="~/Images/picture.jpg" class="d-block w-100" alt="N2">
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item" data-bs-interval="4000">
+                <img src="~/Images/set-of-illustration-of-smiling-nurse-holding-a-clipboard-international-nurses-day-concept-vector.jpg" class="d-block w-100" alt="N3">
+            </div>
+            <!-- Slide 4 -->
+            <div class="carousel-item" data-bs-interval="4000">
+                <img src="~/Images/free-child-blood-type-chart-ts3ks.jpeg" class="d-block w-100" alt="N4">
             </div>
         </div>
 
-        <div class="CardsContainer">
-            <div class="card">
-                <h1>Preparation</h1>
-                <p>
-                    Please bring a valid form of ID and fill out a Donor details form.
-                    Completing the form ensures your health information is complete and
-                    you consent to testing.
-                </p>
-            </div>
-            <div class="card">
-                <h1>Health Assessment</h1>
-                <p>
-                    After you've completed the form, a finger prick test will be needed in
-                    order to check your haemoglobin level. This is a confidential process
-                    and no one may  accompany you except children under the age of 5. This
-                    is to ensure the interview will be done in a consistent manner and free
-                    from any external influence.
-                </p>
-            </div>
-            <div class="card">
-                <h1>Eligibility Criteria</h1>
-                <ul>
-                    <li>New donors can donate blood between the ages 16 and 71</li>
-                    <li>Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer</li>
-                    <li>You must weigh 50 kg or more and be atleast 150 cm tall</li>
-                    <li>You must be in good health at the time you donate</li>
-                    <li>You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)</li>
-                </ul>
-            </div>
+        <!-- Carousel nav buttons-->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<!-- INFORMATION SECTION -->
+<div class="cards-container">
+    <!-- Requirements cards-->
+    <div class="card">
+        <h1>Preparation</h1>
+        <p>
+            Please bring a valid form of ID and fill out a Donor details form.
+            Completing the form ensures your health information is complete and
+            you consent to testing.
+        </p>
+    </div>
+
+    <!-- Assessment process -->
+    <div class="card">
+        <h1>Health Assessment</h1>
+        <p>
+            After you've completed the form, a finger prick test will be needed in
+            order to check your haemoglobin level. This is a confidential process
+            and no one may accompany you except children under the age of 5. This
+            is to ensure the interview will be done in a consistent manner and free
+            from any external influence.
+        </p>
+    </div>
+
+    <!-- Eligibility cards -->
+    <div class="card">
+        <h1>Eligibility Criteria</h1>
+        <ul>
+            <li>New donors can donate blood between the ages 16 and 71</li>
+            <li>Existing donors can donate until 75 and may continue until 81 with consent from a NZBS Medical Officer</li>
+            <li>You must weigh 50 kg or more and be atleast 150 cm tall</li>
+            <li>You must be in good health at the time you donate</li>
+            <li>You must wait 3 months if you've recently had a tattoo (including cosmetic tattoos)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION HEADING -->
+<div class="about-heading">
+    <h1>All blood types can donate blood!</h1>
+</div>
+
+<!-- BOTTOM SECTION -->
+<div class="bottom-container">
+    <!-- Blood facts-->
+    <div class="column-text">
+        <div class="about-text">
+            <p>
+                Anybody can donate blood, with O
+                negative being the only bloodtype
+                that can be safely given to anybody!
+                This is because O negative have no antigens
+                in their blood red cells, causing no reaction
+                in other peoples immune system. This makes it
+                essential for emergency situations.
+            </p>
         </div>
 
-        <div class="abt">
-            <h1>All blood types can donate blood!</h1>
+        <div class="about-text">
+            <p>
+                Approximately 6% to 8% of the world's population has
+                O-negative (O-) blood making it quite rare compared
+                to other blood types making up 13% of hospital blood requests.
+            </p>
         </div>
+    </div>
 
-        <div class="bottom-container">
-            <div class="columntext">
-                <div class="about">
-                    <p>
-                        Anybody can donate blood, with O
-                        negative being the only bloodtype
-                        that can be safely given to anybody!
-                        This is because O negative have no antigens
-                        in their blood red cells, causing no reaction
-                        in other peoples immune system. This makes it
-                        essential for emergency situations.
-                    </p>
-                </div>
-
-                <div class="about">
-                    <p>
-                        Approximately 6% to 8% of the world's population has
-                        O-negative (O-) blood making it quite rare compared
-                        to other blood types making up 13% of hospital blood requests.
-                    </p>
-                </div>
-            </div>
-
-            <div class="card bottom-card">
-                <div>
-                    <h1>BLOOD TYPES</h1>
-                    <ul class="blood-list">
-                        <li>A Positive (A+)</li>
-                        <li>A Negative (A-)</li>
-                        <li>B Positive (B+)</li>
-                        <li>B Negative (B-)</li>
-                        <li>AB Positive (AB+)</li>
-                        <li>AB Negative (AB-)</li>
-                        <li>O Positive (O+)</li>
-                        <li>O Negative (O-)</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Card displaying all blood types -->
+    <div class="card bottom-card">
+        <div>
+            <h1>BLOOD TYPES</h1>
+            <ul class="blood-list">
+                <li>A Positive (A+)</li>
+                <li>A Negative (A-)</li>
+                <li>B Positive (B+)</li>
+                <li>B Negative (B-)</li>
+                <li>AB Positive (AB+)</li>
+                <li>AB Negative (AB-)</li>
+                <li>O Positive (O+)</li>
+                <li>O Negative (O-)</li>
+            </ul>
         </div>
+    </div>
+</div>
