@@ -31,6 +31,7 @@ namespace BloodProject3.Controllers
             string searchString,
             int? pageNumber)
         {
+
             // Stores the current sorting parameter
             ViewData["CurrentSort"] = sortOrder;
 
@@ -54,9 +55,11 @@ namespace BloodProject3.Controllers
             // Saves the current search filter
             ViewData["CurrentFilter"] = searchString;
 
-            // Fetches initial appointment records as a queryable collection
-            var appointment = from s in _context.Appointment
-                              select s;
+            // Fetches initial appointment records as a queryable collection with the donor included
+            IQueryable<Appointment> appointment = _context.Appointment
+                                                  .Include(s => s.Donor);
+
+
 
             // Searches across appointment fields if a search term is entered
             if (!String.IsNullOrEmpty(searchString))
@@ -200,7 +203,7 @@ namespace BloodProject3.Controllers
         }
 
         // POST: Appointments/Delete/5
-        // Confirms and executes removal of the appointment record from the database
+        // Removes the appointment record from the database
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
