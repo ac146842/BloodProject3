@@ -16,9 +16,12 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-DbInitialiser.AddData(app); // calls adddata method to seed the database
+// Calls the AddData method to seed the database
+DbInitialiser.AddData(app); 
 
-using (var scope = app.Services.CreateScope()) // creates admin role if it doesn't exist
+
+// Creates the "Admin" user role if it doesn't exist yet
+using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -26,19 +29,22 @@ using (var scope = app.Services.CreateScope()) // creates admin role if it doesn
         await roleManager.CreateAsync(new IdentityRole("Admin"));
 }
 
+// Creates an Admin account if one doesn't exist yet, or ensures the existing account has the correct details
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
+    // Admin account details
     string adminID = "00000000000";
     string adminEmail = "BDstaff@org.nz";
     string adminPassword = "BloodDonation@123";
 
-    // searches by id first
+    // Checks to see if the Admin account already exists using the adminID
     var existingUser = await userManager.FindByIdAsync(adminID);
 
     if (existingUser == null)
     {
+        // Sets up a new admin user account with it's details
         var user = new User
         {
             Id = adminID,
@@ -49,6 +55,7 @@ using (var scope = app.Services.CreateScope())
             LastName = "Admin"  
         };
 
+        // Creates the user in the database and gives the user the "Admin" role
         var result = await userManager.CreateAsync(user, adminPassword);
         if (result.Succeeded)
         {
@@ -57,8 +64,7 @@ using (var scope = app.Services.CreateScope())
     }
     else
     {
-        // If user exists, ensures details are correct
-        // Uses the 'existingUser' object because EF is already tracking it
+        // If the user exists but lost the Admin role, this gives it back to them
         if (!await userManager.IsInRoleAsync(existingUser, "Admin"))
         {
             await userManager.AddToRoleAsync(existingUser, "Admin");
