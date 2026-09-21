@@ -27,6 +27,7 @@ namespace BloodProject3.Controllers
 
         // GET: Inventories
         // Displays a paginated, searchable, and sortable list of inventory records, including related blood type information.
+        [HttpGet]
         public async Task<IActionResult> Index(
         string sortOrder,
         string currentFilter,
@@ -116,6 +117,7 @@ namespace BloodProject3.Controllers
 
         // GET: Inventories/Details/5
         // Displays details for a single inventory record by its ID
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             // Returns 404 error if no ID is passed
@@ -138,6 +140,7 @@ namespace BloodProject3.Controllers
 
         // GET: Inventories/Create
         // Displays the form for adding new blood stock and populates blood type drop-down
+        [HttpGet]
         public IActionResult Create()
         {
             var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem
@@ -152,7 +155,6 @@ namespace BloodProject3.Controllers
         // POST: Inventories/Create
         // Handles form submission to save a new inventory record to the database
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BloodBankID,DonationID,BloodTypeID,CurrentVolumeML,StorageLocation,BloodStatus")] Inventory inventory)
         {
             // Save inventory if all user inputs pass model validation
@@ -174,6 +176,7 @@ namespace BloodProject3.Controllers
 
         // GET: Inventories/Edit/5
         // Displays the form to edit an existing inventory record
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -199,7 +202,6 @@ namespace BloodProject3.Controllers
         // POST: Inventories/Edit/5
         // Handles saving updated inventory details
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BloodBankID,DonationID,BloodTypeID,CurrentVolumeML,StorageLocation,BloodStatus")] Inventory inventory)
         {
             if (id != inventory.BloodBankID)
@@ -239,6 +241,7 @@ namespace BloodProject3.Controllers
 
         // GET: Inventories/Delete/5
         // Displays confirmation screen prior to deleting a record
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -260,8 +263,7 @@ namespace BloodProject3.Controllers
 
         // POST: Inventories/Delete/5
         // Handles permanently removing an inventory record
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var inventory = await _context.Inventory.FindAsync(id);

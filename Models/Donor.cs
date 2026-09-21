@@ -1,7 +1,8 @@
 ﻿using BloodProject3.Validation;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace BloodProject3.Models
 {
     public class Donor
@@ -10,7 +11,7 @@ namespace BloodProject3.Models
         [Display(Name = "Donor ID")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonorID { get; set; }
-        
+
         [Required(ErrorMessage = "First name is required.")] //required to be filled
         [StringLength(50)] //max 50 characters
         [Display(Name = "First Name")] // display as "First Name" in the UI
@@ -39,7 +40,7 @@ namespace BloodProject3.Models
         [ForeignKey("BloodTypeID")]
         [Display(Name = "Blood Type ID")]
         public int BloodTypeID { get; set; }
-        public virtual BloodType BloodType { get; set; }
+        public virtual BloodType? BloodType { get; set; }
 
 
         [DataType(DataType.Date)] //ensures input is a valid date format
@@ -47,7 +48,7 @@ namespace BloodProject3.Models
         [NoFutureDate(ErrorMessage = "Last donation date cannot be set in the future.")]
         public DateTime? LastDonationDate { get; set; }
 
-        public virtual ICollection<DonatedBlood> DonatedBloods { get; set; }
+        public virtual ICollection<DonatedBlood>? DonatedBloods { get; set; }
 
     }
 }

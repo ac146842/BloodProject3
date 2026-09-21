@@ -26,6 +26,7 @@ namespace BloodProject3.Controllers
 
         // GET: Questions
         // Displays a list of question records.
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Questions.ToListAsync());
@@ -33,6 +34,7 @@ namespace BloodProject3.Controllers
 
         // GET: Questions/Details/5
         // Displays details for a single question record by its ID
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             // Returns 404 error if no ID is passed
@@ -54,6 +56,7 @@ namespace BloodProject3.Controllers
 
         // GET: Questions/Create
         // Displays the form for adding new question details
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -62,7 +65,6 @@ namespace BloodProject3.Controllers
         // POST: Questions/Create
         // Handles form submission to save a new question record to the database
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("HealthQID,FormQuestions")] Questions questions)
         {
             // Save question if all user inputs pass model validation
@@ -77,6 +79,7 @@ namespace BloodProject3.Controllers
 
         // GET: Questions/Edit/5
         // Displays the form to edit an existing question record
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,7 +98,6 @@ namespace BloodProject3.Controllers
         // POST: Questions/Edit/5
         // Handles saving updated question details
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("HealthQID,FormQuestions")] Questions questions)
         {
             if (id != questions.HealthQID)
@@ -129,6 +131,7 @@ namespace BloodProject3.Controllers
 
         // GET: Questions/Delete/5
         // Displays confirmation screen prior to deleting a record
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,8 +152,7 @@ namespace BloodProject3.Controllers
 
         // POST: Questions/Delete/5
         // Handles permanently removing a question record
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var questions = await _context.Questions.FindAsync(id);

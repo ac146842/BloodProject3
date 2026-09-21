@@ -27,6 +27,7 @@ namespace BloodProject3.Controllers
 
         // GET: Appointments
         // Displays a paginated, searchable, and sortable list of appointments
+        [HttpGet]
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -119,6 +120,7 @@ namespace BloodProject3.Controllers
 
         // GET: Appointments/Create
         // Opens creation form and displays dropdowns, combining the full names for Donors and Nurses
+        [HttpGet]
         public IActionResult Create()
         {
             ViewBag.DonorList = new SelectList(_context.Donor.Select(d => new { Id = d.DonorID, Name = $"{d.FirstName} {d.LastName}" }), "Id", "Name");
@@ -129,7 +131,6 @@ namespace BloodProject3.Controllers
         // POST: Appointments/Create
         // Saves a new appointment record to the database
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AppointmentID,DonorID,NurseID,AppointmentDateTime,Location,TypeOfAppointment,AppointmentStatus,DurationEndTime")] Appointment appointment)
         {
             if (ModelState.IsValid)
@@ -146,6 +147,7 @@ namespace BloodProject3.Controllers
 
         // GET: Appointments/Edit/5
         // Opens edit form populated with current appointment data and donor/nurse dropdowns
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -162,7 +164,6 @@ namespace BloodProject3.Controllers
         // POST: Appointments/Edit/5
         // Saves changes made to an existing appointment
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AppointmentID,DonorID,NurseID,AppointmentDateTime,Location,TypeOfAppointment,AppointmentStatus,DurationEndTime")] Appointment appointment)
         {
             if (id != appointment.AppointmentID) return NotFound();
@@ -190,6 +191,7 @@ namespace BloodProject3.Controllers
 
         // GET: Appointments/Delete/5
         // Shows confirmation view for removing an appointment
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -206,8 +208,7 @@ namespace BloodProject3.Controllers
 
         // POST: Appointments/Delete/5
         // Removes the appointment record from the database
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var appointment = await _context.Appointment.FindAsync(id);

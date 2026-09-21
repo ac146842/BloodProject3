@@ -27,6 +27,7 @@ namespace BloodProject3.Controllers
 
         // GET: DonatedBloods
         // Displays a paginated, searchable, and sortable list of donated blood records with linked details
+        [HttpGet]
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -109,6 +110,7 @@ namespace BloodProject3.Controllers
 
         // GET: DonatedBloods/Details/5
         // Displays details for a single donated blood record by its ID
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             // Return a 404 error if no ID is passed
@@ -134,6 +136,7 @@ namespace BloodProject3.Controllers
 
         // GET: DonatedBloods/Create
         // Displays the form for adding a new donation record and populates blood type drop-down
+        [HttpGet]
         public IActionResult Create()
         {
             // Populate drop-down selection list with blood types
@@ -150,7 +153,6 @@ namespace BloodProject3.Controllers
         // POST: DonatedBloods/Create
         // Handles form submission for making a new donation record and calculates dates automatically
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DonationID,AppointmentID,BloodTypeID,DonorID,VolumeML,BloodStatus")] DonatedBlood donatedBlood)
         {
             // Exclude auto-generated dates from validation check
@@ -182,6 +184,7 @@ namespace BloodProject3.Controllers
 
         // GET: DonatedBloods/Edit/5
         // Displays the form to edit an existing donation record
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -209,7 +212,6 @@ namespace BloodProject3.Controllers
         // POST: DonatedBloods/Edit/5
         // Handles saving updated donation details
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DonationID,AppointmentID,BloodTypeID,DonorID,CollectionDate,VolumeML,ExpiryDate,BloodStatus")] DonatedBlood donatedBlood)
         {
             // Ensures ID matches the edited model ID
@@ -252,6 +254,7 @@ namespace BloodProject3.Controllers
 
         // GET: DonatedBloods/Delete/5
         // Displays confirmation screen prior to deleting a record
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -276,8 +279,7 @@ namespace BloodProject3.Controllers
 
         // POST: DonatedBloods/Delete/5
         // Handles permanently removing a donation record
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var donatedBlood = await _context.DonatedBlood.FindAsync(id);

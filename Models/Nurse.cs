@@ -1,8 +1,8 @@
 ﻿using BloodProject3.Validation;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace BloodProject3.Models
 {
     public class Nurse
@@ -43,5 +43,8 @@ namespace BloodProject3.Models
         [Display(Name = "License Number")]
         [RegularExpression(@"^[A-Z]{2}\d{6}$", ErrorMessage = "License must be 2 uppercase letters followed by 6 digits.")]
         public string LicenseNumber { get; set; }
+
+        public virtual ICollection<Appointment>? Appointments { get; set; }
+        public virtual ICollection<MedicalForm>? MedicalForms { get; set; }
     }
 }

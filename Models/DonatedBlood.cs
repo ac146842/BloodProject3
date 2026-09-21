@@ -1,7 +1,7 @@
 ﻿using BloodProject3.Validation;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace BloodProject3.Models
 {
     public class DonatedBlood
@@ -24,19 +24,19 @@ namespace BloodProject3.Models
         [Display(Name = "Appointment ID")]
         [ForeignKey("AppointmentID")]
         public int AppointmentID { get; set; }
-        public virtual Appointment Appointment { get; set; }
+        public virtual Appointment? Appointment { get; set; }
 
         [Required]
         [Display(Name = "Blood Type ID")]
         [ForeignKey("BloodTypeID")] //required bloodtype id and fk
         public int BloodTypeID { get; set; }
-        public virtual BloodType BloodType { get; set; }
+        public virtual BloodType? BloodType { get; set; }
 
         [Required]
         [Display(Name = "Donor ID")]
         [ForeignKey("DonorID")] //required donor id and fk
         public int DonorID { get; set; }
-        public virtual Donor Donor { get; set; }
+        public virtual Donor? Donor { get; set; }
 
         [Required(ErrorMessage = "Collection date is required")] //required collectiondate
         [DataType(DataType.Date)] //ensures ui shows a date pickter

@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BloodProject3.Validation;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace BloodProject3.Models
 {
     public class Questions
@@ -13,5 +15,7 @@ namespace BloodProject3.Models
         [StringLength(500)]
         [Display(Name = "Questions")]
         public string FormQuestions { get; set; }
+
+        public virtual ICollection<Answers>? Answers { get; set; }
     }
 }

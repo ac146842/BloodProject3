@@ -27,6 +27,7 @@ namespace BloodProject3.Controllers
 
         // GET: Nurses
         // Displays a paginated, searchable, and sortable list of nurse records.
+        [HttpGet]
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -80,6 +81,7 @@ namespace BloodProject3.Controllers
 
         // GET: Nurses/Details/5
         // Displays details for a single nurse record by its ID
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             // Returns 404 error if no ID is passed
@@ -101,6 +103,7 @@ namespace BloodProject3.Controllers
 
         // GET: Nurses/Create
         // Displays the form for adding new nurse details
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -109,7 +112,6 @@ namespace BloodProject3.Controllers
         // POST: Nurses/Create
         // Handles form submission to save a new nurse record to the database
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("NurseID,FirstName,LastName,Phone,JobRole,EmployedStartDate,LicenseNumber")] Nurse nurse)
         {
             // Save nurse if all user inputs pass model validation
@@ -124,6 +126,7 @@ namespace BloodProject3.Controllers
 
         // GET: Nurses/Edit/5
         // Displays the form to edit an existing nurse record
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -142,7 +145,6 @@ namespace BloodProject3.Controllers
         // POST: Nurses/Edit/5
         // Handles saving updated nurse details
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("NurseID,FirstName,LastName,Phone,JobRole,EmployedStartDate,LicenseNumber")] Nurse nurse)
         {
             if (id != nurse.NurseID)
@@ -176,6 +178,7 @@ namespace BloodProject3.Controllers
 
         // GET: Nurses/Delete/5
         // Displays confirmation screen prior to deleting a record
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -196,8 +199,7 @@ namespace BloodProject3.Controllers
 
         // POST: Nurses/Delete/5
         // Handles permanently removing a nurse record
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var nurse = await _context.Nurse.FindAsync(id);

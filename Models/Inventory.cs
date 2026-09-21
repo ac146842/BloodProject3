@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BloodProject3.Models
@@ -24,13 +25,14 @@ namespace BloodProject3.Models
         [Display(Name = "Donation ID")]
         [ForeignKey("DonationID")]
         public int DonationID { get; set; }
+        public virtual DonatedBlood? DonatedBlood { get; set; }
 
         //fk and required field
         [Required]
         [Display(Name = "Blood Type ID")]
         [ForeignKey("BloodTypeID")]
         public int BloodTypeID { get; set; }
-        public virtual BloodType BloodType { get; set; }
+        public virtual BloodType? BloodType { get; set; }
 
         [Required(ErrorMessage = "Volume is required")] //required field with error message
         [Display(Name = "Current Volume (ML)")] // display as "Last Donation Date" in the UI
@@ -46,8 +48,5 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "Inventory status is required.")] //required to be filled
         [Display(Name = "Inventory Status")] // display as "Inventory Status" in the UI
         public Status BloodStatus { get; set; }
-
-        //add navigation property
-        //public virtual DonatedBlood DonatedBlood { get; set; }
     }
 }

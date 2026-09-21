@@ -27,6 +27,7 @@ namespace BloodProject3.Controllers
 
         // GET: Donors
         // Displays a paginated, searchable, and sortable list of donor records, including related information.
+        [HttpGet]
         public async Task<IActionResult> Index(
         string sortOrder,
         string currentFilter,
@@ -104,6 +105,7 @@ namespace BloodProject3.Controllers
 
         // GET: Donors/Create
         // Displays the form for adding a new donor and populates blood type drop-down
+        [HttpGet]
         public IActionResult Create()
         {
             // Populate drop-down selection list with blood types
@@ -120,7 +122,6 @@ namespace BloodProject3.Controllers
         // POST: Donors/Create
         // Handles form submission to save a new donor record to the database
         [HttpPost]
-        [ValidateAntiForgeryToken] // Prevents CSRF attacks
         public async Task<IActionResult> Create([Bind("DonorID,FirstName,LastName,Phone,DateOfBirth,BloodTypeID")] Donor donor)
         {
             // Saves donor if all user inputs pass model validation
@@ -144,6 +145,7 @@ namespace BloodProject3.Controllers
 
         // GET: Donors/Edit/5
         // Displays the form to edit an existing donor record
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             // Returns 404 error if no ID is passed
@@ -172,7 +174,6 @@ namespace BloodProject3.Controllers
         // POST: Donors/Edit/5
         // Handles saving updated donor details
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DonorID,FirstName,LastName,Phone,DateOfBirth,BloodTypeID")] Donor donor)
         {
             // Ensures ID matches the edited model ID
@@ -215,6 +216,7 @@ namespace BloodProject3.Controllers
 
         // GET: Donors/Delete/5
         // Displays confirmation screen prior to deleting a record
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -236,8 +238,7 @@ namespace BloodProject3.Controllers
 
         // POST: Donors/Delete/5
         // Handles permanently removing a donor record
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var donor = await _context.Donor.FindAsync(id);

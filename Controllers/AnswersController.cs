@@ -28,6 +28,7 @@ namespace BloodProject3.Controllers
 
         // GET: Answers
         // Displays a paginated, searchable, and sortable list of answer records, including related question and donor information.
+        [HttpGet]
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -116,6 +117,7 @@ namespace BloodProject3.Controllers
 
         // GET: Answers/Details/5
         // Displays details for a single answer record by its ID
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             // Return a 404 error if no ID is passed
@@ -140,6 +142,7 @@ namespace BloodProject3.Controllers
 
         // GET: Answers/Create
         // Displays the form for adding a new answer record and saves it to the database if valid
+        [HttpGet]
         public IActionResult Create()
         {
             // Populates a drop-down list with all available health questions
@@ -149,6 +152,7 @@ namespace BloodProject3.Controllers
 
         // POST: Answers/Create
         // Handles form creation to save a new answer record to the database
+        [HttpPost]
         public async Task<IActionResult> Create([Bind("AnswersID,FormID,HealthQID,DonorID,AnswersText,AnswerDate")] Answers answers)
         {
             // Saves answer if all user inputs pass model validation

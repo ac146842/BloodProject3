@@ -27,6 +27,7 @@ namespace BloodProject3.Controllers
 
         // GET: MedicalForms
         // Displays a paginated, searchable, and sortable list of medical form records, including related nurse and appointment information.
+        [HttpGet]
         public async Task<IActionResult> Index(
          string sortOrder,
          string currentFilter,
@@ -102,6 +103,7 @@ namespace BloodProject3.Controllers
 
         // GET: MedicalForms/Details/5
         // Displays details for a single medical form record by its ID
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             // Returns 404 error if no ID is passed
@@ -127,6 +129,7 @@ namespace BloodProject3.Controllers
 
         // GET: MedicalForms/Create
         // Displays the form for adding new medical form details and populates nurse drop-down
+        [HttpGet]
         public IActionResult Create()
         {
             var nurseList = _context.Nurse.ToList().Select(n => new SelectListItem
@@ -142,7 +145,6 @@ namespace BloodProject3.Controllers
         // POST: MedicalForms/Create
         // Handles form submission to save a new medical form record to the database
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FormID,NurseID,AppointmentID,FormDate")] MedicalForm medicalForm)
         {
             // Save medical form if all user inputs pass model validation
@@ -166,6 +168,7 @@ namespace BloodProject3.Controllers
 
         // GET: MedicalForms/Edit/5
         // Displays the form to edit an existing medical form record
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -196,7 +199,6 @@ namespace BloodProject3.Controllers
         // POST: MedicalForms/Edit/5
         // Handles saving updated medical form details
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("FormID,NurseID,AppointmentID,FormDate")] MedicalForm medicalForm)
         {
             if (id != medicalForm.FormID)
@@ -234,6 +236,7 @@ namespace BloodProject3.Controllers
 
         // GET: MedicalForms/Delete/5
         // Displays confirmation screen prior to deleting a record
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -256,8 +259,7 @@ namespace BloodProject3.Controllers
 
         // POST: MedicalForms/Delete/5
         // Handles permanently removing a medical form record
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var medicalForm = await _context.MedicalForm.FindAsync(id);

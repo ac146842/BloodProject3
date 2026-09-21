@@ -2,7 +2,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace BloodProject3.Models
 {
     public class Appointment
@@ -31,14 +30,14 @@ namespace BloodProject3.Models
         public int DonorID { get; set; }
 
         [ForeignKey("DonorID")]
-        public virtual Donor Donor { get; set; }
+        public virtual Donor? Donor { get; set; }
 
         [Required(ErrorMessage = "A nurse must be assigned.")]
         [Display(Name = "Nurse ID")]
         public int NurseID { get; set; }
 
         [ForeignKey("NurseID")]
-        public virtual Nurse Nurse { get; set; }
+        public virtual Nurse? Nurse { get; set; }
 
         [Required(ErrorMessage = "Please select a date and time.")]
         [DataType(DataType.DateTime)]

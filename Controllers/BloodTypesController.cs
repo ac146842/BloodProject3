@@ -26,6 +26,7 @@ namespace BloodProject3.Controllers
 
         // GET: BloodTypes
         // Displays a list of all available blood types
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.BloodType.ToListAsync());
@@ -33,6 +34,7 @@ namespace BloodProject3.Controllers
 
         // GET: BloodTypes/Details/5
         // Displays details for a single blood type record by its ID
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             // Return a 404 error if no ID is passed
@@ -54,6 +56,7 @@ namespace BloodProject3.Controllers
 
         // GET: BloodTypes/Create
         // Displays the form for adding a new blood type
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -62,7 +65,6 @@ namespace BloodProject3.Controllers
         // POST: BloodTypes/Create
         // Handles form submission to save a new blood type record to the database
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BloodTypeID,SelectedBloodType")] BloodType bloodType)
         {
             // Saves blood type if all user inputs pass model validation
@@ -77,6 +79,7 @@ namespace BloodProject3.Controllers
 
         // GET: BloodTypes/Edit/5
         // Displays the form to edit an existing blood type record
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,7 +98,6 @@ namespace BloodProject3.Controllers
         // POST: BloodTypes/Edit/5
         // Handles saving updated blood type details
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BloodTypeID,SelectedBloodType")] BloodType bloodType)
         {
             // Checks whether ID matches the edited model ID
@@ -130,6 +132,7 @@ namespace BloodProject3.Controllers
 
         // GET: BloodTypes/Delete/5
         // Displays confirmation screen prior to deleting a record
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,8 +152,7 @@ namespace BloodProject3.Controllers
 
         // POST: BloodTypes/Delete/5
         // Handles permanently removing a blood type record
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var bloodType = await _context.BloodType.FindAsync(id);

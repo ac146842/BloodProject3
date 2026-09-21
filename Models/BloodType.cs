@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace BloodProject3.Models
 {
@@ -26,5 +27,8 @@ namespace BloodProject3.Models
         [Required] //required field
         [Display(Name = "Blood Type")]
         public BloodGroup SelectedBloodType { get; set; }
+
+        // Navigation property for related donors
+        public virtual ICollection<Donor>? Donors { get; set; }
     }
 }
