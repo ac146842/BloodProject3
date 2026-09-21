@@ -5,7 +5,7 @@
 namespace BloodProject3.Migrations
 {
     /// <inheritdoc />
-    public partial class questions : Migration
+    public partial class ModelUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
