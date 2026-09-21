@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BloodProject3.Areas.Identity.Data;
+using BloodProject3.Models;
+using BloodProject3.Views;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BloodProject3.Areas.Identity.Data;
-using BloodProject3.Models;
-using BloodProject3.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BloodProject3.Controllers
 {
     // A controller to manage all CRUD functionality for the Nurses model, including sorting, searching, and pagination.
+    [Authorize(Roles = "Admin")]
     public class NursesController : Controller
     {
         // Database context field for access with stored records

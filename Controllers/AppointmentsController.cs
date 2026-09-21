@@ -1,6 +1,7 @@
 ﻿using BloodProject3.Areas.Identity.Data;
 using BloodProject3.Models;
 using BloodProject3.Views;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace BloodProject3.Controllers
 {
     // Controller to handle all the CRUD functionality
+    [Authorize(Roles = "Admin")]
     public class AppointmentsController : Controller
     {
         // Database context field for access with stored records

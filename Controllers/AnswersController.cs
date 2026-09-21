@@ -2,6 +2,7 @@
 using BloodProject3.Migrations;
 using BloodProject3.Models;
 using BloodProject3.Views;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace BloodProject3.Controllers
 {
     // A controller to manage all CRUD functionality for the Answers model, including sorting, searching, and pagination.
+    [Authorize(Roles = "Admin")]
     public class AnswersController : Controller
     {
         // Database context field for access with stored records
