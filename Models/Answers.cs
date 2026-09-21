@@ -19,13 +19,13 @@ namespace BloodProject3.Models
         public int HealthQID { get; set; }
 
         [ForeignKey("HealthQID")]
-        public virtual Questions Questions { get; set; }
+        public virtual Questions? Questions { get; set; }
 
         [Display(Name = "Donor ID")]
         public int DonorID { get; set; }
 
         [ForeignKey("DonorID")]
-        public virtual Donor Donor { get; set; }
+        public virtual Donor? Donor { get; set; }
 
         [Display(Name = "Answer")]
         [Required(ErrorMessage = "Answer is required")]

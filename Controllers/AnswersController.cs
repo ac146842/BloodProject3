@@ -149,8 +149,6 @@ namespace BloodProject3.Controllers
 
         // POST: Answers/Create
         // Handles form creation to save a new answer record to the database
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AnswersID,FormID,HealthQID,DonorID,AnswersText,AnswerDate")] Answers answers)
         {
             // Saves answer if all user inputs pass model validation
@@ -168,6 +166,7 @@ namespace BloodProject3.Controllers
 
         // GET: Answers/Edit/5
         // Displays the form to edit an existing answer record
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -187,7 +186,6 @@ namespace BloodProject3.Controllers
         // POST: Answers/Edit/5
         // Handles saving updated answer details
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AnswersID,FormID,HealthQID,DonorID,AnswersText,AnswerDate")] Answers answers)
         {
             // Ensures the ID matches the edited model ID
@@ -222,6 +220,7 @@ namespace BloodProject3.Controllers
         }
 
         // GET: Answers/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -243,9 +242,8 @@ namespace BloodProject3.Controllers
 
         // POST: Answers/Delete/5
         // Handles permanently removing an answer record
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
             var answers = await _context.Answers.FindAsync(id);
             if (answers != null)
