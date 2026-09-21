@@ -57,9 +57,11 @@ namespace BloodProject3.Controllers
             // Saves the current search filter
             ViewData["CurrentFilter"] = searchString;
 
-            // Fetches initial donor records as a queryable collection
-            var donors = from s in _context.Donor
-                         select s;
+            // Fetches initial donor records as a queryable collection, including related BloodType and DonatedBloods data
+            var donors = _context.Donor
+                         .Include(d => d.BloodType)
+                         .Include(d => d.DonatedBloods)
+                         .AsQueryable();
 
             // Filters records if a search query is entered, checks all fields including related information
             if (!String.IsNullOrEmpty(searchString))
