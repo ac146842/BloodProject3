@@ -24,6 +24,7 @@
         <table class="table table-custom mb-0">
             <thead>
                 <tr>
+                    <th>Donation ID</th>
                     <th>Appointment Details</th>
                     <th>Blood Type</th>
                     <th>Donor Name</th>
@@ -42,6 +43,9 @@
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DonationID)
+                        </td>
                         <td>
                             @if (item.Appointment != null)
                             {

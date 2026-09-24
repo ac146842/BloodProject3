@@ -24,6 +24,7 @@
         <table class="table table-custom mb-0">
             <thead>
                 <tr>
+                    <th>Appointment ID</th>
                     <th>Appointment Date&Time</th>
                     <th>Location</th>
                     <th>Donor</th>
@@ -36,6 +37,9 @@
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppointmentID)
+                        </td>
                         <td>
                             @item.AppointmentDateTime.ToString("dd/MM/yyyy hh:mm tt")
                         </td>

@@ -66,13 +66,21 @@ namespace BloodProject3.Controllers
             // Filters records for a search query if one is given checking every field in the Answers model, as well as the related Questions and Donor models
             if (!String.IsNullOrEmpty(searchString))
             {
-                answers = answers.Where(s => (s.Questions != null && s.Questions.FormQuestions.Contains(searchString))
-                                       || (s.Donor != null && (s.Donor.FirstName.Contains(searchString) || s.Donor.LastName.Contains(searchString)))
-                                       || s.HealthQID.ToString().Contains(searchString)
-                                       || s.DonorID.ToString().Contains(searchString)
-                                       || s.AnswersID.ToString().Contains(searchString)
-                                       || s.AnswersText.Contains(searchString)
-                                       || s.AnswerDate.ToString().Contains(searchString));
+                string search = searchString.Trim();
+
+                answers = answers.Where(s =>
+                    (s.Questions != null && s.Questions.FormQuestions.Contains(search)) ||
+                    (s.Donor != null && (
+                        s.Donor.FirstName.Contains(search) ||
+                        s.Donor.LastName.Contains(search)
+                    )) ||
+                    s.AnswersText.Contains(search) ||
+                    s.HealthQID.ToString().Contains(search) ||
+                    s.DonorID.ToString().Contains(search) ||
+                    s.AnswersID.ToString().Contains(search) ||
+                    s.FormID.ToString().Contains(search) ||
+                    s.AnswerDate.ToString().Contains(search)
+                );
             }
 
             // Applies an order based off the selected column and direction
