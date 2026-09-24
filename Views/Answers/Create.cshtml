@@ -32,9 +32,13 @@
                 <input asp-for="AnswersText" class="form-control" />
                 <span asp-validation-for="AnswersText" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="AnswerDate" class="control-label"></label>
-                <input asp-for="AnswerDate" class="form-control" />
+                <input asp-for="AnswerDate"
+                       type="date"
+                       max="@DateTime.Now.ToString("yyyy-MM-dd")"
+                       class="form-control" />
                 <span asp-validation-for="AnswerDate" class="text-danger"></span>
             </div>
 

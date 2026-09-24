@@ -33,7 +33,6 @@ namespace BloodProject3.Models
 
         [Required]
         [Display(Name = "Answer Date")]
-        [NoFutureDate(ErrorMessage = "Answer date cannot be in the future.")]
         public DateTime AnswerDate { get; set; } = DateTime.Now;
     }
 }
