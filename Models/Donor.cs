@@ -1,5 +1,4 @@
-﻿using BloodProject3.Validation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -44,7 +43,6 @@ namespace BloodProject3.Models
 
         [DataType(DataType.Date)] //ensures input is a valid date format
         [Display(Name = "Last Donation Date")] // display as "Last Donation Date" in the UI
-        [NoFutureDate(ErrorMessage = "Last donation date cannot be set in the future.")]
         public DateTime? LastDonationDate { get; set; }
 
         public virtual ICollection<DonatedBlood>? DonatedBloods { get; set; }
