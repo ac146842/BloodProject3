@@ -33,7 +33,6 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "Date of birth is required.")] //required to be filled
         [DataType(DataType.Date)] //ensures input is a valid date format
         [Display(Name = "Date Of Birth")]
-        [NoFutureDate(ErrorMessage = "Date of birth cannot be set in the future.")]
         public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Blood type is required.")] //fk to the bloodtype table and error message is given

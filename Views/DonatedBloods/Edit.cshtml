@@ -32,7 +32,10 @@
 
             <div class="form-group">
                 <label asp-for="CollectionDate" class="control-label"></label>
-                <input asp-for="CollectionDate" class="form-control" type="date" />
+                <input asp-for="CollectionDate"
+                       class="form-control"
+                       type="date"
+                       max="@DateTime.Now.ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="CollectionDate" class="text-danger"></span>
             </div>
 

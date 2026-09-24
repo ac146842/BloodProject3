@@ -26,7 +26,6 @@ namespace BloodProject3.Models
         [Required]
         [Display(Name = "Form Date")]
         [DataType(DataType.DateTime)]
-        [NoFutureDateAttribute(ErrorMessage = "Form date cannot be set in the future.")]
         public DateTime FormDate { get; set; }
     }
 }

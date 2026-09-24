@@ -32,7 +32,10 @@
 
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" type="date" />
+                <input asp-for="DateOfBirth"
+                       class="form-control"
+                       type="date"
+                       max="@DateTime.Now.ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
 
@@ -46,7 +49,10 @@
 
             <div class="form-group">
                 <label asp-for="LastDonationDate" class="control-label"></label>
-                <input asp-for="LastDonationDate" class="form-control" type="date" />
+                <input asp-for="LastDonationDate"
+                       class="form-control"
+                       type="date"
+                       max="@DateTime.Now.ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="LastDonationDate" class="text-danger"></span>
             </div>
 
