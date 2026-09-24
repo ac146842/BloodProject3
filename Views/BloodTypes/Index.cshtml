@@ -42,6 +42,8 @@
                             @Html.DisplayFor(modelItem => item.SelectedBloodType)
                         </td>
                         <td class="text-end">
+                            <a asp-action="Edit" asp-route-id="@item.BloodTypeID" class="btn btn-dark btn-outline-secondary">Edit</a>
+
                             <a href="#delete-modal-@item.BloodTypeID" class="btn btn-dark btn-outline-danger">Delete</a>
 
                             <div id="delete-modal-@item.BloodTypeID" class="css-modal-overlay text-start">
