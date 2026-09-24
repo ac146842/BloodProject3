@@ -323,6 +323,11 @@ footer {
     font-weight: 600;
     font-size: 15px;
     text-align: center;
+    /* fixed button appearance */
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
 }
 
 .btn-modal-cancel {

@@ -96,7 +96,9 @@
                                     </div>
                                     <div class="custom-modal-actions">
                                         <a href="#" class="btn-modal-cancel">Cancel</a>
-                                        <a asp-action="Delete" asp-route-id="@item.DonorID" class="btn-modal-delete">Delete</a>
+                                        <form asp-action="Delete" asp-route-id="@item.DonorID" method="post" style="flex: 1; display: flex; margin: 0;">
+                                            <button type="submit" class="btn-modal-delete" style="width: 100%;">Delete</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
