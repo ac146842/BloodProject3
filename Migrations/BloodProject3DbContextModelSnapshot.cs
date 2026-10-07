@@ -554,7 +554,7 @@ namespace BloodProject3.Migrations
                     b.HasOne("BloodProject3.Models.Nurse", "Nurse")
                         .WithMany("Appointments")
                         .HasForeignKey("NurseID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Donor");
@@ -628,7 +628,7 @@ namespace BloodProject3.Migrations
                     b.HasOne("BloodProject3.Models.Nurse", "Nurse")
                         .WithMany("MedicalForms")
                         .HasForeignKey("NurseID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Appointment");

@@ -1,5 +1,4 @@
-﻿using BloodProject3.Migrations;
-using BloodProject3.Models;
+﻿using BloodProject3.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

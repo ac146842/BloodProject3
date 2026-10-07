@@ -1,5 +1,4 @@
 ﻿using BloodProject3.Areas.Identity.Data;
-using BloodProject3.Migrations;
 using BloodProject3.Models;
 using BloodProject3.Views;
 using Microsoft.AspNetCore.Authorization;

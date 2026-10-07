@@ -32,6 +32,20 @@ public class BloodProject3DbContext : IdentityDbContext<User>
             .WithMany()
             .HasForeignKey(d => d.AppointmentID)
             .OnDelete(DeleteBehavior.NoAction);
+
+        // Disables cascade delete between MedicalForm and Nurse and links the navigation property
+        builder.Entity<MedicalForm>()
+            .HasOne(m => m.Nurse)
+            .WithMany(n => n.MedicalForms)
+            .HasForeignKey(m => m.NurseID)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        // Disables cascade delete between Appointment and Nurse and links the navigation property
+        builder.Entity<Appointment>()
+            .HasOne(a => a.Nurse)
+            .WithMany(n => n.Appointments)
+            .HasForeignKey(a => a.NurseID)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 
     public DbSet<BloodProject3.Models.Answers> Answers { get; set; } = default!;

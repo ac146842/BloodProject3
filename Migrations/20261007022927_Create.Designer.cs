@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodProject3.Migrations
 {
     [DbContext(typeof(BloodProject3DbContext))]
-    [Migration("20260921092604_AllUpdatedModels")]
-    partial class AllUpdatedModels
+    [Migration("20261007022927_Create")]
+    partial class Create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -557,7 +557,7 @@ namespace BloodProject3.Migrations
                     b.HasOne("BloodProject3.Models.Nurse", "Nurse")
                         .WithMany("Appointments")
                         .HasForeignKey("NurseID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Donor");
@@ -631,7 +631,7 @@ namespace BloodProject3.Migrations
                     b.HasOne("BloodProject3.Models.Nurse", "Nurse")
                         .WithMany("MedicalForms")
                         .HasForeignKey("NurseID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Appointment");
