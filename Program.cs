@@ -29,7 +29,7 @@ using (var scope = app.Services.CreateScope())
         await roleManager.CreateAsync(new IdentityRole("Admin"));
 }
 
-// Creates an Admin account if one doesn't exist yet, or ensures the existing account has the correct details
+// Creates an Admin account if one doesn't exist yet, or ensures the existing account has the correct role
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
