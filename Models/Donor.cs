@@ -27,7 +27,7 @@ namespace BloodProject3.Models
         public string FullName => $"{FirstName} {LastName}";
 
         [Required(ErrorMessage = "Phone number is required.")] //required to be filled
-        [StringLength(15)] //max 15 characters
+        [StringLength(10)] //max 10 characters
         [Phone] //ensures input is a valid phone number format
         [Display(Name = "Phone Number")] // display as "Phone Number" in the UI
         [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Phone must be in the format 000-000-0000")]
