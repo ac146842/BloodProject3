@@ -28,6 +28,9 @@ namespace BloodProject3.Models
 
         [Display(Name = "Answer")]
         [Required(ErrorMessage = "Answer is required")]
+        [StringLength(1000, ErrorMessage = "Answer must be 1000 characters or less.")]
+        [RegularExpression(@"^[a-zA-Z0-9\s\?\!\.\,\'\-\:\;\(\)\/]+$",
+    ErrorMessage = "Answer contains invalid characters.")]
         public string AnswersText { get; set; }
 
         [Required]
