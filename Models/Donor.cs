@@ -30,7 +30,8 @@ namespace BloodProject3.Models
         [StringLength(10)] //max 10 characters
         [Phone] //ensures input is a valid phone number format
         [Display(Name = "Phone Number")] // display as "Phone Number" in the UI
-        [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Phone must be in the format 000-000-0000")]
+        [RegularExpression(@"^(0[2]\d{1}[\s\-]?\d{3}[\s\-]?\d{4}|0[3-9][\s\-]?\d{3}[\s\-]?\d{4})$",
+    ErrorMessage = "Phone must be a valid NZ phone number (e.g., 021 123 4567 or 09 123 4567).")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Date of birth is required.")] //required to be filled
