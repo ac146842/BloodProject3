@@ -44,6 +44,8 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "Storage location is required.")] //required to be filled
         [StringLength(15, ErrorMessage = "Location code cannot exceed 15 characters")] //max string length can be 15 with error message
         [Display(Name = "Storage Location")] // display as "Storage Location" in the UI
+        [RegularExpression(@"^[a-zA-Z0-9\-]+$",
+    ErrorMessage = "Storage location can only contain letters, numbers, and hyphens.")]
         //'Fridge-A1', 'Shelf-04'
         public string StorageLocation { get; set; }
 
