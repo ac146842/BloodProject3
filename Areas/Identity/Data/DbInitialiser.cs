@@ -41,18 +41,18 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var nurses = new Nurse[]
                     {
-                        new Nurse{FirstName="William", LastName="Anderson", Phone = "555-807-2513", JobRole = "Senior Nurse", EmployedStartDate = DateTime.Parse("2020-01-10"), LicenseNumber = "RN123456"},
-                        new Nurse{FirstName="Lauren", LastName="Thomas", Phone = "555-918-3624", JobRole="Clinic Lead", EmployedStartDate=DateTime.Parse("2021-05-15"), LicenseNumber="RN678901"},
-                        new Nurse{FirstName="Robert", LastName="Moore", Phone = "555-685-0391", JobRole = "Staff Nurse", EmployedStartDate = DateTime.Parse("2023-08-24"), LicenseNumber = "RN456123"},
-                        new Nurse{FirstName="Amanda", LastName="Taylor", Phone = "555-796-1402", JobRole = "Phlebotomist", EmployedStartDate = DateTime.Parse("2024-11-02"), LicenseNumber = "RN789321"},
-                        new Nurse{FirstName="Charles", LastName="Harris", Phone = "555-111-2222", JobRole = "Donor Care Specialist", EmployedStartDate = DateTime.Parse("2019-03-14"), LicenseNumber = "RN102938"},
-                        new Nurse{FirstName="Patricia", LastName="Clark", Phone = "555-333-4444", JobRole = "Apheresis Specialist", EmployedStartDate = DateTime.Parse("2022-07-19"), LicenseNumber = "RN564738"},
-                        new Nurse{FirstName="Matthew", LastName="Lewis", Phone = "555-555-6666", JobRole = "Clinical Supervisor", EmployedStartDate = DateTime.Parse("2018-11-30"), LicenseNumber = "RN928134"},
-                        new Nurse{FirstName="Jennifer", LastName="Walker", Phone = "555-777-8888", JobRole = "Mobile Unit Coordinator", EmployedStartDate = DateTime.Parse("2021-02-14"), LicenseNumber = "RN384729"},
-                        new Nurse{FirstName="Christopher", LastName="Hall", Phone = "555-999-0000", JobRole = "Quality Assurance Nurse", EmployedStartDate = DateTime.Parse("2020-06-05"), LicenseNumber = "RN728394"},
-                        new Nurse{FirstName="Elizabeth", LastName="Allen", Phone = "555-123-9876", JobRole = "Triage Nurse", EmployedStartDate = DateTime.Parse("2023-01-15"), LicenseNumber = "RN463728"},
-                        new Nurse{FirstName="Daniel", LastName="Young", Phone = "555-456-1122", JobRole = "Hematology Nurse", EmployedStartDate = DateTime.Parse("2024-05-20"), LicenseNumber = "RN293847"},
-                        new Nurse{FirstName="Megan", LastName="King", Phone = "555-789-3344", JobRole = "Research Nurse", EmployedStartDate = DateTime.Parse("2022-10-10"), LicenseNumber = "RN583920"}
+                        new Nurse{FirstName="William", LastName="Anderson", Phone = "0211234567", JobRole = "Senior Nurse", EmployedStartDate = DateTime.Parse("2020-01-10"), LicenseNumber = "RN123456"},
+                        new Nurse{FirstName="Lauren", LastName="Thomas", Phone = "0212345678", JobRole="Clinic Lead", EmployedStartDate=DateTime.Parse("2021-05-15"), LicenseNumber="RN678901"},
+                        new Nurse{FirstName="Robert", LastName="Moore", Phone = "0213456789", JobRole = "Staff Nurse", EmployedStartDate = DateTime.Parse("2023-08-24"), LicenseNumber = "RN456123"},
+                        new Nurse{FirstName="Amanda", LastName="Taylor", Phone = "0214567890", JobRole = "Phlebotomist", EmployedStartDate = DateTime.Parse("2024-11-02"), LicenseNumber = "RN789321"},
+                        new Nurse{FirstName="Charles", LastName="Harris", Phone = "0215678901", JobRole = "Donor Care Specialist", EmployedStartDate = DateTime.Parse("2019-03-14"), LicenseNumber = "RN102938"},
+                        new Nurse{FirstName="Patricia", LastName="Clark", Phone = "0216789012", JobRole = "Apheresis Specialist", EmployedStartDate = DateTime.Parse("2022-07-19"), LicenseNumber = "RN564738"},
+                        new Nurse{FirstName="Matthew", LastName="Lewis", Phone = "0217890123", JobRole = "Clinical Supervisor", EmployedStartDate = DateTime.Parse("2018-11-30"), LicenseNumber = "RN928134"},
+                        new Nurse{FirstName="Jennifer", LastName="Walker", Phone = "0218901234", JobRole = "Mobile Unit Coordinator", EmployedStartDate = DateTime.Parse("2021-02-14"), LicenseNumber = "RN384729"},
+                        new Nurse{FirstName="Christopher", LastName="Hall", Phone = "0219012345", JobRole = "Quality Assurance Nurse", EmployedStartDate = DateTime.Parse("2020-06-05"), LicenseNumber = "RN728394"},
+                        new Nurse{FirstName="Elizabeth", LastName="Allen", Phone = "0210123456", JobRole = "Triage Nurse", EmployedStartDate = DateTime.Parse("2023-01-15"), LicenseNumber = "RN463728"},
+                        new Nurse{FirstName="Daniel", LastName="Young", Phone = "091234567", JobRole = "Hematology Nurse", EmployedStartDate = DateTime.Parse("2024-05-20"), LicenseNumber = "RN293847"},
+                        new Nurse{FirstName="Megan", LastName="King", Phone = "092345678", JobRole = "Research Nurse", EmployedStartDate = DateTime.Parse("2022-10-10"), LicenseNumber = "RN583920"}
                     };
                     context.Nurse.AddRange(nurses);
                     context.SaveChanges();
@@ -63,28 +63,28 @@ namespace BloodProject3.Areas.Identity.Data
                 {
                     var donors = new Donor[]
                     {
-                        new Donor{FirstName="John", LastName="Doe", Phone="123-456-7890", DateOfBirth=DateTime.Parse("1990-01-01"), BloodTypeID=1},
-                        new Donor{FirstName="Jane", LastName="Smith", Phone="098-765-4321", DateOfBirth=DateTime.Parse("1992-02-02"), BloodTypeID=2},
-                        new Donor{FirstName="Michael", LastName="Johnson", Phone="555-123-4567", DateOfBirth=DateTime.Parse("1988-03-15"), BloodTypeID=3},
-                        new Donor{FirstName="Emily", LastName="Williams", Phone="555-987-6543", DateOfBirth=DateTime.Parse("1995-04-22"), BloodTypeID=3},
-                        new Donor{FirstName="David", LastName="Brown", Phone="555-246-8135", DateOfBirth=DateTime.Parse("1987-05-10"), BloodTypeID=3},
-                        new Donor{FirstName="Sarah", LastName="Davis", Phone="555-369-1357", DateOfBirth=DateTime.Parse("1993-06-18"), BloodTypeID=3},
-                        new Donor{FirstName="James", LastName="Miller", Phone="555-482-7160", DateOfBirth=DateTime.Parse("1991-07-25"), BloodTypeID=3},
-                        new Donor{FirstName="Jessica", LastName="Wilson", Phone="555-573-9284", DateOfBirth=DateTime.Parse("1994-08-12"), BloodTypeID=3},
-                        new Donor{FirstName="Kevin", LastName="Martinez", Phone="555-612-3456", DateOfBirth=DateTime.Parse("1985-09-05"), BloodTypeID=3},
-                        new Donor{FirstName="Lisa", LastName="Anderson", Phone="555-714-5678", DateOfBirth=DateTime.Parse("1989-12-30"), BloodTypeID=3},
-                        new Donor{FirstName="Brian", LastName="Thomas", Phone="555-816-7890", DateOfBirth=DateTime.Parse("1996-05-14"), BloodTypeID=3},
-                        new Donor{FirstName="Michelle", LastName="White", Phone="555-918-9012", DateOfBirth=DateTime.Parse("1990-11-21"), BloodTypeID=3},
-                        new Donor{FirstName="Liam", LastName="Baker", Phone="021-111-2222", DateOfBirth=DateTime.Parse("1994-01-11"), BloodTypeID=1},
-                        new Donor{FirstName="Noah", LastName="Carter", Phone="021-222-3333", DateOfBirth=DateTime.Parse("1991-02-12"), BloodTypeID=2},
-                        new Donor{FirstName="Oliver", LastName="Evans", Phone="021-333-4444", DateOfBirth=DateTime.Parse("1989-03-13"), BloodTypeID=3},
-                        new Donor{FirstName="Elijah", LastName="Foster", Phone="021-444-5555", DateOfBirth=DateTime.Parse("1995-04-14"), BloodTypeID=4},
-                        new Donor{FirstName="Lucas", LastName="Green", Phone="021-555-6666", DateOfBirth=DateTime.Parse("1992-05-15"), BloodTypeID=5},
-                        new Donor{FirstName="Mason", LastName="Harris", Phone="021-666-7777", DateOfBirth=DateTime.Parse("1987-06-16"), BloodTypeID=6},
-                        new Donor{FirstName="Logan", LastName="Jackson", Phone="021-777-8888", DateOfBirth=DateTime.Parse("1993-07-17"), BloodTypeID=7},
-                        new Donor{FirstName="Ethan", LastName="Kelly", Phone="021-888-9999", DateOfBirth=DateTime.Parse("1990-08-18"), BloodTypeID=8},
-                        new Donor{FirstName="Aiden", LastName="Lane", Phone="021-999-0000", DateOfBirth=DateTime.Parse("1996-09-19"), BloodTypeID=1},
-                        new Donor{FirstName="James", LastName="Adams", Phone="021-123-4567", DateOfBirth=DateTime.Parse("1994-10-20"), BloodTypeID=2}
+                        new Donor{FirstName="John", LastName="Doe", Phone="0211112222", DateOfBirth=DateTime.Parse("1990-01-01"), BloodTypeID=1},
+                        new Donor{FirstName="Jane", LastName="Smith", Phone="0212223333", DateOfBirth=DateTime.Parse("1992-02-02"), BloodTypeID=2},
+                        new Donor{FirstName="Michael", LastName="Johnson", Phone="0213334444", DateOfBirth=DateTime.Parse("1988-03-15"), BloodTypeID=3},
+                        new Donor{FirstName="Emily", LastName="Williams", Phone="0214445555", DateOfBirth=DateTime.Parse("1995-04-22"), BloodTypeID=3},
+                        new Donor{FirstName="David", LastName="Brown", Phone="0215556666", DateOfBirth=DateTime.Parse("1987-05-10"), BloodTypeID=3},
+                        new Donor{FirstName="Sarah", LastName="Davis", Phone="0216667777", DateOfBirth=DateTime.Parse("1993-06-18"), BloodTypeID=3},
+                        new Donor{FirstName="James", LastName="Miller", Phone="0217778888", DateOfBirth=DateTime.Parse("1991-07-25"), BloodTypeID=3},
+                        new Donor{FirstName="Jessica", LastName="Wilson", Phone="0218889999", DateOfBirth=DateTime.Parse("1994-08-12"), BloodTypeID=3},
+                        new Donor{FirstName="Kevin", LastName="Martinez", Phone="0219990000", DateOfBirth=DateTime.Parse("1985-09-05"), BloodTypeID=3},
+                        new Donor{FirstName="Lisa", LastName="Anderson", Phone="0211234567", DateOfBirth=DateTime.Parse("1989-12-30"), BloodTypeID=3},
+                        new Donor{FirstName="Brian", LastName="Thomas", Phone="0212345678", DateOfBirth=DateTime.Parse("1996-05-14"), BloodTypeID=3},
+                        new Donor{FirstName="Michelle", LastName="White", Phone="0213456789", DateOfBirth=DateTime.Parse("1990-11-21"), BloodTypeID=3},
+                        new Donor{FirstName="Liam", LastName="Baker", Phone="0214567890", DateOfBirth=DateTime.Parse("1994-01-11"), BloodTypeID=1},
+                        new Donor{FirstName="Noah", LastName="Carter", Phone="0215678901", DateOfBirth=DateTime.Parse("1991-02-12"), BloodTypeID=2},
+                        new Donor{FirstName="Oliver", LastName="Evans", Phone="0216789012", DateOfBirth=DateTime.Parse("1989-03-13"), BloodTypeID=3},
+                        new Donor{FirstName="Elijah", LastName="Foster", Phone="0217890123", DateOfBirth=DateTime.Parse("1995-04-14"), BloodTypeID=4},
+                        new Donor{FirstName="Lucas", LastName="Green", Phone="0218901234", DateOfBirth=DateTime.Parse("1992-05-15"), BloodTypeID=5},
+                        new Donor{FirstName="Mason", LastName="Harris", Phone="0219012345", DateOfBirth=DateTime.Parse("1987-06-16"), BloodTypeID=6},
+                        new Donor{FirstName="Logan", LastName="Jackson", Phone="0210123456", DateOfBirth=DateTime.Parse("1993-07-17"), BloodTypeID=7},
+                        new Donor{FirstName="Ethan", LastName="Kelly", Phone="091234567", DateOfBirth=DateTime.Parse("1990-08-18"), BloodTypeID=8},
+                        new Donor{FirstName="Aiden", LastName="Lane", Phone="092345678", DateOfBirth=DateTime.Parse("1996-09-19"), BloodTypeID=1},
+                        new Donor{FirstName="James", LastName="Adams", Phone="093456789", DateOfBirth=DateTime.Parse("1994-10-20"), BloodTypeID=2}
                     };
 
                     context.Donor.AddRange(donors);

@@ -22,9 +22,11 @@ namespace BloodProject3.Models
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(15)]
+        [StringLength(10)]
         [Display(Name = "Phone Number")]
         [Phone]
+        [RegularExpression(@"^(0[2]\d{1}[\s\-]?\d{3}[\s\-]?\d{4}|0[3-9][\s\-]?\d{3}[\s\-]?\d{4})$",
+    ErrorMessage = "Phone must be a valid NZ phone number (e.g., 021 123 4567 or 09 123 4567).")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Please specify the nurse's job role.")]
