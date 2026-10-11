@@ -27,10 +27,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.SelectedBloodType)
                     </th>
-
-                    <th class="text-end py-2">
-                        <a asp-action="Create" class="btn btn-dark btn-outline-secondary">+ Create New</a>
-                    </th>
                 </tr>
             </thead>
 
@@ -42,8 +38,6 @@
                             @Html.DisplayFor(modelItem => item.SelectedBloodType)
                         </td>
                         <td class="text-end">
-
-                            <a href="#delete-modal-@item.BloodTypeID" class="btn btn-dark btn-outline-danger">Delete</a>
 
                             <div id="delete-modal-@item.BloodTypeID" class="css-modal-overlay text-start">
                                 <div class="custom-modal">
