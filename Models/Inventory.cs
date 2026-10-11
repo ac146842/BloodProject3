@@ -36,7 +36,9 @@ namespace BloodProject3.Models
 
         [Required(ErrorMessage = "Volume is required")] //required field with error message
         [Display(Name = "Current Volume (ML)")] // display as "Last Donation Date" in the UI
+        [Range(0.01, 500.00, ErrorMessage = "Volume must be between 0.01 and 500 ML")] //ensures volume is between 0.01 and 500
         [Column(TypeName = "decimal(6, 2)")] //6 total digits, 2 after decimal
+        [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
         public decimal CurrentVolumeML { get; set; }
 
         [Required(ErrorMessage = "Storage location is required.")] //required to be filled
