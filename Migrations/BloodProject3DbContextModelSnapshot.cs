@@ -110,7 +110,8 @@ namespace BloodProject3.Migrations
 
                     b.Property<string>("AnswersText")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int>("DonorID")
                         .HasColumnType("int");
