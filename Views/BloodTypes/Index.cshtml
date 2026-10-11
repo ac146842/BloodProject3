@@ -3,6 +3,17 @@
 @{
     ViewData["Title"] = "Blood Types";
 }
+<style>
+    .blood-types-table thead th {
+        padding-top: 20px !important;
+        padding-bottom: 12px !important;
+    }
+
+    .blood-types-table tbody td {
+        padding-top: 16px !important;
+        padding-bottom: 16px !important;
+    }
+</style>
 <div>
     <h1 class="index-header">Blood Types</h1>
 
@@ -21,12 +32,13 @@
 </div>
 <div class="index-card shadow-sm border-0 rounded-3 overflow-hidden">
     <div class="p-0">
-        <table class="table table-custom mb-0">
+        <table class="table table-custom blood-types-table mb-0">
             <thead>
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.SelectedBloodType)
                     </th>
+                    <th></th> <!-- Added second header cell to match row structure -->
                 </tr>
             </thead>
 
