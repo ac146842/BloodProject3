@@ -31,6 +31,7 @@ namespace BloodProject3.Models
 
         [Required(ErrorMessage = "Please specify the nurse's job role.")]
         [StringLength(50)]
+        [RegularExpression(@"^[a-zA-Z\s\-]+$", ErrorMessage = "Job role can only contain letters, spaces, and hyphens.")]
         [Display(Name = "Job Role")]
         public string JobRole { get; set; }
 
