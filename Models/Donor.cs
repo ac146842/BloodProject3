@@ -14,11 +14,15 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "First name is required.")] //required to be filled
         [StringLength(50)] //max 50 characters
         [Display(Name = "First Name")] // display as "First Name" in the UI
+        [RegularExpression(@"^[a-zA-Z\s\-'āēīōūĀĒĪŌŪ]+$",
+    ErrorMessage = "First name contains invalid characters.")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last name is required.")] //required to be filled
         [StringLength(50)] //max 50 characters 
         [Display(Name = "Last Name")] // display as "Last Name" in the UI
+        [RegularExpression(@"^[a-zA-Z\s\-'āēīōūĀĒĪŌŪ]+$",
+    ErrorMessage = "Last name contains invalid characters.")]
         public string LastName { get; set; }
         public string FullName => $"{FirstName} {LastName}";
 
