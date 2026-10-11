@@ -66,10 +66,10 @@ namespace BloodProject3.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 inventories = inventories.Where(s => s.DonationID.ToString().Contains(searchString)
-                                       || s.BloodTypeID.ToString().Contains(searchString)
-                                       || s.CurrentVolumeML.ToString().Contains(searchString)
-                                       || s.StorageLocation.ToString().Contains(searchString)
-                                       || s.BloodStatus.ToString().Contains(searchString));
+                                            || s.BloodTypeID.ToString().Contains(searchString)
+                                            || s.CurrentVolumeML.ToString().Contains(searchString)
+                                            || s.StorageLocation.ToString().Contains(searchString)
+                                            || s.BloodStatus.ToString().Contains(searchString));
             }
 
             // Applys an order based off the selected column and direction
@@ -149,6 +149,7 @@ namespace BloodProject3.Controllers
                 Text = b.SelectedBloodType.ToString()
             }).ToList();
             ViewBag.BloodTypeID = new SelectList(bloodTypeList, "Value", "Text");
+            ViewBag.BloodStatusList = new SelectList(Enum.GetValues(typeof(Inventory.Status)));
             return View();
         }
 
@@ -171,6 +172,7 @@ namespace BloodProject3.Controllers
                 Text = b.SelectedBloodType.ToString()
             }).ToList();
             ViewBag.BloodTypeID = new SelectList(bloodTypeList, "Value", "Text", inventory.BloodTypeID);
+            ViewBag.BloodStatusList = new SelectList(Enum.GetValues(typeof(Inventory.Status)), inventory.BloodStatus);
             return View(inventory);
         }
 
@@ -196,6 +198,7 @@ namespace BloodProject3.Controllers
                 Text = b.SelectedBloodType.ToString()
             }).ToList();
             ViewBag.BloodTypeID = new SelectList(bloodTypeList, "Value", "Text", inventory.BloodTypeID);
+            ViewBag.BloodStatusList = new SelectList(Enum.GetValues(typeof(Inventory.Status)), inventory.BloodStatus);
             return View(inventory);
         }
 
@@ -236,6 +239,7 @@ namespace BloodProject3.Controllers
                 Text = b.SelectedBloodType.ToString()
             }).ToList();
             ViewBag.BloodTypeID = new SelectList(bloodTypeList, "Value", "Text", inventory.BloodTypeID);
+            ViewBag.BloodStatusList = new SelectList(Enum.GetValues(typeof(Inventory.Status)), inventory.BloodStatus);
             return View(inventory);
         }
 
@@ -263,7 +267,7 @@ namespace BloodProject3.Controllers
 
         // POST: Inventories/Delete/5
         // Handles permanently removing an inventory record
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var inventory = await _context.Inventory.FindAsync(id);

@@ -279,7 +279,7 @@ namespace BloodProject3.Controllers
 
         // POST: DonatedBloods/Delete/5
         // Handles permanently removing a donation record
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var donatedBlood = await _context.DonatedBlood.FindAsync(id);

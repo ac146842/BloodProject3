@@ -199,7 +199,7 @@ namespace BloodProject3.Controllers
 
         // POST: Nurses/Delete/5
         // Handles permanently removing a nurse record
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var nurse = await _context.Nurse.FindAsync(id);

@@ -152,7 +152,7 @@ namespace BloodProject3.Controllers
 
         // POST: Questions/Delete/5
         // Handles permanently removing a question record
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var questions = await _context.Questions.FindAsync(id);

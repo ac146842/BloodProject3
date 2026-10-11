@@ -59,19 +59,19 @@ namespace BloodProject3.Controllers
 
             // Fetches initial donor records as a queryable collection, including related BloodType and DonatedBloods data
             var donors = _context.Donor
-                         .Include(d => d.BloodType)
-                         .Include(d => d.DonatedBloods)
-                         .AsQueryable();
+                       .Include(d => d.BloodType)
+                       .Include(d => d.DonatedBloods)
+                       .AsQueryable();
 
             // Filters records if a search query is entered, checks all fields including related information
             if (!String.IsNullOrEmpty(searchString))
             {
                 donors = donors.Where(s => s.FirstName.Contains(searchString)
-                                      || s.LastName.Contains(searchString)
-                                      || s.Phone.Contains(searchString)
-                                      || s.DateOfBirth.ToString().Contains(searchString)
-                                      || s.BloodTypeID.ToString().Contains(searchString)
-                                      || s.LastDonationDate.ToString().Contains(searchString));
+                                    || s.LastName.Contains(searchString)
+                                    || s.Phone.Contains(searchString)
+                                    || s.DateOfBirth.ToString().Contains(searchString)
+                                    || s.BloodTypeID.ToString().Contains(searchString)
+                                    || s.LastDonationDate.ToString().Contains(searchString));
             }
 
             // Applys an order based off the selected column and direction
@@ -240,7 +240,7 @@ namespace BloodProject3.Controllers
 
         // POST: Donors/Delete/5
         // Handles permanently removing a donor record
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var donor = await _context.Donor.FindAsync(id);

@@ -253,7 +253,7 @@ namespace BloodProject3.Controllers
 
         // POST: Answers/Delete/5
         // Handles permanently removing an answer record
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
             var answers = await _context.Answers.FindAsync(id);

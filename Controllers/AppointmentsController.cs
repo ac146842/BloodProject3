@@ -60,7 +60,7 @@ namespace BloodProject3.Controllers
 
             // Fetches initial appointment records as a queryable collection with the donor included
             IQueryable<Appointment> appointment = _context.Appointment
-                                                  .Include(s => s.Donor);
+                                                        .Include(s => s.Donor);
 
 
 
@@ -68,11 +68,11 @@ namespace BloodProject3.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 appointment = appointment.Where(s => s.DonorID.ToString().Contains(searchString)
-                                                   || s.NurseID.ToString().Contains(searchString)
-                                                   || s.AppointmentDateTime.ToString().Contains(searchString)
-                                                   || s.Location.ToString().Contains(searchString)
-                                                   || s.TypeOfAppointment.ToString().Contains(searchString)
-                                                   || s.AppointmentStatus.ToString().Contains(searchString));
+                                                 || s.NurseID.ToString().Contains(searchString)
+                                                 || s.AppointmentDateTime.ToString().Contains(searchString)
+                                                 || s.Location.ToString().Contains(searchString)
+                                                 || s.TypeOfAppointment.ToString().Contains(searchString)
+                                                 || s.AppointmentStatus.ToString().Contains(searchString));
             }
 
             // Applies ordering depending on which column header was selected
@@ -208,7 +208,7 @@ namespace BloodProject3.Controllers
 
         // POST: Appointments/Delete/5
         // Removes the appointment record from the database
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var appointment = await _context.Appointment.FindAsync(id);

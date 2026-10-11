@@ -29,10 +29,10 @@ namespace BloodProject3.Controllers
         // Displays a paginated, searchable, and sortable list of medical form records, including related nurse and appointment information.
         [HttpGet]
         public async Task<IActionResult> Index(
-         string sortOrder,
-         string currentFilter,
-         string searchString,
-         int? pageNumber)
+           string sortOrder,
+           string currentFilter,
+           string searchString,
+           int? pageNumber)
         {
             // Stores the current sorting parameter
             ViewData["CurrentSort"] = sortOrder;
@@ -259,7 +259,7 @@ namespace BloodProject3.Controllers
 
         // POST: MedicalForms/Delete/5
         // Handles permanently removing a medical form record
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var medicalForm = await _context.MedicalForm.FindAsync(id);
