@@ -5,10 +5,10 @@ A full-stack web application made using ASP.NET MVC and Entity Framework Core fo
 ______________________________________________
 
 Table of Contents
-[About](#about)
-[Built With](#built-with)
-[Login](#login)
-[Connection string](#connection-string)
+[About](#about) |
+[Built With](#built-with) |
+[Login](#login) |
+[Connection string](#connection-string) 
 
 ______________________________________________
 
