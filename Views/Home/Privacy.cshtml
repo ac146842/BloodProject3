@@ -1,6 +1,57 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container py-4">
+    <h1>Privacy Policy</h1>
+    <p class="text-muted">Effective Date: October 12, 2026</p>
+    <hr />
+
+    <section class="mb-4">
+        <h3>1. Information We Collect</h3>
+        <p>BloodProject3 collects personal data necessary to manage blood donation services, appointments, and inventory records. This includes:</p>
+        <ul>
+            <li><strong>Personal Details:</strong> Full name, date of birth, and contact information (phone number, email address).</li>
+            <li><strong>Medical & Donation Data:</strong> Blood type, medical questionnaire responses, donation history, and appointment schedules.</li>
+            <li><strong>Staff Information:</strong> Nurse contact details, job roles, and employment licensing numbers.</li>
+            <li><strong>Account Credentials:</strong> Securely hashed login credentials and role-based permissions managed via ASP.NET Core Identity.</li>
+        </ul>
+    </section>
+
+    <section class="mb-4">
+        <h3>2. How We Use Your Information</h3>
+        <p>The information collected is strictly used for operational and clinical purposes, including:</p>
+        <ul>
+            <li>Scheduling and managing blood donation appointments.</li>
+            <li>Verifying donor eligibility through medical forms and pre-screening questionnaire answers.</li>
+            <li>Tracking blood inventory, collection volumes, storage locations, and automated expiration dates.</li>
+            <li>Ensuring secure access control through authorized administrator and medical staff roles.</li>
+        </ul>
+    </section>
+
+    <section class="mb-4">
+        <h3>3. Data Protection and Security</h3>
+        <p>We implement strict administrative and technical safeguards to protect personal health and identity data:</p>
+        <ul>
+            <li><strong>Database Protection:</strong> Data access is managed through Entity Framework Core using parameterized queries to safeguard against SQL injection and data tampering.</li>
+            <li><strong>Access Control:</strong> System features and administrative functions are protected behind secure authentication and authorization handlers.</li>
+            <li><strong>Data Integrity:</strong> Relational integrity rules and automated validation ensure data accuracy and prevent unauthorized record deletion or duplication.</li>
+        </ul>
+    </section>
+
+    <section class="mb-4">
+        <h3>4. Data Sharing & Disclosure</h3>
+        <p>We do not sell, rent, or trade personal health or donor information. Data is only accessed by authorized personnel responsible for blood bank administration, donor management, and clinical care.</p>
+    </section>
+
+    <section class="mb-4">
+        <h3>5. Data Retention & Your Rights</h3>
+        <p>Personal and donation records are retained in compliance with healthcare data recordkeeping standards. Users and registered donors have the right to request access to, update, or correct their personal details by contacting system administrators.</p>
+    </section>
+
+    <section class="mb-4">
+        <h3>6. Contact Us</h3>
+        <p>If you have questions about this Privacy Policy or how your data is handled, please contact the system administration team at:</p>
+        <p><strong>Email:</strong> support@bloodproject3.local</p>
+    </section>
+</div>
