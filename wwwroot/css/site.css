@@ -356,6 +356,11 @@ footer {
     background-color: #fde5e3;
 }
 
+.table td {
+    word-break: break-word;
+    max-width: 200px;
+}
+
     .table-custom thead th {
         background-color: #fde5e3;
         color: #495057;

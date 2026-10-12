@@ -165,9 +165,16 @@ namespace BloodProject3.Controllers
             // Saves answer if all user inputs pass model validation
             if (ModelState.IsValid)
             {
-                _context.Add(answers);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(answers);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("DonorID", "Related record ID does not exist.");
+                }
             }
 
             // Reloads the drop-down list if form submission was invalid
@@ -211,6 +218,7 @@ namespace BloodProject3.Controllers
                 {
                     _context.Update(answers);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -224,7 +232,10 @@ namespace BloodProject3.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("DonorID", "Related record ID does not exist.");
+                }
             }
             ViewData["HealthQID"] = new SelectList(_context.Questions, "HealthQID", "FormQuestions", answers.HealthQID);
             return View(answers);

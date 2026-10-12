@@ -69,12 +69,12 @@ namespace BloodProject3.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 DonatedBloods = DonatedBloods.Where(s => s.DonationID.ToString().Contains(searchString)
-                                                       || s.AppointmentID.ToString().Contains(searchString)
-                                                       || s.BloodTypeID.ToString().Contains(searchString)
-                                                       || s.DonorID.ToString().Contains(searchString)
-                                                       || s.CollectionDate.ToString().Contains(searchString)
-                                                       || s.VolumeML.ToString().Contains(searchString)
-                                                       || s.BloodStatus.ToString().Contains(searchString));
+                                                     || s.AppointmentID.ToString().Contains(searchString)
+                                                     || s.BloodTypeID.ToString().Contains(searchString)
+                                                     || s.DonorID.ToString().Contains(searchString)
+                                                     || s.CollectionDate.ToString().Contains(searchString)
+                                                     || s.VolumeML.ToString().Contains(searchString)
+                                                     || s.BloodStatus.ToString().Contains(searchString));
             }
 
             // Apply ordering based on the selected column and direction
@@ -162,13 +162,20 @@ namespace BloodProject3.Controllers
             // Saves donation if all user inputs pass model validation
             if (ModelState.IsValid)
             {
-                // Sets the creation date to now and sets expiry date to 42 days out
-                donatedBlood.CollectionDate = DateTime.Now;
-                donatedBlood.ExpiryDate = DateTime.Now.AddDays(42);
+                try
+                {
+                    // Sets the creation date to now and sets expiry date to 42 days out
+                    donatedBlood.CollectionDate = DateTime.Now;
+                    donatedBlood.ExpiryDate = DateTime.Now.AddDays(42);
 
-                _context.Add(donatedBlood);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                    _context.Add(donatedBlood);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("DonorID", "Related record ID does not exist.");
+                }
             }
 
             // Reloads drop-down list if form submission was invalid
@@ -226,6 +233,7 @@ namespace BloodProject3.Controllers
                 {
                     _context.Update(donatedBlood);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -239,7 +247,10 @@ namespace BloodProject3.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("DonorID", "Related record ID does not exist.");
+                }
             }
 
             var bloodTypeList = _context.BloodType.ToList().Select(b => new SelectListItem

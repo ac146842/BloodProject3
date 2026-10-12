@@ -150,9 +150,16 @@ namespace BloodProject3.Controllers
             // Save medical form if all user inputs pass model validation
             if (ModelState.IsValid)
             {
-                _context.Add(medicalForm);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(medicalForm);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("AppointmentID", "Appointment ID does not exist.");
+                }
             }
 
             // Reloads drop-down list if form submission was invalid
@@ -212,6 +219,7 @@ namespace BloodProject3.Controllers
                 {
                     _context.Update(medicalForm);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -225,7 +233,10 @@ namespace BloodProject3.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("AppointmentID", "Appointment ID does not exist.");
+                }
             }
 
             ViewBag.NurseList = new SelectList(_context.Nurse.Select(n => new { Id = n.NurseID, Name = $"{n.FirstName} {n.LastName}" }), "Id", "Name", medicalForm.NurseID);

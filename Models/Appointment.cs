@@ -60,6 +60,6 @@ namespace BloodProject3.Models
         [Required(ErrorMessage = "Appointment duration is required.")]
         [Range(1, 60, ErrorMessage = "Appointment duration must be between 1 and 60 minutes.")]
         [Display(Name = "Duration (Minutes)")]
-        public int DurationEndTime { get; set; }
+        public int DurationEndTime { get; set; } = 30; //required so appointments save because this field was removed
     }
 }
